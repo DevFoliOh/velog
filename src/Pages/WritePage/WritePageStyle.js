@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const WriteContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
 `;
 
 const WriteHeader = styled.div`
@@ -42,6 +43,19 @@ const WriteTag = styled.input.attrs({
   font-size: 20px;
   border: none;
   padding-left: 0;
+  margin-bottom: 12px;
+`;
+
+const EditorContainer = styled.div`
+  display: flex;
+  padding: 0 48px;
+
+  .ck.ck-editor {
+    max-width: 600px;
+  }
+  .ck-editor__editable {
+    min-height: 400px;
+  }
 `;
 
 const WriteFooter = styled.div``;
@@ -53,5 +67,6 @@ export const style = {
   WriteLine,
   WriteTagContainer,
   WriteTag,
+  EditorContainer,
   WriteFooter,
 };
