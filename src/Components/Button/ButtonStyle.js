@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const ButtonContainer = styled.button`
+const ButtonContainer = styled.button.attrs({
+  type: 'submit',
+})`
   display: flex;
   justify-content: center;
   align-items: center;

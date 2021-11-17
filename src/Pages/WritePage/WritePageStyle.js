@@ -37,6 +37,20 @@ const WriteTagContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const WriteTagContent = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+
+  div {
+    height: 32px;
+    line-height: 36px;
+    border-radius: 16px;
+    background: rgb(241, 243, 245);
+    padding: 5px 10px;
+    margin-right: 10px;
+  }
+`;
+
 const WriteTag = styled.input.attrs({
   placeholder: '태그를 입력하세요',
   type: 'text',
@@ -68,13 +82,19 @@ const WriteFooter = styled.div`
   padding: 20px 0 0 48px;
 `;
 
+const PreviewContainer = styled.div`
+  display: flex;
+`;
+
 export const style = {
   WriteContainer,
   WriteHeader,
   WriteTitle,
   WriteLine,
   WriteTagContainer,
+  WriteTagContent,
   WriteTag,
   EditorContainer,
   WriteFooter,
+  PreviewContainer,
 };
