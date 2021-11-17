@@ -1,17 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { style } from './WritePageStyle';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Button from 'Components/Button/Button';
 import { Axios } from 'axios';
+import Editor from 'Components/Editor/Editor';
 
 const WritePage = () => {
-  const [hashTagArr, setHashTagArr] = useState([]);
   const [postContent, setPostContent] = useState({
     id: '',
     title: '',
-    body: '',
   });
+  const [content, setContent] = useState('');
+  const [hashTagArr, setHashTagArr] = useState([]);
 
   const getValue = (e) => {
     const { name, value } = e.target;
@@ -64,20 +63,7 @@ const WritePage = () => {
           </WriteTagContainer>
         </WriteHeader>
         <EditorContainer>
-          <CKEditor
-            editor={ClassicEditor}
-            data="당신의 이야기를 적어보세요..."
-            onReady={(editor) => {}}
-            onChange={(event, editor) => {
-              const data = editor.getData();
-              setPostContent({
-                ...postContent,
-                body: data,
-              });
-            }}
-            onBlur={(event, editor) => {}}
-            onFocus={(event, editor) => {}}
-          />
+          <Editor setContent={setContent} data={content} />
         </EditorContainer>
         <WriteFooter>
           <Button text="출간하기" onClick={registerPost} />
