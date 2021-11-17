@@ -1,42 +1,23 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from 'Components/Header/Header';
 import DetailTitle from 'Components/DetailTitle/DetailTitle';
 import * as style from './style';
+import useGetDetailData from 'Hooks/useGetDetailData';
 
-const DetailPage = (props) => {
+const DetailPage = ({ id }) => {
+  const [detailData, setDetailData] = useState({});
+  const body = { datailData: { body } };
+  const title = { datailData: { title } };
+  const setData = useCallback((data) => {
+    setDetailData(data);
+  }, []);
+
+  const loading = useGetDetailData(setData, id);
+
   return (
     <div>
       <Header></Header>
-      <style.Main>
-        <DetailTitle title="asdf"></DetailTitle>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex impedit
-        nesciunt adipisci enim consequuntur quibusdam voluptatem ut dicta
-        possimus nam inventore porro quis voluptas consequatur modi, iusto
-        pariatur. Eaque, culpa. Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Ex impedit nesciunt adipisci enim consequuntur
-        quibusdam voluptatem ut dicta possimus nam inventore porro quis voluptas
-        consequatur modi, iusto pariatur. Eaque, culpa. Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Ex impedit nesciunt adipisci enim
-        consequuntur quibusdam voluptatem ut dicta possimus nam inventore porro
-        quis voluptas consequatur modi, iusto pariatur. Eaque, culpa.Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Ex impedit nesciunt
-        adipisci enim consequuntur quibusdam voluptatem ut dicta possimus nam
-        inventore porro quis voluptas consequatur modi, iusto pariatur. Eaque,
-        culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-        impedit nesciunt adipisci enim consequuntur quibusdam voluptatem ut
-        dicta possimus nam inventore porro quis voluptas consequatur modi, iusto
-        pariatur. Eaque, culpa.Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Ex impedit nesciunt adipisci enim consequuntur
-        quibusdam voluptatem ut dicta possimus nam inventore porro quis voluptas
-        consequatur modi, iusto pariatur. Eaque, culpa.Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Ex impedit nesciunt adipisci enim
-        consequuntur quibusdam voluptatem ut dicta possimus nam inventore porro
-        quis voluptas consequatur modi, iusto pariatur. Eaque, culpa.Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Ex impedit nesciunt
-        adipisci enim consequuntur quibusdam voluptatem ut dicta possimus nam
-        inventore porro quis voluptas consequatur modi, iusto pariatur. Eaque,
-        culpa.
-      </style.Main>
+      <style.Main>{loading && <DetailTitle title={title} />}</style.Main>
     </div>
   );
 };
