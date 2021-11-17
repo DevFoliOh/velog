@@ -1,0 +1,7 @@
+{
+  "id": "5ebac534954b54139806c112",
+  "title": "React에 대하여",
+  "body": "React는 처음부터 점진적으로 적용할 수 있도록 설계되었으며 필요한 만큼 React를 사용할 수 있습니다. React를 맛보기로 접해보거나 간단한 HTML 페이지에 약간의 대화형 기능(interactivity)을 추가하거나 복잡한 React 기반의 앱을 시작하고자 하는 경우, 이 섹션의 링크를 통해 시작할 수 있습니다.",
+  "thumbnail": "https://cdn.imweb.me/upload/S201712205a3a0910b89f5/a2470afad8a92.jpg",
+  "tags": ["react", "Javascript"]
+}
