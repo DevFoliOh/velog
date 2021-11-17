@@ -54,7 +54,7 @@ const WritePage = () => {
             <WriteTagContent>
               {hashTagArr.map((hashtag, idx) => {
                 return (
-                  <div key={idx}>
+                  <div key={idx} onClick={() => removeHashTag(hashtag)}>
                     <span>{hashtag}</span>
                   </div>
                 );

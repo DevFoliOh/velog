@@ -48,6 +48,7 @@ const WriteTagContent = styled.div`
     background: rgb(241, 243, 245);
     padding: 5px 10px;
     margin-right: 10px;
+    cursor: pointer;
   }
 `;
 
