@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { style } from './WritePageStyle';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Button from 'Components/Button/Button';
 
 const WritePage = () => {
   const [postContent, setPostContent] = useState({
@@ -45,7 +46,10 @@ const WritePage = () => {
           onFocus={(event, editor) => {}}
         />
       </EditorContainer>
-      <WriteFooter></WriteFooter>
+      <WriteFooter>
+        <Button text="나가기" />
+        <Button text="출간하기" />
+      </WriteFooter>
     </WriteContainer>
   );
 };

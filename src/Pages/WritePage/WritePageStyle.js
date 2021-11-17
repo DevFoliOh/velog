@@ -4,10 +4,10 @@ const WriteContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 600px;
 `;
 
 const WriteHeader = styled.div`
-  width: 600px;
   padding: 32px 48px 0;
 `;
 
@@ -62,7 +62,11 @@ const EditorContainer = styled.div`
   }
 `;
 
-const WriteFooter = styled.div``;
+const WriteFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0 0 48px;
+`;
 
 export const style = {
   WriteContainer,
