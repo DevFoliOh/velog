@@ -1,5 +1,7 @@
 import React from 'react';
-import * as style from './style';
-const DetailTitle = ({ title }) => <style.Title>{title}</style.Title>;
+import style from './DetailTitleStyle';
+const DetailTitle = ({ title }) => <Title>{title}</Title>;
 
 export default DetailTitle;
+
+const { Title } = style;

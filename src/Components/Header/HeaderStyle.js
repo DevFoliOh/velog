@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-const { default: styled } = require('styled-components');
-
-export const Header = styled.header`
+const HeaderWrap = styled.header`
   height: 4rem;
 `;
 
-export const HeaderContent = styled.div`
+const HeaderContent = styled.div`
   max-width: 1024px;
   margin: auto;
   height: 100%;
@@ -15,25 +14,30 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
 `;
 
-export const Logo = styled.div`
+const Logo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const LogoImg = styled.svg`
+const LogoLink = styled(Link)`
+  text-decoration: none;
+  color: 'rgb(33, 37, 41)';
+`;
+
+const LogoImg = styled.svg`
   margin-right: 1rem;
   width: 1.75rem;
   height: 1.75rem;
   display: block;
 `;
 
-export const RightContent = styled.div`
+const RightContent = styled.div`
   display: flex;
   align-items: center;
 `;
 
-export const Search = styled.div`
+const Search = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +55,7 @@ export const Search = styled.div`
   }
 `;
 
-export const WriteBtn = styled(Link)`
+const WriteBtn = styled(Link)`
   display: flex;
   align-items: center;
   height: 2rem;
@@ -75,13 +79,13 @@ export const WriteBtn = styled(Link)`
   }
 `;
 
-export const Profile = styled.div`
+const Profile = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
 `;
 
-export const ProfileImg = styled.img`
+const ProfileImg = styled.img`
   display: block;
   height: 2.5rem;
   width: 2.5rem;
@@ -91,7 +95,7 @@ export const ProfileImg = styled.img`
   transition: all 0.125s ease-in 0s;
 `;
 
-export const Dropdown = styled.svg`
+const Dropdown = styled.svg`
   font-size: 1.5rem;
   margin-left: 0.25 rem;
   color: rgb(134, 142, 150);
@@ -102,3 +106,17 @@ export const Dropdown = styled.svg`
     color: rgb(52, 58, 64);
   }
 `;
+
+export const style = {
+  HeaderWrap,
+  HeaderContent,
+  Logo,
+  LogoImg,
+  RightContent,
+  Search,
+  WriteBtn,
+  Profile,
+  ProfileImg,
+  Dropdown,
+  LogoLink,
+};
