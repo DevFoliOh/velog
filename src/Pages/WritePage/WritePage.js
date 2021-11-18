@@ -75,15 +75,27 @@ const WritePage = () => {
           <Editor setContent={setContent} data={content} />
         </EditorContainer>
         <WriteFooter>
-          <Button
-            text="미리보기"
-            _onClick={previewPost}
-            _style={{
-              background: 'rgb(233, 236, 239)',
-              color: 'rgb(73, 80, 87)',
-            }}
-          />
-          <Button text="출간하기" _onClick={registerPost} />
+          <div>
+            <Button
+              _style={{
+                background: '#fff',
+                color: 'rgb(73, 80, 87)',
+              }}
+              text="🔙 뒤로가기"
+            />
+          </div>
+          <div>
+            <Button
+              text="미리보기"
+              _onClick={previewPost}
+              _style={{
+                background: 'rgb(233, 236, 239)',
+                color: 'rgb(73, 80, 87)',
+                marginRight: '10px',
+              }}
+            />
+            <Button text="출간하기" _onClick={registerPost} />
+          </div>
         </WriteFooter>
       </WriteContainer>
       <PreviewContainer>

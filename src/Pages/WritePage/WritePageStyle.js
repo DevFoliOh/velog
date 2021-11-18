@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+  max-width: 600px;
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -9,8 +10,8 @@ const Container = styled.div`
 const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40vw;
-  padding: 30px 0 30px 50px;
+  width: 50vw;
+  padding: 30px 50px;
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 `;
 
@@ -72,10 +73,12 @@ const WriteTag = styled.input.attrs({
 
 const EditorContainer = styled.div`
   display: flex;
+  flex: 1;
+  width: 100%;
   margin-bottom: 50px;
 
   .ck.ck-editor {
-    max-width: 100%;
+    max-width: 700px;
   }
   .ck-editor__editable {
     min-height: 400px;
@@ -83,10 +86,15 @@ const EditorContainer = styled.div`
 `;
 
 const WriteFooter = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: center;
-  /* padding-right: 70px; */
-  /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px; */
+  justify-content: space-between;
+  margin: 0 auto;
+
+  div {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const PreviewContainer = styled.div`

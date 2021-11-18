@@ -6,7 +6,7 @@ const ButtonContainer = styled.button.attrs({
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 100%;
   height: 40px;
   padding: 0 20px;
   font-size: 16px;
