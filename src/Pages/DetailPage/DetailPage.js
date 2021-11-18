@@ -5,6 +5,12 @@ import useGetDetailData from 'Hooks/useGetDetailData';
 import Tag from 'Components/Tag/Tag';
 
 const DetailPage = () => {
+  // const [detailData, setDetailData] = useState({});
+  // const setData = useCallback((data) => {
+  //   setDetailData(data);
+  // }, []);
+
+  // const loading = useGetDetailData(setData, id);
   return (
     <div>
       <Header></Header>
