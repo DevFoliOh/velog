@@ -13,10 +13,10 @@ const useGetDetailData = (setData, id) => {
 
   const getData = async () => {
     try {
-      setIsLoading(false);
+      setIsLoading(true);
       const response = await getPostData(postId);
       setData(response);
-      setIsLoading(true);
+      setIsLoading(false);
     } catch (error) {
       throw new Error('data load 실패');
     }
