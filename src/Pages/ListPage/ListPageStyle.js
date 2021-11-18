@@ -7,14 +7,6 @@ const Wrapper = styled.div`
   margin-top: 2rem;
 `;
 
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  height: 80px;
-  font-size: 28px;
-  font-weight: 600;
-`;
-
 const Container = styled.div`
   display: flex;
   margin-top: 2rem;
@@ -48,4 +40,4 @@ const CardList = styled.div`
   justify-content: space-between;
 `;
 
-export const style = { Wrapper, Header, Container, CardList };
+export const style = { Wrapper, Container, CardList };

@@ -46,7 +46,7 @@ const MenuApi = {
   },
 
   createPost(data) {
-    return request(HTTP_METHOD.CREATE(data));
+    return request(HTTP_METHOD.CREATE({ data }));
   },
 };
 

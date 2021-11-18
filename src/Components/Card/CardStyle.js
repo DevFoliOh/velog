@@ -1,25 +1,7 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const Card = ({ userInfo }) => {
-  if (!userInfo) {
-    // return <SkeletonProfile />;
-  } else {
-    return (
-      <Wrapper>
-        {/* <ImageContainer></ImageContainer> */}
-        <PostInfoContainer>
-          <ContentContainer>
-            <TitleCon>{userInfo.username}</TitleCon>
-            <ContentCon>{userInfo.email}</ContentCon>
-          </ContentContainer>
-        </PostInfoContainer>
-      </Wrapper>
-    );
-  }
-};
-
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
   width: 20rem;
   margin: 1rem;
   position: relative;
@@ -62,6 +44,25 @@ const Wrapper = styled.div`
   }
 `;
 
+const ImageContainer = styled.div`
+  position: relative;
+  padding-bottom: 55%;
+  width: 100%;
+  max-height: 177px;
+`;
+
+const Image = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  display: block;
+  object-fit: cover;
+`;
+
 const PostInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,7 +71,7 @@ const PostInfoContainer = styled.div`
   flex: 1 1 0%;
 `;
 
-const ContentContainer = styled.div`
+const PostInfo = styled.div`
   color: black;
   text-decoration: none;
   &:focus {
@@ -78,12 +79,13 @@ const ContentContainer = styled.div`
   }
 `;
 
-const TitleCon = styled.b`
+const Title = styled.b`
   font-size: 1rem;
+  font-weight: 600;
   line-height: 1.5;
 `;
 
-const ContentCon = styled.p`
+const Content = styled.p`
   word-break: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -97,4 +99,18 @@ const ContentCon = styled.p`
   color: rgb(73, 80, 87);
 `;
 
-export default Card;
+const DateBox = styled.div`
+  font-size: 13px;
+  color: rgb(134, 142, 150);
+`;
+
+export const style = {
+  Wrapper,
+  ImageContainer,
+  Image,
+  PostInfoContainer,
+  PostInfo,
+  Title,
+  Content,
+  DateBox,
+};

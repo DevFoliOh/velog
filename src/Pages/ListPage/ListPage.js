@@ -1,36 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { style } from './ListPageStyle';
-import Card from 'Components/Card';
-import axios from 'axios';
+import Header from 'Components/Header/Header';
+import Card from 'Components/Card/Card';
+import useGetListData from 'Hooks/useGetListData';
+import { useInView } from 'react-intersection-observer';
 
-const ListPage = (props) => {
-  const [data, setData] = useState(null);
+const ListPage = () => {
+  const [postData, setPostData] = useState(null);
+  const [ref, inView] = useInView();
 
-  useEffect(() => {
-    setTimeout(async () => {
-      await axios('https://jsonplaceholder.typicode.com/users')
-        .then((res) => setData(res.data))
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 1000);
-  }, []);
+  useGetListData(setPostData);
+  console.log(postData);
 
   return (
-    <Wrapper>
-      <Header>velog</Header>
-
+    <Wrapper ref={ref}>
+      <Header />
+      Element {inView.toString()}
       <Container>
         <CardList>
-          {data &&
-            data.map((userInfo) => {
-              return (
-                <Card
-                  userInfo={userInfo}
-                  className="profile"
-                  key={userInfo.id}
-                />
-              );
+          {postData &&
+            postData.map((posts) => {
+              return <Card posts={posts} key={posts.id} />;
             })}
         </CardList>
       </Container>
@@ -40,4 +30,4 @@ const ListPage = (props) => {
 
 export default ListPage;
 
-const { Wrapper, Header, Container, CardList } = style;
+const { Wrapper, Container, CardList } = style;

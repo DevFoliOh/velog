@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
-import { getListData } from 'Common/get-post-data';
 import MenuApi from 'Common/api';
 
-const useGetListData = () => {
+const useGetListData = (setPostData) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [postData, setPostData] = useState(null);
+  console.log(isLoading);
 
   const getData = async () => {
     try {
       setIsLoading(true);
       const response = await MenuApi.getAllPosts();
-      setPostData(response);
+      setPostData(response.data.results);
       setIsLoading(false);
     } catch (error) {
       throw new Error('data load 실패');
@@ -20,6 +19,8 @@ const useGetListData = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  return isLoading;
 };
 
 export default useGetListData;
