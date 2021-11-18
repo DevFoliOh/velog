@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import { getCardReducer } from './getCardData/getCardData';
+import { getCardIdReducer } from './getCardId/getCardId';
 
 // catReducer 를 rootReducer 로 합쳐 내보냄
 const rootReducer = combineReducers({
-  getCardReducer,
+  getCardIdReducer,
 });
 
 export default rootReducer;

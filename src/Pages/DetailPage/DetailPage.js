@@ -4,7 +4,7 @@ import { style } from './DetailPageStyle';
 import useGetDetailData from 'Hooks/useGetDetailData';
 import Tag from 'Components/Tag/Tag';
 
-const DetailPage = ({ id }) => {
+const DetailPage = () => {
   return (
     <div>
       <Header></Header>
