@@ -1,17 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
-  Id: {
-    id: 1,
-  },
+  cardId: 1,
 };
 
 export const getCardSlice = createSlice({
-  name: 'card',
+  name: 'cardId',
   initialState,
   reducers: {
     getCardData: (state, action) => {
-      state.Id = action.payload;
+      state.cardId = action.payload;
     },
   },
 });

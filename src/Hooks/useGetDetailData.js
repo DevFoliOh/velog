@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 const useGetDetailData = (setData, id) => {
   const [isLoading, setIsLoading] = useState(false);
   const [postId, setPostId] = useState();
-  const card = useSelector((state) => state.getCardReducer.Id);
+  const Id = useSelector((state) => state.getCardReducer.cardId);
 
   useEffect(() => {
-    card && setPostId(card.id);
-  }, [card]);
+    Id && setPostId(Id);
+  }, [Id]);
 
   const getData = async () => {
     try {
