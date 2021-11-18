@@ -5,6 +5,7 @@ import useGetData from 'Hooks/useGetData';
 import Tag from 'Components/Tag/Tag';
 import Comment from 'Components/Comment/Comment';
 import parse from 'html-react-parser';
+import { postCommentData } from 'Common/api';
 
 const DetailPage = () => {
   const [detailData, setDetailData] = useState({
@@ -15,7 +16,7 @@ const DetailPage = () => {
     updatedAt: '',
     id: '',
   });
-  const [commentData, setCommentData] = useState({});
+  const [commentData, setCommentData] = useState([]);
   const [tagArr, setTagArr] = useState([]);
 
   const textRef = useRef();
@@ -25,14 +26,18 @@ const DetailPage = () => {
   }, []);
 
   const setComment = useCallback((data) => {
-    setCommentData(data);
+    setCommentData(() => {
+      const changedData = [...data];
+      return changedData;
+    });
   }, []);
 
   const loading = useGetData(setPostData, setComment);
 
   const onTextSubmit = (event) => {
     event.preventDefault();
-    console.log(textRef.current.value);
+    const text = textRef.current.value;
+    postCommentData(text);
   };
 
   useEffect(() => {
@@ -59,7 +64,7 @@ const DetailPage = () => {
           </UserDescriptionWrap>
         </UserContainer>
         <CommentContainer>
-          <CommentCount>N개의 댓글</CommentCount>
+          <CommentCount>{`${commentData.length}개의 댓글`}</CommentCount>
           <form onSubmit={onTextSubmit}>
             <CommentTextArea
               placeholder="댓글을 작성하세요"
@@ -70,7 +75,9 @@ const DetailPage = () => {
             </ButtonWraper>
           </form>
           <CommentList>
-            <Comment></Comment>
+            {commentData.map((comment) => (
+              <Comment comment={comment} />
+            ))}
           </CommentList>
         </CommentContainer>
       </Main>

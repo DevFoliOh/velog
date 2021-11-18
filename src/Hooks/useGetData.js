@@ -15,9 +15,9 @@ const useGetData = (setPostData, setComment) => {
     try {
       setIsLoading(true);
       const postResponse = await getPostData(postId);
-      // const commentResponse = await getCommentData(postId);
+      const commentResponse = await getCommentData(postId);
       setPostData(postResponse.data);
-      // setComment(commentResponse.data);
+      setComment(commentResponse.data.results);
       setIsLoading(false);
     } catch (error) {
       throw new Error('data load 실패');
