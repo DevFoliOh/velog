@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { style } from './WritePageStyle';
 import Button from 'Components/Button/Button';
-import { Axios } from 'axios';
+import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
+import uuid from 'react-uuid';
 
 const WritePage = () => {
-  const [postContent, setPostContent] = useState({
-    id: '',
-    title: '',
-  });
+  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
+  const [viewContent, setViewContent] = useState([]);
+  const id = uuid();
 
-  const getValue = (e) => {
-    const { name, value } = e.target;
-    setPostContent({
-      ...postContent,
-      [name]: value,
+  const getTitle = (e) => {
+    const { value } = e.target;
+    setTitle({
+      ...title,
+      title: value,
     });
   };
 
@@ -31,23 +31,36 @@ const WritePage = () => {
     setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
   };
 
-  const registerPost = async () => {
-    await Axios.post('https://limitless-sierra-67996.herokuapp.com/v1/posts', {
-      id: postContent.id,
-      title: postContent.title,
-      body: postContent.body,
-      tags: hashTagArr,
-    }).then(() => {
-      alert('포스트 등록 완료!');
-      console.log('test');
-    });
+  const previewPost = () => {
+    setViewContent(viewContent.push({ ...title, ...content, ...hashTagArr }));
   };
+
+  const registerPost = async () => {
+    try {
+      const response = await axios.post(
+        'https://limitless-sierra-67996.herokuapp.com/v1/posts',
+        {
+          id: id,
+          title: title.title,
+          body: content.body,
+          tags: hashTagArr,
+          thumbnail:
+            'https://cdn.imweb.me/upload/S201712205a3a0910b89f5/a2470afad8a92.jpg',
+        },
+      );
+    } catch (error) {
+      alert(error);
+    }
+    console.log('POST 성공!');
+  };
+
+  console.log(id, title, content, hashTagArr);
 
   return (
     <>
       <WriteContainer>
         <WriteHeader>
-          <WriteTitle onChange={getValue} />
+          <WriteTitle onChange={getTitle} />
           <WriteLine />
           <WriteTagContainer>
             <WriteTagContent>
@@ -66,10 +79,19 @@ const WritePage = () => {
           <Editor setContent={setContent} data={content} />
         </EditorContainer>
         <WriteFooter>
-          <Button text="출간하기" onClick={registerPost} />
+          <Button text="미리보기" onClick={previewPost} />
+          <Button text="출간하기" _onClick={registerPost} />
         </WriteFooter>
       </WriteContainer>
-      <PreviewContainer></PreviewContainer>
+      <PreviewContainer>
+        {viewContent.map((element) => (
+          <div>
+            <h2>{element.title}</h2>
+            <div>{element.hashTagArr}</div>
+            <div>{element.content}</div>
+          </div>
+        ))}
+      </PreviewContainer>
     </>
   );
 };

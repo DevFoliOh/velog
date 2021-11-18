@@ -3,10 +3,9 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const API_URL = 'https://limitless-sierra-67996.herokuapp.com/v1';
-// const API_URL = 'http://localhost:3000';
 const UPLOAD_ENDPOINT = 'posts';
 
-export default function Editor({ setContent }) {
+export default function Editor({ content, setContent }) {
   function uploadAdapter(loader) {
     return {
       upload: () => {
@@ -59,7 +58,10 @@ export default function Editor({ setContent }) {
         onFocus={(event, editor) => {}}
         onChange={(event, editor) => {
           const data = editor.getData();
-          setContent(data);
+          setContent({
+            ...content,
+            body: data,
+          });
         }}
       />
     </div>
