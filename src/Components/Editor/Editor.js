@@ -51,7 +51,7 @@ export default function Editor({ content, setContent }) {
         config={{
           extraPlugins: [uploadPlugin],
         }}
-        data="<p>게시글을 작성해주세요</p>"
+        data="게시글을 작성해주세요"
         editor={ClassicEditor}
         onReady={(editor) => {}}
         onBlur={(event, editor) => {}}

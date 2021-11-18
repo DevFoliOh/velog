@@ -1,15 +1,20 @@
 import styled from 'styled-components';
 
-const WriteContainer = styled.div`
+const Container = styled.div`
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 600px;
+  flex-direction: row;
+  height: 100vh;
 `;
 
-const WriteHeader = styled.div`
-  padding: 32px 48px 0;
+const WriteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  padding: 30px 0 30px 50px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 `;
+
+const WriteHeader = styled.div``;
 
 const WriteTitle = styled.input.attrs({
   placeholder: '제목을 입력하세요',
@@ -67,10 +72,10 @@ const WriteTag = styled.input.attrs({
 
 const EditorContainer = styled.div`
   display: flex;
-  padding: 0 48px;
+  margin-bottom: 50px;
 
   .ck.ck-editor {
-    max-width: 600px;
+    max-width: 100%;
   }
   .ck-editor__editable {
     min-height: 400px;
@@ -79,8 +84,9 @@ const EditorContainer = styled.div`
 
 const WriteFooter = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 20px 0 0 48px;
+  justify-content: center;
+  /* padding-right: 70px; */
+  /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px; */
 `;
 
 const PreviewContainer = styled.div`
@@ -88,6 +94,7 @@ const PreviewContainer = styled.div`
 `;
 
 export const style = {
+  Container,
   WriteContainer,
   WriteHeader,
   WriteTitle,

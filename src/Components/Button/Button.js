@@ -2,10 +2,13 @@ import React from 'react';
 import { style } from './ButtonStyle';
 
 const Button = (props) => {
-  const { _onClick } = props;
-  return <ButtonContainer onClick={_onClick}>{props.text}</ButtonContainer>;
+  const { _style, _onClick } = props;
+  return (
+    <ButtonContainer style={_style} onClick={_onClick}>
+      {props.text}
+    </ButtonContainer>
+  );
 };
-// Button.defaultProps = {_onClick: () => {}, };
 
 export default Button;
 

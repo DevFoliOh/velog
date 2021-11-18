@@ -4,6 +4,7 @@ import Button from 'Components/Button/Button';
 import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
 import uuid from 'react-uuid';
+import parse from 'html-react-parser';
 
 const WritePage = () => {
   const [title, setTitle] = useState('');
@@ -50,10 +51,9 @@ const WritePage = () => {
     }
     console.log('POST 성공!');
   };
-  console.log(viewContent);
 
   return (
-    <>
+    <Container>
       <WriteContainer>
         <WriteHeader>
           <WriteTitle onChange={getTitle} />
@@ -75,7 +75,14 @@ const WritePage = () => {
           <Editor setContent={setContent} data={content} />
         </EditorContainer>
         <WriteFooter>
-          <Button text="미리보기" _onClick={previewPost} />
+          <Button
+            text="미리보기"
+            _onClick={previewPost}
+            _style={{
+              background: 'rgb(233, 236, 239)',
+              color: 'rgb(73, 80, 87)',
+            }}
+          />
           <Button text="출간하기" _onClick={registerPost} />
         </WriteFooter>
       </WriteContainer>
@@ -84,17 +91,18 @@ const WritePage = () => {
           <div key={idx}>
             <h2>{element.title}</h2>
             <span>{element.hashTagArr}</span>
-            <p>{element.body}</p>
+            <p>{parse(element.body)}</p>
           </div>
         ))}
       </PreviewContainer>
-    </>
+    </Container>
   );
 };
 
 export default WritePage;
 
 const {
+  Container,
   WriteContainer,
   WriteHeader,
   WriteTitle,
