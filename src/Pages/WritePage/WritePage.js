@@ -81,12 +81,13 @@ const WritePage = () => {
                 background: '#fff',
                 color: 'rgb(73, 80, 87)',
               }}
-              text="🔙 뒤로가기"
+              _text="🔙 뒤로가기"
+              _link="/"
             />
           </div>
           <div>
             <Button
-              text="미리보기"
+              _text="미리보기"
               _onClick={previewPost}
               _style={{
                 background: 'rgb(233, 236, 239)',
@@ -94,7 +95,7 @@ const WritePage = () => {
                 marginRight: '10px',
               }}
             />
-            <Button text="출간하기" _onClick={registerPost} />
+            <Button _text="출간하기" _onClick={registerPost} _link="/" />
           </div>
         </WriteFooter>
       </WriteContainer>

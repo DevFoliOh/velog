@@ -2,10 +2,10 @@ import React from 'react';
 import { style } from './ButtonStyle';
 
 const Button = (props) => {
-  const { _style, _onClick } = props;
+  const { _style, _onClick, _text, _link } = props;
   return (
-    <ButtonContainer style={_style} onClick={_onClick}>
-      {props.text}
+    <ButtonContainer to={_link} style={_style} onClick={_onClick}>
+      {_text}
     </ButtonContainer>
   );
 };

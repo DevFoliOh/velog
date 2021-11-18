@@ -1,8 +1,7 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ButtonContainer = styled.button.attrs({
-  type: 'submit',
-})`
+const ButtonContainer = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +15,7 @@ const ButtonContainer = styled.button.attrs({
   cursor: pointer;
   border: none;
   outline: none;
+  text-decoration: none;
 `;
 
 export const style = { ButtonContainer };
