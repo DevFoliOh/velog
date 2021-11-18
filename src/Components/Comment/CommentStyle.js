@@ -31,9 +31,26 @@ const CommentTextWrap = styled.div`
   overflow-wrap: break-word;
 `;
 
+const CommentAction = styled.div`
+  font-size: 0.875rem;
+  color: rgb(134, 142, 150);
+`;
+
+const ChangeComment = styled.span`
+  cursor: pointer;
+`;
+
+const RemoveComment = styled.span`
+  margin-left: 0.5rem;
+  cursor: pointer;
+`;
+
 export const style = {
   CommentItem,
   CommentUserWrap,
   CommentUser,
   CommentTextWrap,
+  CommentAction,
+  ChangeComment,
+  RemoveComment,
 };

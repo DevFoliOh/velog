@@ -79,5 +79,4 @@ const {
   UserDescriptionWrap,
   UserDescriptionTitle,
   UserDescriptionSubTitle,
-  UserUnderLine,
 } = style;

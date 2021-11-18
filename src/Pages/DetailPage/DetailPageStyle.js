@@ -89,6 +89,8 @@ const UserContainer = styled.footer`
   align-items: center;
   margin-top: 10rem;
   margin-bottom: 6rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgb(233, 236, 239); ;
 `;
 
 const UserImg = styled.img`
@@ -120,14 +122,6 @@ const UserDescriptionSubTitle = styled.div`
   letter-spacing: -0.004em;
 `;
 
-const UserUnderLine = styled.div`
-  background: rgb(233, 236, 239);
-  width: 100%;
-  height: 1px;
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
-`;
-
 const CommentList = styled.ul`
   margin-top: 2.5rem;
   margin-bottom: 4rem;
@@ -149,5 +143,4 @@ export const style = {
   UserDescriptionWrap,
   UserDescriptionTitle,
   UserDescriptionSubTitle,
-  UserUnderLine,
 };
