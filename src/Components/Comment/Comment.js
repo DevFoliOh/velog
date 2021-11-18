@@ -1,14 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { style } from './CommentStyle';
 
-const Comment = (props) => {
-  // const [CommentData, setCommentData] = useState({});
-
-  // const setComment = useCallback((data) => {
-  //   setCommentData(data);
-  // }, []);
-
-  // const loading = useGetDetailData(setData, id);
+const Comment = ({ commentData }) => {
   return (
     <>
       <CommentItem>
