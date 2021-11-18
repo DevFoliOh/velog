@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  max-width: 600px;
+  /* max-width: 600px; */
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -10,12 +10,16 @@ const Container = styled.div`
 const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 630px;
   width: 50vw;
   padding: 30px 50px;
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 `;
 
-const WriteHeader = styled.div``;
+const WriteHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const WriteTitle = styled.input.attrs({
   placeholder: '제목을 입력하세요',
@@ -99,6 +103,7 @@ const WriteFooter = styled.div`
 
 const PreviewContainer = styled.div`
   display: flex;
+  /* width: 50vw; */
   justify-content: center;
   align-items: center;
   margin: 0 auto;

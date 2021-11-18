@@ -5,8 +5,9 @@ import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
 import uuid from 'react-uuid';
 import parse from 'html-react-parser';
+import Input from 'Components/Input/Input';
 
-const WritePage = () => {
+const WritePage = ({ file, imgFile, imgBase64 }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
@@ -35,6 +36,8 @@ const WritePage = () => {
 
   const registerPost = async () => {
     try {
+      const formData = new FormData();
+      formData.append('thumbnail', file);
       const response = await axios.post(
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
@@ -42,10 +45,11 @@ const WritePage = () => {
           title: title.title,
           body: content.body,
           tags: hashTagArr,
-          thumbnail:
-            'https://cdn.imweb.me/upload/S201712205a3a0910b89f5/a2470afad8a92.jpg',
+          thumbnail: formData,
+          // headers: { 'Content-Type': 'multipart/form-data' },
         },
       );
+      console.log(formData.toString());
     } catch (error) {
       alert(error);
     }
@@ -56,20 +60,23 @@ const WritePage = () => {
     <Container>
       <WriteContainer>
         <WriteHeader>
-          <WriteTitle onChange={getTitle} />
-          <WriteLine />
-          <WriteTagContainer>
-            <WriteTagContent>
-              {hashTagArr.map((hashtag, idx) => {
-                return (
-                  <div key={idx} onClick={() => removeHashTag(hashtag)}>
-                    <span>{hashtag}</span>
-                  </div>
-                );
-              })}
-            </WriteTagContent>
-            <WriteTag onKeyPress={handleKeyEnter} />
-          </WriteTagContainer>
+          <div>
+            <WriteTitle onChange={getTitle} />
+            <WriteLine />
+            <WriteTagContainer>
+              <WriteTagContent>
+                {hashTagArr.map((hashtag, idx) => {
+                  return (
+                    <div key={idx} onClick={() => removeHashTag(hashtag)}>
+                      <span>{hashtag}</span>
+                    </div>
+                  );
+                })}
+              </WriteTagContent>
+              <WriteTag onKeyPress={handleKeyEnter} />
+            </WriteTagContainer>
+          </div>
+          <Input />
         </WriteHeader>
         <EditorContainer>
           <Editor setContent={setContent} data={content} />
