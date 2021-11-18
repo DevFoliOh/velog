@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import Header from 'Components/Header/Header';
 import { style } from './DetailPageStyle';
 import useGetDetailData from 'Hooks/useGetDetailData';
+import Tag from 'Components/Tag/Tag';
 
 const DetailPage = ({ id }) => {
   return (
@@ -9,6 +10,9 @@ const DetailPage = ({ id }) => {
       <Header></Header>
       <Main>
         <Title>Title</Title>
+        <TagList>
+          <Tag />
+        </TagList>
       </Main>
     </div>
   );
@@ -16,4 +20,4 @@ const DetailPage = ({ id }) => {
 
 export default DetailPage;
 
-const { Main, Title } = style;
+const { Main, Title, TagList } = style;

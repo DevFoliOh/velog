@@ -18,7 +18,14 @@ const Title = styled.h1`
   word-break: keep-all;
 `;
 
+const TagList = styled.ul`
+  margin-top: 0.875rem;
+  margin-bottom: -0.875rem;
+  min-height: 0.875rem;
+`;
+
 export const style = {
   Main,
   Title,
+  TagList,
 };
