@@ -15,7 +15,6 @@ const ListPage = () => {
   return (
     <Wrapper ref={ref}>
       <Header />
-      Element {inView.toString()}
       <Container>
         <CardList>
           {postData &&
