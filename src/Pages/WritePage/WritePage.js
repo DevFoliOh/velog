@@ -90,7 +90,6 @@ const WritePage = () => {
         {viewContent.map((element, idx) => (
           <div key={idx}>
             <h2>{element.title}</h2>
-            <span>{element.hashTagArr}</span>
             <p>{parse(element.body)}</p>
           </div>
         ))}

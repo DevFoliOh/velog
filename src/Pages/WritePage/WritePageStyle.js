@@ -91,6 +91,20 @@ const WriteFooter = styled.div`
 
 const PreviewContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `;
 
 export const style = {
