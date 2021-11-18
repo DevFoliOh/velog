@@ -14,10 +14,7 @@ const WritePage = () => {
 
   const getTitle = (e) => {
     const { value } = e.target;
-    setTitle({
-      ...title,
-      title: value,
-    });
+    setTitle({ ...title, title: value });
   };
 
   const handleKeyEnter = (e) => {
@@ -32,7 +29,7 @@ const WritePage = () => {
   };
 
   const previewPost = () => {
-    setViewContent(viewContent.push({ ...title, ...content, ...hashTagArr }));
+    setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
   };
 
   const registerPost = async () => {
@@ -53,8 +50,7 @@ const WritePage = () => {
     }
     console.log('POST 성공!');
   };
-
-  console.log(id, title, content, hashTagArr);
+  console.log(viewContent);
 
   return (
     <>
@@ -79,16 +75,16 @@ const WritePage = () => {
           <Editor setContent={setContent} data={content} />
         </EditorContainer>
         <WriteFooter>
-          <Button text="미리보기" onClick={previewPost} />
+          <Button text="미리보기" _onClick={previewPost} />
           <Button text="출간하기" _onClick={registerPost} />
         </WriteFooter>
       </WriteContainer>
       <PreviewContainer>
-        {viewContent.map((element) => (
-          <div>
+        {viewContent.map((element, idx) => (
+          <div key={idx}>
             <h2>{element.title}</h2>
-            <div>{element.hashTagArr}</div>
-            <div>{element.content}</div>
+            <span>{element.hashTagArr}</span>
+            <p>{element.body}</p>
           </div>
         ))}
       </PreviewContainer>
