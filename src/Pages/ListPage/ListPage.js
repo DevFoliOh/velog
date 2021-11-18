@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Wrapper, Header, Section, CardList } from './Style';
+import { style } from './ListPageStyle';
+import Card from 'Components/Card';
+import axios from 'axios';
 
 const ListPage = (props) => {
   const [data, setData] = useState(null);
-  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     setTimeout(async () => {
-      console.log('load');
-      const res = await fetch('https://jsonplaceholder.typicode.com/users');
-      const data = await res.json();
-      console.log(data);
-      setProfile(data);
-    }, 2000);
+      await axios('https://jsonplaceholder.typicode.com/users')
+        .then((res) => setData(res.data))
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 1000);
   }, []);
 
   return (
     <Wrapper>
       <Header>velog</Header>
-      {/*<Section>
-        {data.map((el) => (
-          <Card data={el} />
-        ))}
-      </Section> */}
 
-      <Section>
+      <Container>
         <CardList>
-          {profile &&
-            profile.map((userInfo, id) => {
+          {data &&
+            data.map((userInfo) => {
               return (
                 <Card
                   userInfo={userInfo}
@@ -36,12 +32,12 @@ const ListPage = (props) => {
                 />
               );
             })}
-
-          {!profile && <SkeletonProfile />}
         </CardList>
-      </Section>
+      </Container>
     </Wrapper>
   );
 };
 
 export default ListPage;
+
+const { Wrapper, Header, Container, CardList } = style;
