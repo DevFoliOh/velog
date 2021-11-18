@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux';
 const useGetDetailData = (setData, id) => {
   const [isLoading, setIsLoading] = useState(false);
   const [postId, setPostId] = useState();
-  const card = useSelector((state) => state.getCardReducer.card);
-  console.log(card);
+  const card = useSelector((state) => state.getCardReducer.Id);
 
   useEffect(() => {
     card && setPostId(card.id);
@@ -17,7 +16,6 @@ const useGetDetailData = (setData, id) => {
       setIsLoading(false);
       const response = await getPostData(postId);
       setData(response);
-      console.log(response);
       setIsLoading(true);
     } catch (error) {
       throw new Error('data load 실패');

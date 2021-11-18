@@ -1,12 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
-  card: {
+  Id: {
     id: 1,
-    title: '더미 데이터 입니다',
-    body: '더미 데이터 입니다',
-    thumbnail: 'dummydata.jpg',
-    tags: ['더미1', '더미2'],
   },
 };
 
@@ -15,9 +11,7 @@ export const getCardSlice = createSlice({
   initialState,
   reducers: {
     getCardData: (state, action) => {
-      console.log(action.payload);
-      state.card = action.payload;
-      console.log(state.card);
+      state.Id = action.payload;
     },
   },
 });

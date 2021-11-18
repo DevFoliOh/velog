@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from './HeaderStyle';
+import { style } from './HeaderStyle';
 
 const Header = () => (
   <HeaderWrap>
