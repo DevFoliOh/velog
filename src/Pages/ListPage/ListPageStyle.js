@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background: #f8f9fa;
-  margin-top: 2rem;
 `;
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   margin-top: 2rem;
   width: 1728px;
   margin-left: auto;
   margin-right: auto;
+  background: #f8f9fa;
 
   @media (max-width: 1919px) {
     width: 1376px;
@@ -33,11 +36,11 @@ const Container = styled.div`
 
 const CardList = styled.div`
   width: 100%;
-  /* background: lightgreen; */
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   justify-content: space-between;
+  background: #f8f9fa;
 `;
 
 export const style = { Wrapper, Container, CardList };

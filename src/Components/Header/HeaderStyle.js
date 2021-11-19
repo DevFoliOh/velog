@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 const HeaderWrap = styled.header`
   height: 4rem;
+  padding: 0 1.3rem;
+  background: transparent;
 `;
 
 const HeaderContent = styled.div`
-  max-width: 1024px;
-  margin: auto;
   height: 100%;
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@ const Logo = styled.div`
 
 const LogoLink = styled(Link)`
   text-decoration: none;
-  color: 'rgb(33, 37, 41)';
+  color: rgb(33, 37, 41);
 `;
 
 const LogoImg = styled.svg`

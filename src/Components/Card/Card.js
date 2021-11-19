@@ -5,7 +5,7 @@ import { style } from './CardStyle';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const Card = ({ posts, length, ref }) => {
+const Card = ({ posts }) => {
   const [cardId, setCardId] = useState();
   const { getCardId } = getCardIdAction;
   const dispatch = useDispatch();
@@ -26,7 +26,6 @@ const Card = ({ posts, length, ref }) => {
 
     return (
       <Wrapper
-        ref={ref}
         onClick={() => {
           setCardId(posts.id);
           dispatch(getCardId(cardId));
