@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { getCardIdAction } from 'Modules/getCardId/getCardId';
 import { useDispatch } from 'react-redux';
 import { style } from './CardStyle';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-const Card = ({ posts }) => {
+const Card = ({ posts, length, ref }) => {
   const [cardId, setCardId] = useState();
   const { getCardId } = getCardIdAction;
   const dispatch = useDispatch();
@@ -14,12 +16,17 @@ const Card = ({ posts }) => {
   };
 
   if (!posts) {
-    // return <Skeleton />;
+    return (
+      <Wrapper>
+        <Skeleton height={400} />;
+      </Wrapper>
+    );
   } else {
     const thumbnail = posts.thumbnail;
 
     return (
       <Wrapper
+        ref={ref}
         onClick={() => {
           setCardId(posts.id);
           dispatch(getCardId(cardId));
@@ -33,8 +40,8 @@ const Card = ({ posts }) => {
         )}
         <PostInfoContainer>
           <PostInfo>
-            <Title>{posts.title}</Title>
-            <Content>{posts.body}</Content>
+            <Title>{posts.title || <Skeleton />}</Title>
+            <Content>{posts.body || <Skeleton count={3} />}</Content>
           </PostInfo>
           <DateBox>{formatDate(posts.createdAt)}</DateBox>
         </PostInfoContainer>
