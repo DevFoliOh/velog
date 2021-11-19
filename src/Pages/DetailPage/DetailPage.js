@@ -8,6 +8,7 @@ import MenuApi from 'Common/api';
 import { useSelector } from 'react-redux';
 import useGetData from 'Hooks/useGetData';
 import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';
+import DetailAction from 'Components/DetailAction/DetailAction';
 
 const DetailPage = () => {
   const [detailData, setDetailData] = useState({
@@ -64,7 +65,7 @@ const DetailPage = () => {
       ) : (
         <Body>
           <Title>{detailData.title}</Title>
-
+          <DetailAction />
           <TagList>
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
