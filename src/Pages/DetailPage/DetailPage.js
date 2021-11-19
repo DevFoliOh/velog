@@ -7,6 +7,7 @@ import parse from 'html-react-parser';
 import MenuApi from 'Common/api';
 import { useSelector } from 'react-redux';
 import useGetData from 'Hooks/useGetData';
+import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';
 
 const DetailPage = () => {
   const [detailData, setDetailData] = useState({
@@ -49,7 +50,9 @@ const DetailPage = () => {
   return (
     <div>
       <Header></Header>
-      {loading && (
+      {loading ? (
+        <DetailSkeleton />
+      ) : (
         <Main>
           <Title>{detailData.title}</Title>
           <TagList>
