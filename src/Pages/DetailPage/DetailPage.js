@@ -42,6 +42,7 @@ const DetailPage = () => {
     event.preventDefault();
     const data = textRef.current.value;
     const response = await MenuApi.createComment(id, data);
+    textRef.current.value = '';
     if (response) {
       const commentResponse = await MenuApi.getCommentData(id);
       setCommentData(commentResponse.data.results);
