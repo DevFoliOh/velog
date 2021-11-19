@@ -59,6 +59,9 @@ const DetailPage = () => {
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
           </TagList>
+          <ThumbnailWrap>
+            <Thumbnail src={detailData.thumbnail}></Thumbnail>
+          </ThumbnailWrap>
           <Content
             dangerouslySetInnerHTML={{ __html: parse(detailData.body) }}
           ></Content>
@@ -98,6 +101,8 @@ const {
   Main,
   Title,
   TagList,
+  ThumbnailWrap,
+  Thumbnail,
   Content,
   CommentContainer,
   CommentCount,

@@ -23,7 +23,7 @@ const HTTP_METHOD = {
   GETDETAIL(id) {
     return {
       method: 'GET',
-      url: `${BASE_URL}/posts/${id}`,
+      url: `${BASE_URL}/posts/6195e6820b7d21002cce559f`,
     };
   },
 

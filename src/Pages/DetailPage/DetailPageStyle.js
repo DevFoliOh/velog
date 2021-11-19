@@ -24,6 +24,18 @@ const TagList = styled.ul`
   min-height: 0.875rem;
 `;
 
+const ThumbnailWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 5rem 0 5rem 0;
+`;
+
+const Thumbnail = styled.img`
+  width: 50%;
+  height: auto;
+`;
+
 const Content = styled.section`
   margin-top: 2rem;
 `;
@@ -131,6 +143,8 @@ export const style = {
   Main,
   Title,
   TagList,
+  ThumbnailWrap,
+  Thumbnail,
   Content,
   CommentContainer,
   CommentCount,
