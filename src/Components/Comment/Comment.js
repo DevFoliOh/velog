@@ -2,10 +2,18 @@ import React from 'react';
 import { style } from './CommentStyle';
 import MenuApi from 'Common/api';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, id, setComment, mainRef }) => {
   const onDeleteComment = async () => {
     const response = await MenuApi.deleteComment(comment.id);
-    response && window.location.reload();
+    if (response) {
+      const commentResponse = await MenuApi.getCommentData(id);
+      setComment(commentResponse.data.results);
+      mainRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'end',
+      });
+    }
   };
 
   return (

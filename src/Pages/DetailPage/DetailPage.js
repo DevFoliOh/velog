@@ -21,6 +21,7 @@ const DetailPage = () => {
   const [commentData, setCommentData] = useState([]);
   const [tagArr, setTagArr] = useState([]);
 
+  const mainRef = useRef();
   const textRef = useRef();
 
   const id = useSelector((state) => state.getCardIdReducer.cardId);
@@ -39,7 +40,15 @@ const DetailPage = () => {
     event.preventDefault();
     const data = textRef.current.value;
     const response = await MenuApi.createComment(id, data);
-    response && window.location.reload();
+    if (response) {
+      const commentResponse = await MenuApi.getCommentData(id);
+      setCommentData(commentResponse.data.results);
+      mainRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest',
+      });
+    }
   };
 
   useEffect(() => {
@@ -53,8 +62,9 @@ const DetailPage = () => {
       {loading ? (
         <DetailSkeleton />
       ) : (
-        <Main>
+        <Main ref={mainRef}>
           <Title>{detailData.title}</Title>
+
           <TagList>
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
@@ -85,7 +95,12 @@ const DetailPage = () => {
             </form>
             <CommentList>
               {commentData.map((comment) => (
-                <Comment comment={comment} />
+                <Comment
+                  comment={comment}
+                  id={id}
+                  setComment={setComment}
+                  mainRef={mainRef}
+                />
               ))}
             </CommentList>
           </CommentContainer>
