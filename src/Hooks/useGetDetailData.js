@@ -1,6 +1,6 @@
-import { getPostData } from 'Common/get-post-data';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import MenuApi from 'Common/api';
 
 const useGetDetailData = (setData, id) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,10 +13,10 @@ const useGetDetailData = (setData, id) => {
 
   const getData = async () => {
     try {
-      setIsLoading(false);
-      const response = await getPostData(postId);
-      setData(response);
       setIsLoading(true);
+      const response = await MenuApi.getPostDetail(postId);
+      setData(response);
+      setIsLoading(false);
     } catch (error) {
       throw new Error('data load 실패');
     }
