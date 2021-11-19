@@ -56,7 +56,6 @@ const HTTP_METHOD = {
 
 const request = async (option) => {
   const response = await axios(option);
-  console.log(response);
   let responseOK =
     (response && response.statusText === 'OK' && response.status === 200) ||
     (response &&

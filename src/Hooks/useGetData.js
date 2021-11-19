@@ -16,8 +16,6 @@ const useGetData = (setPostData, setComment, id) => {
       setIsLoading(true);
       const postResponse = await MenuApi.getPostDetail(id);
       const commentResponse = await MenuApi.getCommentData(id);
-      console.log(postResponse);
-      console.log(commentResponse);
       setPostData(postResponse.data);
       setComment(commentResponse.data.results);
       setIsLoading(false);
