@@ -2,14 +2,11 @@ import React, { useState, useRef } from 'react';
 import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
 
-const Input = () => {
+const Input = (props) => {
   const inputOpenImageRef = useRef(null);
-  // const [imgFile, setImgFile] = useState(null);
-  // const [imgBase64, setImgBase64] = useState('');
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
-  const [url, setUrl] = useState('');
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
@@ -41,12 +38,10 @@ const Input = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUrl(data.url);
+        props.setUrl(data.url);
       })
       .catch((err) => console.log(err));
   };
-
-  console.log(url);
 
   return (
     <UploadContainer>

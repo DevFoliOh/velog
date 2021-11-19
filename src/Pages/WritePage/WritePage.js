@@ -7,12 +7,13 @@ import uuid from 'react-uuid';
 import parse from 'html-react-parser';
 import Input from 'Components/Input/Input';
 
-const WritePage = ({ url }) => {
+const WritePage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
   const id = uuid();
+  const [url, setUrl] = useState('');
 
   const getTitle = (e) => {
     const { value } = e.target;
@@ -25,8 +26,6 @@ const WritePage = ({ url }) => {
       e.target.value = '';
     }
   };
-
-  console.log(url);
 
   const removeHashTag = (hashtag) => {
     setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
@@ -47,7 +46,6 @@ const WritePage = ({ url }) => {
           thumbnail: url,
         },
       );
-      console.log(response.data.location);
     } catch (error) {
       alert(error);
     }
@@ -74,7 +72,7 @@ const WritePage = ({ url }) => {
               <WriteTag onKeyPress={handleKeyEnter} />
             </WriteTagContainer>
           </div>
-          <Input />
+          <Input url={url} setUrl={setUrl} />
         </WriteHeader>
         <EditorContainer>
           <Editor setContent={setContent} data={content} />

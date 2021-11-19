@@ -9,7 +9,16 @@ const Preview = styled.img`
   object-fit: cover;
 `;
 
-const UploadButton = styled.button``;
+const UploadButton = styled.button`
+  width: 150px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
 
 const UploadInputContainer = styled.div``;
 
