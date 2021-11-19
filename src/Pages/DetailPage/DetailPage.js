@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Header from 'Components/Header/Header';
 import { style } from './DetailPageStyle';
-import useGetData from 'Hooks/useGetData';
+
 import Tag from 'Components/Tag/Tag';
 import Comment from 'Components/Comment/Comment';
 import parse from 'html-react-parser';
-import { postCommentData } from 'Common/api';
+import MenuApi from 'Common/api';
+import { useSelector } from 'react-redux';
+import useGetData from 'Hooks/useGetData';
 
 const DetailPage = () => {
   const [detailData, setDetailData] = useState({
@@ -21,23 +23,22 @@ const DetailPage = () => {
 
   const textRef = useRef();
 
+  const id = useSelector((state) => state.getCardIdReducer.cardId);
+
   const setPostData = useCallback((data) => {
     setDetailData(data);
   }, []);
 
   const setComment = useCallback((data) => {
-    setCommentData(() => {
-      const changedData = [...data];
-      return changedData;
-    });
+    setCommentData(data);
   }, []);
 
-  const loading = useGetData(setPostData, setComment);
+  const loading = useGetData(setPostData, setComment, id);
 
   const onTextSubmit = (event) => {
     event.preventDefault();
     const text = textRef.current.value;
-    postCommentData(text);
+    MenuApi.createComment(id, text);
   };
 
   useEffect(() => {

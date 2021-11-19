@@ -1,21 +1,23 @@
-import { getCommentData, getPostData } from 'Common/api';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import MenuApi from 'Common/api';
 
-const useGetData = (setPostData, setComment) => {
+const useGetData = (setPostData, setComment, id) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [postId, setPostId] = useState();
-  const Id = useSelector((state) => state.getCardIdReducer.cardId);
 
   useEffect(() => {
-    Id && setPostId(Id);
-  }, [Id]);
+    if (id) {
+      getData(id);
+    }
+  }, []);
 
-  const getData = async () => {
+  const getData = async (id) => {
     try {
       setIsLoading(true);
-      const postResponse = await getPostData(postId);
-      const commentResponse = await getCommentData(postId);
+      const postResponse = await MenuApi.getPostDetail(id);
+      const commentResponse = await MenuApi.getCommentData(id);
+      console.log(postResponse);
+      console.log(commentResponse);
       setPostData(postResponse.data);
       setComment(commentResponse.data.results);
       setIsLoading(false);
@@ -23,10 +25,6 @@ const useGetData = (setPostData, setComment) => {
       throw new Error('data load 실패');
     }
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return isLoading;
 };

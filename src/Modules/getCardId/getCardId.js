@@ -9,6 +9,7 @@ export const getCardIdSlice = createSlice({
   initialState,
   reducers: {
     getCardId: (state, action) => {
+      console.log(action.payload);
       state.cardId = action.payload;
     },
   },
