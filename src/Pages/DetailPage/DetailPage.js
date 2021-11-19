@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import useGetData from 'Hooks/useGetData';
 import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';
 import DetailAction from 'Components/DetailAction/DetailAction';
-
+import PostShare from 'Components/PostShare/PostShare';
+import { debounce } from 'lodash';
 const DetailPage = () => {
   const [detailData, setDetailData] = useState({
     tags: [],
@@ -21,7 +22,7 @@ const DetailPage = () => {
   });
   const [commentData, setCommentData] = useState([]);
   const [tagArr, setTagArr] = useState([]);
-
+  const [isFixedShare, setIsFixedshare] = useState();
   const mainRef = useRef();
   const textRef = useRef();
 
@@ -52,6 +53,19 @@ const DetailPage = () => {
     }
   };
 
+  const onFixedShareComponent = () => {
+    console.log(window.pageYOffset);
+    if (window.pageYOffset > 220) {
+      setIsFixedshare(true);
+    } else {
+      setIsFixedshare(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', debounce(onFixedShareComponent, 10));
+  }, []);
+
   useEffect(() => {
     detailData && setTagArr(detailData.tags);
     detailData && window.scrollTo(0, 0);
@@ -69,6 +83,7 @@ const DetailPage = () => {
           <TagList>
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
+            <PostShare isFixedShare={isFixedShare} />
           </TagList>
           <ThumbnailWrap>
             <Thumbnail src={detailData.thumbnail}></Thumbnail>

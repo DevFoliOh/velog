@@ -5,6 +5,7 @@ const Main = styled.main``;
 const Body = styled.div`
   margin-top: 5.5rem;
   width: 768px;
+  height: auto;
   margin-left: auto;
   margin-right: auto; ;
 `;
