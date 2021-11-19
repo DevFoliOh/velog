@@ -54,7 +54,6 @@ const DetailPage = () => {
   };
 
   const onFixedShareComponent = () => {
-    console.log(window.pageYOffset);
     if (window.pageYOffset > 220) {
       setIsFixedshare(true);
     } else {
@@ -83,7 +82,9 @@ const DetailPage = () => {
           <TagList>
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
-            <PostShare isFixedShare={isFixedShare} />
+            {!loading && (
+              <PostShare isFixedShare={isFixedShare} detailData={detailData} />
+            )}
           </TagList>
           <ThumbnailWrap>
             <Thumbnail src={detailData.thumbnail}></Thumbnail>

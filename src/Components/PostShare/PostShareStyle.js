@@ -39,8 +39,8 @@ const ShareBtn = styled.button`
 `;
 
 const ShareImg = styled.svg`
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 `;
 
 export const style = {
