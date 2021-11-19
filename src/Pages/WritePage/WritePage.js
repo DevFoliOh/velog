@@ -12,8 +12,9 @@ const WritePage = () => {
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
-  const id = uuid();
+  // const id = uuid();
   const [url, setUrl] = useState('');
+  const date = new Date();
 
   const getTitle = (e) => {
     const { value } = e.target;
@@ -39,11 +40,12 @@ const WritePage = () => {
       const response = await axios.post(
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
-          id: id,
+          id: uuid(),
           title: title.title,
           body: content.body,
           tags: hashTagArr,
           thumbnail: url,
+          createdAt: date,
         },
       );
     } catch (error) {
