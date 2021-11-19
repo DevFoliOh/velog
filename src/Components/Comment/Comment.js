@@ -5,7 +5,7 @@ const Comment = ({ comment }) => {
   return (
     <CommentItem>
       <CommentUserWrap>
-        <CommentUser src="avatar.png" />
+        <CommentUser src="/avatar.png" />
         <CommentAction>
           <ChangeComment>수정</ChangeComment>
           <RemoveComment>삭제</RemoveComment>

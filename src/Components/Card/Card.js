@@ -22,7 +22,7 @@ const Card = ({ posts }) => {
         onClick={() => {
           dispatch(getCardId(posts.id));
         }}
-        to={`/detail`}
+        to={`/detail/${posts.id}`}
       >
         {thumbnail && (
           <ImageContainer>

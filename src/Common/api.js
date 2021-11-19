@@ -49,10 +49,11 @@ const HTTP_METHOD = {
 
 const request = async (option) => {
   const response = await axios(option);
-  console.log(option);
   console.log(response);
   let responseOK =
-    response && response.status === 200 && response.statusText === 'OK';
+    (response && response.statusText === 'OK' && response.status === 200) ||
+    (response && response.statusText === 'Created' && response.status === 201);
+
   if (!responseOK) {
     throw new Error('data load 실패');
   }
@@ -82,33 +83,6 @@ const MenuApi = {
 };
 
 export default MenuApi;
-
-// export const getPostData = async (id) => {
-//   try {
-//     const response = await axios(
-//       `https://limitless-sierra-67996.herokuapp.com/v1/posts/6196101e0b7d21002cce55a0`,
-//     );
-//     console.log(response);
-//     return response;
-//   } catch (error) {
-//     throw new Error('data load 실패');
-//   }
-// };
-
-// export const getCommentData = async (id) => {
-//   try {
-//     const response = await axios({
-//       method: 'get',
-//       url: 'https://limitless-sierra-67996.herokuapp.com/v1/comments',
-//       params: {
-//         postId: '6196101e0b7d21002cce55a0',
-//       },
-//     });
-//     return response;
-//   } catch (error) {
-//     throw new Error('data load 실패');
-//   }
-// };
 
 // export const postCommentData = async (id, text) => {
 //   try {

@@ -28,7 +28,7 @@ const Header = () => (
         </Search>
         <WriteBtn to="/write">새 글 작성</WriteBtn>
         <Profile>
-          <ProfileImg src="avatar.png" alt="profile" />
+          <ProfileImg src="/avatar.png" alt="profile" />
           <Dropdown
             stroke="currentColor"
             fill="currentColor"
