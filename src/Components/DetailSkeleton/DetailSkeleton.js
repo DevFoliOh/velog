@@ -5,26 +5,50 @@ const DetailSkeleton = () => {
   return (
     <Main>
       <TitleWrap>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
+        <Title>
+          <Shimmer />
+        </Title>
+        <Title>
+          <Shimmer />
+        </Title>
+        <Title>
+          <Shimmer />
+        </Title>
+        <Title>
+          <Shimmer />
+        </Title>
       </TitleWrap>
       <TagList>
-        <TagItem />
-        <TagItem />
-        <TagItem />
+        <TagItem>
+          <Shimmer />
+        </TagItem>
+        <TagItem>
+          <Shimmer />
+        </TagItem>
+        <TagItem>
+          <Shimmer />
+        </TagItem>
       </TagList>
       <Content>
-        <FirstContentItem />
-        <SecondContentItem />
-        <ThirdContentItem />
+        <FirstContentItem>
+          <Shimmer />
+        </FirstContentItem>
+        <SecondContentItem>
+          <Shimmer />
+        </SecondContentItem>
+        <ThirdContentItem>
+          <Shimmer />
+        </ThirdContentItem>
       </Content>
       <UserContainer>
         <UserImg />
         <UserDescriptionWrap>
-          <UserDescriptionTitle></UserDescriptionTitle>
-          <UserDescriptionSubTitle></UserDescriptionSubTitle>
+          <UserDescriptionTitle>
+            <Shimmer />
+          </UserDescriptionTitle>
+          <UserDescriptionSubTitle>
+            <Shimmer />
+          </UserDescriptionSubTitle>
         </UserDescriptionWrap>
       </UserContainer>
     </Main>
@@ -48,4 +72,5 @@ const {
   UserDescriptionWrap,
   UserDescriptionTitle,
   UserDescriptionSubTitle,
+  Shimmer,
 } = style;

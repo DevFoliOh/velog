@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Main = styled.main`
   margin-top: 5.5rem;
@@ -22,6 +22,7 @@ const Title = styled.div`
   color: rgb(52, 58, 64);
   margin-bottom: 2rem;
   word-break: keep-all;
+  overflow: hidden;
 `;
 
 const TagList = styled.ul`
@@ -46,6 +47,7 @@ const TagItem = styled.ul`
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
+  overflow: hidden;
 `;
 
 const Content = styled.section`
@@ -59,6 +61,7 @@ const FirstContentItem = styled.div`
   height: 30px;
   background-color: #eeeeee;
   margin-top: 1rem;
+  overflow: hidden;
 `;
 
 const SecondContentItem = styled.div`
@@ -66,6 +69,7 @@ const SecondContentItem = styled.div`
   height: 30px;
   background-color: #eeeeee;
   margin-top: 1rem;
+  overflow: hidden;
 `;
 
 const ThirdContentItem = styled.div`
@@ -73,6 +77,27 @@ const ThirdContentItem = styled.div`
   height: 30px;
   background-color: #eeeeee;
   margin-top: 1rem;
+  overflow: hidden;
+`;
+
+const Shimmer = styled.div`
+  width: 50%;
+  height: 100%;
+  background-color: #e0e0e0;
+  box-shadow: 0 0 30px 30px #e0e0e0;
+  animation: loading 2s infinite;
+
+  @keyframes loading {
+    0% {
+      transform: translateX(-50%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translate(200%);
+    }
+  }
 `;
 
 const UserContainer = styled.footer`
@@ -81,7 +106,7 @@ const UserContainer = styled.footer`
   margin-top: 7rem;
   margin-bottom: 6rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgb(233, 236, 239); ;
+  border-bottom: 1px solid rgb(233, 236, 239);
 `;
 
 const UserImg = styled.div`
@@ -103,6 +128,7 @@ const UserDescriptionTitle = styled.div`
   width: 65px;
   height: 30px;
   background-color: #eeeeee;
+  overflow: hidden;
 `;
 
 const UserDescriptionSubTitle = styled.div`
@@ -110,6 +136,7 @@ const UserDescriptionSubTitle = styled.div`
   height: 25px;
   margin-top: 0.25rem;
   background-color: #eeeeee;
+  overflow: hidden;
 `;
 
 export const style = {
@@ -127,4 +154,5 @@ export const style = {
   UserDescriptionWrap,
   UserDescriptionTitle,
   UserDescriptionSubTitle,
+  Shimmer,
 };

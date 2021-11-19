@@ -23,7 +23,7 @@ const HTTP_METHOD = {
   GETDETAIL(id) {
     return {
       method: 'GET',
-      url: `${BASE_URL}/posts/6195e6820b7d21002cce559f`,
+      url: `${BASE_URL}/posts/${id}`,
     };
   },
 
@@ -45,6 +45,13 @@ const HTTP_METHOD = {
       },
     };
   },
+
+  DELETECOMMENT(id) {
+    return {
+      method: 'DELETE',
+      url: `${BASE_URL}/comments/${id}`,
+    };
+  },
 };
 
 const request = async (option) => {
@@ -52,7 +59,12 @@ const request = async (option) => {
   console.log(response);
   let responseOK =
     (response && response.statusText === 'OK' && response.status === 200) ||
-    (response && response.statusText === 'Created' && response.status === 201);
+    (response &&
+      response.statusText === 'Created' &&
+      response.status === 201) ||
+    (response &&
+      response.statusText === 'No Content' &&
+      response.status === 204);
 
   if (!responseOK) {
     throw new Error('data load 실패');
@@ -80,22 +92,10 @@ const MenuApi = {
   createComment(id, data) {
     return request(HTTP_METHOD.CREATECOMMENT(id, data));
   },
+
+  deleteComment(id) {
+    return request(HTTP_METHOD.DELETECOMMENT(id));
+  },
 };
 
 export default MenuApi;
-
-// export const postCommentData = async (id, text) => {
-//   try {
-//     await axios({
-//       method: 'post',
-//       url: `https://limitless-sierra-67996.herokuapp.com/v1/comments`,
-//       data: {
-//         postId: '6196101e0b7d21002cce55a0',
-//         body: text,
-//       },
-//     });
-//     window.location.reload();
-//   } catch (error) {
-//     throw new Error('data post 실패');
-//   }
-// };

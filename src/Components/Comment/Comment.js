@@ -1,14 +1,20 @@
 import React from 'react';
 import { style } from './CommentStyle';
+import MenuApi from 'Common/api';
 
 const Comment = ({ comment }) => {
+  const onDeleteComment = async () => {
+    const response = await MenuApi.deleteComment(comment.id);
+    response && window.location.reload();
+  };
+
   return (
     <CommentItem>
       <CommentUserWrap>
         <CommentUser src="/avatar.png" />
         <CommentAction>
           <ChangeComment>수정</ChangeComment>
-          <RemoveComment>삭제</RemoveComment>
+          <RemoveComment onClick={onDeleteComment}>삭제</RemoveComment>
         </CommentAction>
       </CommentUserWrap>
       <CommentTextWrap>{comment.body}</CommentTextWrap>
