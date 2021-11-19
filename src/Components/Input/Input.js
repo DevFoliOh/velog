@@ -4,41 +4,61 @@ import default_thumb from 'Assets/default_image.png';
 
 const Input = () => {
   const inputOpenImageRef = useRef(null);
-  const [imgFile, setImgFile] = useState(null);
-  const [imgBase64, setImgBase64] = useState('');
+  // const [imgFile, setImgFile] = useState(null);
+  // const [imgBase64, setImgBase64] = useState('');
+  const [fileInputState, setFileInputState] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const [url, setUrl] = useState('');
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
   };
 
-  const handleChangeFile = (e) => {
-    let reader = new FileReader();
+  const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-
-    reader.onloadend = () => {
-      const base64 = reader.result;
-      if (base64) {
-        setImgBase64(base64.toString());
-      }
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-      setImgFile(file);
-    }
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
   };
 
-  console.log(imgBase64);
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  const uploadImage = () => {
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('upload_preset', 'rwvzsde8');
+    formData.append('cloud_name', 'ddupb73kz');
+    fetch('https://api.cloudinary.com/v1_1/ddupb73kz/image/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.url);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  console.log(url);
 
   return (
     <UploadContainer>
       <Preview
-        src={imgBase64 ? imgBase64 : default_thumb}
+        src={previewSource ? previewSource : default_thumb}
         onClick={handleOpenImageRef}
         alt="Thumbnail"
-      ></Preview>
+      />
+      <UploadButton onClick={uploadImage}>업로드하기</UploadButton>
       <UploadInputContainer>
         <UploadInput
-          onChange={handleChangeFile}
+          onChange={handleFileInputChange}
           ref={inputOpenImageRef}
         ></UploadInput>
       </UploadInputContainer>
@@ -48,4 +68,10 @@ const Input = () => {
 
 export default Input;
 
-const { UploadContainer, Preview, UploadInputContainer, UploadInput } = style;
+const {
+  UploadContainer,
+  Preview,
+  UploadButton,
+  UploadInputContainer,
+  UploadInput,
+} = style;

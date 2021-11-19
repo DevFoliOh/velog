@@ -7,7 +7,7 @@ import uuid from 'react-uuid';
 import parse from 'html-react-parser';
 import Input from 'Components/Input/Input';
 
-const WritePage = ({ file, imgFile, imgBase64 }) => {
+const WritePage = ({ url }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
@@ -26,6 +26,8 @@ const WritePage = ({ file, imgFile, imgBase64 }) => {
     }
   };
 
+  console.log(url);
+
   const removeHashTag = (hashtag) => {
     setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
   };
@@ -33,11 +35,8 @@ const WritePage = ({ file, imgFile, imgBase64 }) => {
   const previewPost = () => {
     setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
   };
-
   const registerPost = async () => {
     try {
-      const formData = new FormData();
-      formData.append('thumbnail', file);
       const response = await axios.post(
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
@@ -45,11 +44,10 @@ const WritePage = ({ file, imgFile, imgBase64 }) => {
           title: title.title,
           body: content.body,
           tags: hashTagArr,
-          thumbnail: formData,
-          // headers: { 'Content-Type': 'multipart/form-data' },
+          thumbnail: url,
         },
       );
-      console.log(formData.toString());
+      console.log(response.data.location);
     } catch (error) {
       alert(error);
     }

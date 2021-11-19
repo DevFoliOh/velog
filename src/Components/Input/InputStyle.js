@@ -9,6 +9,8 @@ const Preview = styled.img`
   object-fit: cover;
 `;
 
+const UploadButton = styled.button``;
+
 const UploadInputContainer = styled.div``;
 
 const UploadInput = styled.input.attrs({
@@ -22,6 +24,7 @@ const UploadInput = styled.input.attrs({
 export const style = {
   UploadContainer,
   Preview,
+  UploadButton,
   UploadInputContainer,
   UploadInput,
 };
