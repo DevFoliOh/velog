@@ -10,13 +10,13 @@ const Tagitem = styled.li`
   height: 2rem;
   border-radius: 1rem;
   display: inline-flex;
-  -webkit-box-align: center;
   align-items: center;
   margin-right: 0.875 rem;
   color: rgb(12, 166, 120);
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
+  cursor: pointer;
 `;
 
 export const style = {

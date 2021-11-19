@@ -57,12 +57,12 @@ const DetailPage = () => {
   }, [detailData]);
 
   return (
-    <div>
+    <Main ref={mainRef}>
       <Header></Header>
       {loading ? (
         <DetailSkeleton />
       ) : (
-        <Main ref={mainRef}>
+        <Body>
           <Title>{detailData.title}</Title>
 
           <TagList>
@@ -104,9 +104,9 @@ const DetailPage = () => {
               ))}
             </CommentList>
           </CommentContainer>
-        </Main>
+        </Body>
       )}
-    </div>
+    </Main>
   );
 };
 
@@ -114,6 +114,7 @@ export default DetailPage;
 
 const {
   Main,
+  Body,
   Title,
   TagList,
   ThumbnailWrap,

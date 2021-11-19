@@ -5,16 +5,21 @@ import Card from 'Components/Card/Card';
 import useGetListData from 'Hooks/useGetListData';
 import { useInView } from 'react-intersection-observer';
 
-const ListPage = () => {
+const ListPage = ({ history }) => {
   const [postData, setPostData] = useState(null);
+  const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
 
   useGetListData(setPostData);
   console.log(postData);
 
+  useEffect(() => {
+    setLocation(history.location.pathname);
+  }, []);
+
   return (
     <Wrapper ref={ref}>
-      <Header />
+      <Header location={location} />
       <Container>
         <CardList>
           {postData &&

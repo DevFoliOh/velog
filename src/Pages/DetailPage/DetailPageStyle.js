@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const Main = styled.main`
+const Main = styled.main``;
+
+const Body = styled.div`
   margin-top: 5.5rem;
   width: 768px;
   margin-left: auto;
@@ -141,6 +143,7 @@ const CommentList = styled.ul`
 
 export const style = {
   Main,
+  Body,
   Title,
   TagList,
   ThumbnailWrap,
