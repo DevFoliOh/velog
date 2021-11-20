@@ -1,20 +1,27 @@
 import React, { useRef } from 'react';
 import { style } from './CommentWriteStyle';
+import MenuApi from 'Common/api';
 
 const CommentWrite = ({
   onTextSubmit,
-  currentText,
+  currentComment,
+  CommentId,
   isOpenPatchText,
   onClosePatchTextArea,
+  onChangeCurrentComment,
 }) => {
   const textRef = useRef();
   const formRef = useRef();
-
-  const onPropsTextSubmit = (e) => {
+  const onPropsTextSubmit = async (e) => {
     e.preventDefault();
+    let text = textRef.current.value;
     if (isOpenPatchText) {
+      const response = await MenuApi.patchComment(CommentId, text);
+      onChangeCurrentComment(response.data);
+      onClosePatchTextArea();
     } else {
-      onTextSubmit(textRef);
+      await onTextSubmit(text);
+      textRef.current.value = '';
     }
   };
 
@@ -22,7 +29,7 @@ const CommentWrite = ({
     <form onSubmit={onPropsTextSubmit} ref={formRef}>
       <CommentTextArea
         placeholder="댓글을 작성하세요"
-        value={currentText}
+        defaultValue={currentComment}
         ref={textRef}
       ></CommentTextArea>
       {isOpenPatchText ? (

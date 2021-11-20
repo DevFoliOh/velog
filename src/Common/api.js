@@ -52,6 +52,16 @@ const HTTP_METHOD = {
       url: `${BASE_URL}/comments/${id}`,
     };
   },
+
+  PATCHCOMMENT(id, data) {
+    return {
+      method: 'patch',
+      url: `${BASE_URL}/comments/${id}`,
+      data: {
+        body: data,
+      },
+    };
+  },
 };
 
 const request = async (option) => {
@@ -94,6 +104,10 @@ const MenuApi = {
 
   deleteComment(id) {
     return request(HTTP_METHOD.DELETECOMMENT(id));
+  },
+
+  patchComment(id, data) {
+    return request(HTTP_METHOD.PATCHCOMMENT(id, data));
   },
 };
 

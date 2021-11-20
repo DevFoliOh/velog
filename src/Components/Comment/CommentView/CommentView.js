@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { style } from './CommentViewStyle';
 import MenuApi from 'Common/api';
 import CommentWrite from '../CommentWrite/CommentWrite';
+import reactDom from 'react-dom';
 
 const CommentView = ({ comment, id, setComment, mainRef }) => {
   const [isOpenPatchText, setIsOpenPatch] = useState(false);
+  const [currentComment, setCurrentComment] = useState(comment);
 
   const onDeleteComment = async () => {
     const response = await MenuApi.deleteComment(comment.id);
@@ -27,6 +29,10 @@ const CommentView = ({ comment, id, setComment, mainRef }) => {
     setIsOpenPatch(false);
   };
 
+  const onChangeCurrentComment = useCallback((text) => {
+    setCurrentComment(text);
+  }, []);
+
   return (
     <CommentItem>
       <CommentUserWrap>
@@ -40,18 +46,20 @@ const CommentView = ({ comment, id, setComment, mainRef }) => {
       </CommentUserWrap>
       {isOpenPatchText === true ? (
         <CommentWrite
-          currentText={comment.body}
+          currentComment={currentComment.body}
+          CommentId={currentComment.id}
           isOpenPatchText={isOpenPatchText}
           onClosePatchTextArea={onClosePatchTextArea}
+          onChangeCurrentComment={onChangeCurrentComment}
         />
       ) : (
-        <CommentTextWrap>{comment.body}</CommentTextWrap>
+        <CommentTextWrap>{currentComment.body}</CommentTextWrap>
       )}
     </CommentItem>
   );
 };
 
-export default CommentView;
+export default React.memo(CommentView);
 
 const {
   CommentItem,

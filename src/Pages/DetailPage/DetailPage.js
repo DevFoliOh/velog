@@ -39,9 +39,7 @@ const DetailPage = () => {
   const loading = useGetData(setPostData, setComment, id);
 
   const onTextSubmit = useCallback(async (text) => {
-    const data = text.current.value;
-    const response = await MenuApi.createComment(id, data);
-    text.current.value = '';
+    const response = await MenuApi.createComment(id, text);
     if (response) {
       const commentResponse = await MenuApi.getCommentData(id);
       setCommentData(commentResponse.data.results);
