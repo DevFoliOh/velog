@@ -12,6 +12,7 @@ import DetailAction from 'Components/DetailAction/DetailAction';
 import PostShare from 'Components/PostShare/PostShare';
 import { debounce } from 'lodash';
 import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
+import Modal from 'Components/Modal/Modal';
 
 const DetailPage = ({ history }) => {
   const [detailData, setDetailData] = useState({
@@ -25,9 +26,15 @@ const DetailPage = ({ history }) => {
   const [commentData, setCommentData] = useState([]);
   const [tagArr, setTagArr] = useState([]);
   const [isFixedShare, setIsFixedshare] = useState();
+  const [showModal, setShowModal] = useState(false);
+
   const mainRef = useRef();
 
   const id = useSelector((state) => state.getCardIdReducer.cardId);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const setPostData = useCallback((data) => {
     setDetailData(data);
@@ -82,13 +89,21 @@ const DetailPage = ({ history }) => {
 
   return (
     <Main ref={mainRef}>
+      {showModal && (
+        <Modal
+          title="포스트 삭제"
+          description="정말로 삭제하시겠습니까?"
+          modalLink="/"
+          postId={id}
+        />
+      )}
       <Header></Header>
       {loading ? (
         <DetailSkeleton />
       ) : (
         <Body>
           <Title>{detailData.title}</Title>
-          <DetailAction postId={id} history={history} />
+          <DetailAction postId={id} history={history} openModal={openModal} />
           <TagList>
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}

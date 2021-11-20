@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import MenuApi from 'Common/api';
+import React, { useEffect, useState } from 'react';
 import { style } from './ModalStyle';
 
 const Modal = (props) => {
   const [modalState, setModalState] = useState(true);
-  const { title, description, modalLink } = props;
+  const { title, description, modalLink, postId } = props;
 
-  const closeModal = () => {
-    setModalState(false);
+  const closeModal = (e) => {
+    if (e.target.text === '확인') {
+      postId && onDeleteDetail();
+    } else {
+      setModalState(false);
+    }
+  };
+
+  const onDeleteDetail = async () => {
+    await MenuApi.deleteDetail(postId);
   };
 
   return modalState ? (
