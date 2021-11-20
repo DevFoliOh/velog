@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ActionWrap = styled.ul`
@@ -29,8 +30,14 @@ const ActionDelete = styled.li`
   margin-left: 8px;
 `;
 
+const EditLink = styled(Link)`
+  text-decoration: none;
+  color: rgb(134, 142, 150);
+`;
+
 export const style = {
   ActionWrap,
   ActionChange,
   ActionDelete,
+  EditLink,
 };

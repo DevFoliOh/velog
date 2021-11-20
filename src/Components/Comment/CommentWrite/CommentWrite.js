@@ -12,6 +12,7 @@ const CommentWrite = ({
 }) => {
   const textRef = useRef();
   const formRef = useRef();
+
   const onPropsTextSubmit = async (e) => {
     e.preventDefault();
     let text = textRef.current.value;
