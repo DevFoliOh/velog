@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getCardIdAction } from 'Modules/getCardId/getCardId';
 import { useDispatch } from 'react-redux';
 import { style } from './CardStyle';
 
 const Card = ({ posts }) => {
-  const [cardId, setCardId] = useState();
   const { getCardId } = getCardIdAction;
   const dispatch = useDispatch();
 
@@ -21,8 +20,7 @@ const Card = ({ posts }) => {
     return (
       <Wrapper
         onClick={() => {
-          setCardId(posts.id);
-          dispatch(getCardId(cardId));
+          dispatch(getCardId(posts.id));
         }}
         to={`/detail/${posts.id}`}
       >

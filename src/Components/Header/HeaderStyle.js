@@ -2,16 +2,28 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderWrap = styled.header`
+  width: 100%;
   height: 4rem;
 `;
 
 const HeaderContent = styled.div`
-  max-width: 1024px;
+  width: 1728px;
   margin: auto;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 1919px) {
+    width: 1376px;
+  }
+  @media (max-width: 1440px) {
+    width: 1024px;
+  }
+
+  @media (max-width: 1056px) {
+    width: calc(100% - 2rem);
+  }
 `;
 
 const Logo = styled.div`
@@ -22,7 +34,7 @@ const Logo = styled.div`
 
 const LogoLink = styled(Link)`
   text-decoration: none;
-  color: 'rgb(33, 37, 41)';
+  color: black;
 `;
 
 const LogoImg = styled.svg`
