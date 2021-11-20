@@ -54,9 +54,19 @@ const HTTP_METHOD = {
     };
   },
 
+  PATCH(id, data) {
+    return {
+      method: 'PATCH',
+      url: `${BASE_URL}/posts/${id}`,
+      data: {
+        body: data,
+      },
+    };
+  },
+
   PATCHCOMMENT(id, data) {
     return {
-      method: 'patch',
+      method: 'PATCH',
       url: `${BASE_URL}/comments/${id}`,
       data: {
         body: data,
@@ -105,6 +115,10 @@ const MenuApi = {
 
   deleteComment(id) {
     return request(HTTP_METHOD.DELETECOMMENT(id));
+  },
+
+  patchPost(id, data) {
+    return request(HTTP_METHOD.PATCH(id, data));
   },
 
   patchComment(id, data) {

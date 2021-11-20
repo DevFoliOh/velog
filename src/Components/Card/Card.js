@@ -4,15 +4,11 @@ import { useDispatch } from 'react-redux';
 import { style } from './CardStyle';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { formatDate } from 'Common/formatDate';
 
 const Card = ({ posts }) => {
   const { getCardId } = getCardIdAction;
   const dispatch = useDispatch();
-
-  const formatDate = (date) => {
-    const format = date.slice(0, 10).split('-');
-    return `${format[0]}년 ${format[1]}월 ${format[2]}일`;
-  };
 
   if (!posts) {
     return (

@@ -5,7 +5,7 @@ import default_thumb from 'Assets/default_image.png';
 const Input = (props) => {
   const inputOpenImageRef = useRef(null);
   const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState('');
+  const [previewSource, setPreviewSource] = useState(props.url);
   const [selectedFile, setSelectedFile] = useState();
 
   const handleOpenImageRef = () => {

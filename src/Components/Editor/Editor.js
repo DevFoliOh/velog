@@ -8,13 +8,14 @@ export default function Editor({ content, setContent }) {
       <CKEditor
         className="editor"
         config={{}}
-        data="게시글을 작성해주세요"
+        data="냠냠"
         editor={ClassicEditor}
         onReady={(editor) => {}}
         onBlur={(event, editor) => {}}
         onFocus={(event, editor) => {}}
         onChange={(event, editor) => {
           const data = editor.getData();
+          console.log(typeof data);
           setContent({
             ...content,
             body: data,
