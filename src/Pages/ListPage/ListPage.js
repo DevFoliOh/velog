@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom';
 import MenuApi from 'Common/api';
 import ListSkeleton from 'Components/ListSkeleton/ListSkeleton';
 
-const ListPage = () => {
+const ListPage = ({ history }) => {
   const [postData, setPostData] = useState(null);
+  const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
   const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(false);
@@ -33,8 +34,17 @@ const ListPage = () => {
     }
   }, [inView, loading]);
 
+  useEffect(() => {
+    setLocation(history.location.pathname);
+  }, []);
+
   return (
+<<<<<<< HEAD
     <Wrapper>
+=======
+    <Wrapper ref={ref}>
+      <Header location={location} />
+>>>>>>> ce548ad673fd344127be95d0f2b0d7372b77c85f
       <Container>
         <Header />
         {loading ? (

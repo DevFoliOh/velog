@@ -22,7 +22,7 @@ const Logo = styled.div`
 
 const LogoLink = styled(Link)`
   text-decoration: none;
-  color: rgb(33, 37, 41);
+  color: black;
 `;
 
 const LogoImg = styled.svg`
