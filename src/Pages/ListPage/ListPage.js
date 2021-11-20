@@ -18,9 +18,9 @@ const ListPage = ({ history }) => {
   let result = useGetListData(1, setPostData);
 
   useEffect(() => {
+    console.log(`렌더되면 ${postData}`);
     setLoading(result);
   }, [result]);
-
   useEffect(() => {
     if (inView && !loading) {
       setPage((prevState) => prevState + 1);

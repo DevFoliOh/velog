@@ -27,13 +27,15 @@ const DetailPage = ({ history }) => {
   const [tagArr, setTagArr] = useState([]);
   const [isFixedShare, setIsFixedshare] = useState();
   const [showModal, setShowModal] = useState(false);
-
+  const [clickComponent, setClickComponent] = useState('');
   const mainRef = useRef();
 
   const id = useSelector((state) => state.getCardIdReducer.cardId);
 
-  const openModal = () => {
+  const openModal = (click) => {
+    console.log(click);
     setShowModal((prev) => !prev);
+    setClickComponent(click);
   };
 
   const setPostData = useCallback((data) => {
@@ -89,12 +91,26 @@ const DetailPage = ({ history }) => {
 
   return (
     <Main ref={mainRef}>
-      {showModal && (
+      {showModal && clickComponent === 'postDelete' && (
         <Modal
           title="포스트 삭제"
           description="정말로 삭제하시겠습니까?"
           modalLink="/"
           postId={id}
+          mainRef={mainRef}
+          deleteComment={deleteComment}
+          clickComponent={clickComponent}
+        />
+      )}
+      {showModal && clickComponent === 'commentDelete' && (
+        <Modal
+          title="댓글 삭제"
+          description="댓글을 정말로 삭제하시겠습니까?"
+          modalLink=""
+          postId={id}
+          mainRef={mainRef}
+          deleteComment={deleteComment}
+          clickComponent={clickComponent}
         />
       )}
       <Header></Header>
@@ -129,13 +145,7 @@ const DetailPage = ({ history }) => {
             <CommentWrite onTextSubmit={onTextSubmit} />
             <CommentList>
               {commentData.map((comment) => (
-                <CommentView
-                  comment={comment}
-                  id={id}
-                  setComment={setComment}
-                  mainRef={mainRef}
-                  deleteComment={deleteComment}
-                />
+                <CommentView comment={comment} openModal={openModal} />
               ))}
             </CommentList>
           </CommentContainer>
