@@ -6,6 +6,7 @@ import useGetListData from 'Hooks/useGetListData';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import MenuApi from 'Common/api';
+import ListSkeleton from 'Components/ListSkeleton/ListSkeleton';
 
 const ListPage = () => {
   const [postData, setPostData] = useState(null);
@@ -36,17 +37,21 @@ const ListPage = () => {
     <Wrapper>
       <Container>
         <Header />
-        <CardList>
-          {postData &&
-            postData.map((posts) => {
-              return (
-                <div>
-                  <Card posts={posts} key={posts.id} />
-                  <div ref={ref}></div>
-                </div>
-              );
-            })}
-        </CardList>
+        {loading ? (
+          <ListSkeleton />
+        ) : (
+          <CardList>
+            {postData &&
+              postData.map((posts) => {
+                return (
+                  <div>
+                    <Card posts={posts} key={posts.id} />
+                    <div ref={ref}></div>
+                  </div>
+                );
+              })}
+          </CardList>
+        )}
       </Container>
     </Wrapper>
   );
