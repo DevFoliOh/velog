@@ -39,14 +39,9 @@ const ListPage = ({ history }) => {
   }, []);
 
   return (
-<<<<<<< HEAD
-    <Wrapper>
-=======
     <Wrapper ref={ref}>
       <Header location={location} />
->>>>>>> ce548ad673fd344127be95d0f2b0d7372b77c85f
       <Container>
-        <Header />
         {loading ? (
           <ListSkeleton />
         ) : (

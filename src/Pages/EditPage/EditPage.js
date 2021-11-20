@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { style } from './EditPageStyle';
 import usePatchEditData from 'Hooks/usePatchEditData';
-import useGetDetailData from 'Hooks/useGetDetailData';
 
 const EditPage = (props) => {
   const [id, setId] = useState();
