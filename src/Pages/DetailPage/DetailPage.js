@@ -12,7 +12,8 @@ import DetailAction from 'Components/DetailAction/DetailAction';
 import PostShare from 'Components/PostShare/PostShare';
 import { debounce } from 'lodash';
 import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
-const DetailPage = () => {
+
+const DetailPage = ({ history }) => {
   const [detailData, setDetailData] = useState({
     tags: [],
     title: '',
@@ -87,7 +88,7 @@ const DetailPage = () => {
       ) : (
         <Body>
           <Title>{detailData.title}</Title>
-          <DetailAction />
+          <DetailAction postId={id} history={history} />
           <TagList>
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
