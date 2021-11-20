@@ -3,10 +3,11 @@ import axios from 'axios';
 const BASE_URL = 'https://limitless-sierra-67996.herokuapp.com/v1';
 
 const HTTP_METHOD = {
-  GETAll() {
+  GETAll(page) {
     return {
       method: 'GET',
       url: `${BASE_URL}/posts`,
+      params: { page: page },
     };
   },
 
@@ -82,8 +83,8 @@ const request = async (option) => {
 };
 
 const MenuApi = {
-  getAllPosts() {
-    return request(HTTP_METHOD.GETAll());
+  getAllPosts(page) {
+    return request(HTTP_METHOD.GETAll(page));
   },
 
   getPostDetail(id) {
