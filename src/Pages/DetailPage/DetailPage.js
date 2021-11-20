@@ -36,6 +36,17 @@ const DetailPage = () => {
     setCommentData(data);
   }, []);
 
+  const deleteComment = useCallback(
+    (id) => {
+      console.log(id);
+      console.log(commentData);
+      const deleteData = commentData.filter((data) => data.id !== id);
+      console.log(deleteData);
+      setCommentData(deleteData);
+    },
+    [commentData],
+  );
+
   const loading = useGetData(setPostData, setComment, id);
 
   const onTextSubmit = useCallback(async (text) => {
@@ -107,6 +118,7 @@ const DetailPage = () => {
                   id={id}
                   setComment={setComment}
                   mainRef={mainRef}
+                  deleteComment={deleteComment}
                 />
               ))}
             </CommentList>
