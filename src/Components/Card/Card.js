@@ -32,9 +32,13 @@ const Card = ({ posts }) => {
         }}
         to={`/detail/${posts.id}`}
       >
-        {thumbnail && (
+        {thumbnail ? (
           <ImageContainer>
             <Image src={thumbnail} />
+          </ImageContainer>
+        ) : (
+          <ImageContainer>
+            <Image src="default.png" alt="default" />
           </ImageContainer>
         )}
         <PostInfoContainer>

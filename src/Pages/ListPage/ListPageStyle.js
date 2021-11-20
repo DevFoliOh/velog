@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   background: #f8f9fa;
@@ -11,8 +10,9 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-top: 2rem;
-  width: 1728px;
+  /* width: 1728px; */
   margin-left: auto;
   margin-right: auto;
   background: #f8f9fa;
@@ -21,13 +21,12 @@ const Container = styled.div`
     width: 1376px;
   }
   @media (max-width: 1440px) {
-    width: 1280px;
+    width: 1124px;
   }
-  @media (max-width: 1312px) {
-    width: 912px;
-  }
-  @media (max-width: 944px) {
-    width: calc(100% - 2rem);
+  @media (max-width: 1056px) {
+    width: calc(80% - 2rem);
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   @media (max-width: 767px) {
     width: calc(100% - 2rem);

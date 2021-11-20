@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled(Link)`
-  width: 20rem;
+  width: 19rem;
   margin: 1rem;
   position: relative;
   display: flex;
@@ -38,9 +38,21 @@ const Wrapper = styled(Link)`
     }
   }
 
-  @media (max-width: 1153px) {
+  @media (max-width: 944px) {
     width: 487px;
     height: 464px;
+  }
+
+  @media (max-width: 1056px) {
+    width: 42vw;
+  }
+
+  @media (max-width: 767px) {
+    width: 92vw;
+  }
+
+  @media (max-width: 500px) {
+    width: 451px;
   }
 `;
 
@@ -68,7 +80,8 @@ const PostInfoContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  flex: 1 1 0%;
+  min-height: 165px;
+  flex: 1 1 0;
 `;
 
 const PostInfo = styled.div`
@@ -97,6 +110,7 @@ const Content = styled.p`
   height: 1.5rem * 3;
   font-size: 0.875rem;
   color: rgb(73, 80, 87);
+  margin-bottom: 2rem;
 `;
 
 const DateBox = styled.div`
