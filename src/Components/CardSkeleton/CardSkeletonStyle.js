@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-const Wrapper = styled(Link)`
+const CardBox = styled.div`
   width: 19rem;
   margin: 1rem;
   position: relative;
@@ -56,26 +55,14 @@ const Wrapper = styled(Link)`
   }
 `;
 
-const ImageContainer = styled.div`
+const ImageWrap = styled.div`
   position: relative;
   padding-bottom: 55%;
   width: 100%;
-  max-height: 177px;
+  height: 249px;
 `;
 
-const Image = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  display: block;
-  object-fit: cover;
-`;
-
-const PostInfoContainer = styled.div`
+const PostInfoWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -84,47 +71,43 @@ const PostInfoContainer = styled.div`
   flex: 1 1 0;
 `;
 
-const PostInfo = styled.div`
-  color: black;
-  text-decoration: none;
-  &:focus {
-    color: black;
+const TitleLine = styled.div`
+  background-color: #eeeeee;
+  /* width: 100px;
+  height: 30px; */
+`;
+
+const ContentLine = styled.div`
+  background-color: #eeeeee;
+  /* width: 100px;
+  height: 20px; */
+`;
+
+const Shimmer = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #e0e0e0;
+  box-shadow: 0 0 30px 30px #e0e0e0;
+  animation: loading 2s infinite;
+
+  @keyframes loading {
+    0% {
+      transform: translateX(-50%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translate(200%);
+    }
   }
 `;
 
-const Title = styled.b`
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5;
-`;
-
-const Content = styled.p`
-  word-break: break-word;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-  line-height: 1.5rem;
-  height: 1.5rem * 3;
-  font-size: 0.875rem;
-  color: rgb(73, 80, 87);
-  margin-bottom: 2rem;
-`;
-
-const DateBox = styled.div`
-  font-size: 13px;
-  color: rgb(134, 142, 150);
-`;
-
 export const style = {
-  Wrapper,
-  ImageContainer,
-  Image,
-  PostInfoContainer,
-  PostInfo,
-  Title,
-  Content,
-  DateBox,
+  CardBox,
+  ImageWrap,
+  PostInfoWrap,
+  TitleLine,
+  ContentLine,
+  Shimmer,
 };

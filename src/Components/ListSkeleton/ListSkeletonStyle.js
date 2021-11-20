@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Main = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,4 +42,4 @@ const CardList = styled.div`
   background: #f8f9fa;
 `;
 
-export const style = { Wrapper, Container, CardList };
+export const style = { Main, Container, CardList };
