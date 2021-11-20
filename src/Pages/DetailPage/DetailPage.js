@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Header from 'Components/Header/Header';
 import { style } from './DetailPageStyle';
 import Tag from 'Components/Tag/Tag';
-import Comment from 'Components/Comment/Comment';
+import CommentView from 'Components/Comment/CommentView/CommentView';
 import parse from 'html-react-parser';
 import MenuApi from 'Common/api';
 import { useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';
 import DetailAction from 'Components/DetailAction/DetailAction';
 import PostShare from 'Components/PostShare/PostShare';
 import { debounce } from 'lodash';
+import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
 const DetailPage = () => {
   const [detailData, setDetailData] = useState({
     tags: [],
@@ -24,7 +25,6 @@ const DetailPage = () => {
   const [tagArr, setTagArr] = useState([]);
   const [isFixedShare, setIsFixedshare] = useState();
   const mainRef = useRef();
-  const textRef = useRef();
 
   const id = useSelector((state) => state.getCardIdReducer.cardId);
 
@@ -38,11 +38,10 @@ const DetailPage = () => {
 
   const loading = useGetData(setPostData, setComment, id);
 
-  const onTextSubmit = async (event) => {
-    event.preventDefault();
-    const data = textRef.current.value;
+  const onTextSubmit = useCallback(async (text) => {
+    const data = text.current.value;
     const response = await MenuApi.createComment(id, data);
-    textRef.current.value = '';
+    text.current.value = '';
     if (response) {
       const commentResponse = await MenuApi.getCommentData(id);
       setCommentData(commentResponse.data.results);
@@ -52,7 +51,7 @@ const DetailPage = () => {
         inline: 'nearest',
       });
     }
-  };
+  }, []);
 
   const onFixedShareComponent = () => {
     if (window.pageYOffset > 220) {
@@ -102,18 +101,10 @@ const DetailPage = () => {
           </UserContainer>
           <CommentContainer>
             <CommentCount>{`${commentData.length}개의 댓글`}</CommentCount>
-            <form onSubmit={onTextSubmit}>
-              <CommentTextArea
-                placeholder="댓글을 작성하세요"
-                ref={textRef}
-              ></CommentTextArea>
-              <ButtonWraper>
-                <Button>댓글 작성</Button>
-              </ButtonWraper>
-            </form>
+            <CommentWrite onTextSubmit={onTextSubmit} />
             <CommentList>
               {commentData.map((comment) => (
-                <Comment
+                <CommentView
                   comment={comment}
                   id={id}
                   setComment={setComment}
@@ -140,9 +131,6 @@ const {
   Content,
   CommentContainer,
   CommentCount,
-  CommentTextArea,
-  ButtonWraper,
-  Button,
   CommentList,
   UserContainer,
   UserImg,

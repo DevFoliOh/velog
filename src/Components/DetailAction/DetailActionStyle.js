@@ -8,7 +8,7 @@ const ActionWrap = styled.ul`
   justify-content: flex-end;
 `;
 
-const ActionPut = styled.li`
+const ActionChange = styled.li`
   padding: 0px;
   outline: none;
   border: none;
@@ -31,6 +31,6 @@ const ActionDelete = styled.li`
 
 export const style = {
   ActionWrap,
-  ActionPut,
+  ActionChange,
   ActionDelete,
 };

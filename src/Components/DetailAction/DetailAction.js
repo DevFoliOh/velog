@@ -3,11 +3,11 @@ import { style } from './DetailActionStyle';
 
 const DetailAction = (props) => (
   <ActionWrap>
-    <ActionPut>수정</ActionPut>
+    <ActionChange>수정</ActionChange>
     <ActionDelete>삭제</ActionDelete>
   </ActionWrap>
 );
 
 export default DetailAction;
 
-const { ActionWrap, ActionPut, ActionDelete } = style;
+const { ActionWrap, ActionChange, ActionDelete } = style;
