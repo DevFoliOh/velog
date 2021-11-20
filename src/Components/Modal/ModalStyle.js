@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ModalContainer = styled.div`
@@ -43,7 +44,7 @@ const ModalFooter = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
+const Button = styled(Link)`
   width: 120px;
   height: 40px;
   display: flex;
