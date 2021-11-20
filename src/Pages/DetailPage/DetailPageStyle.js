@@ -1,13 +1,23 @@
 import styled from 'styled-components';
 
-const Main = styled.main``;
+const Main = styled.main`
+  width: 100%;
+`;
 
 const Body = styled.div`
   margin-top: 5.5rem;
   width: 768px;
   height: auto;
   margin-left: auto;
-  margin-right: auto; ;
+  margin-right: auto;
+
+  @media (max-width: 1024px) {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h1`
