@@ -1,18 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { style } from './CommentViewStyle';
 import MenuApi from 'Common/api';
 import CommentWrite from '../CommentWrite/CommentWrite';
 import reactDom from 'react-dom';
 
-const CommentView = ({ comment, id, setComment, mainRef }) => {
+const CommentView = ({ comment, id, setComment, mainRef, deleteComment }) => {
   const [isOpenPatchText, setIsOpenPatch] = useState(false);
   const [currentComment, setCurrentComment] = useState(comment);
 
   const onDeleteComment = async () => {
-    const response = await MenuApi.deleteComment(comment.id);
+    const response = await MenuApi.deleteComment(currentComment.id);
     if (response) {
-      const commentResponse = await MenuApi.getCommentData(id);
-      setComment(commentResponse.data.results);
+      console.log(currentComment.id);
+      deleteComment(currentComment.id);
       mainRef.current.scrollIntoView({
         behavior: 'smooth',
         block: 'end',
@@ -20,6 +20,10 @@ const CommentView = ({ comment, id, setComment, mainRef }) => {
       });
     }
   };
+
+  useEffect(() => {
+    setCurrentComment(comment);
+  }, [comment]);
 
   const onOpenPatchTextArea = () => {
     setIsOpenPatch(true);

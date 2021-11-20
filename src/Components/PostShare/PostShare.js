@@ -48,7 +48,7 @@ const PostShare = ({ isFixedShare, detailData }) => {
           {
             title: '웹으로 보기',
             link: {
-              webUrl: `http://localhost:3002/detail/${detailData.id}`,
+              webUrl: `http://localhost:3001/detail/${detailData.id}`,
             },
           },
         ],
