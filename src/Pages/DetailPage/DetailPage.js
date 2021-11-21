@@ -118,6 +118,7 @@ const DetailPage = ({ history }) => {
           onToggleModal={onToggleModal}
         />
       )}
+
       <Header />
       {loading ? (
         <DetailSkeleton />
@@ -131,7 +132,9 @@ const DetailPage = ({ history }) => {
           />
           <TagList>
             {tagArr &&
-              tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
+              tagArr.map((tagContent, index) => (
+                <Tag key={index} tagContent={tagContent} />
+              ))}
             {!loading && (
               <PostShare isFixedShare={isFixedShare} detailData={detailData} />
             )}
@@ -154,7 +157,11 @@ const DetailPage = ({ history }) => {
             <CommentWrite onTextSubmit={onTextSubmit} />
             <CommentList>
               {commentData.map((comment) => (
-                <CommentView comment={comment} openModal={onToggleModal} />
+                <CommentView
+                  key={comment.id}
+                  comment={comment}
+                  openModal={onToggleModal}
+                />
               ))}
             </CommentList>
           </CommentContainer>

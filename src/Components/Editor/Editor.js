@@ -8,9 +8,9 @@ export default function Editor({ content, setContent }) {
       <CKEditor
         className="editor"
         config={{}}
-        data="게시글을 작성해주세요"
+        data=""
         editor={ClassicEditor}
-        onReady={(editor) => {}}
+        onReady={() => {}}
         onBlur={(event, editor) => {}}
         onFocus={(event, editor) => {}}
         onChange={(event, editor) => {
@@ -20,7 +20,7 @@ export default function Editor({ content, setContent }) {
             body: data,
           });
         }}
-      />
+      ></CKEditor>
     </div>
   );
 }

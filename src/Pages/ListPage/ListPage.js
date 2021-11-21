@@ -11,24 +11,23 @@ const ListPage = ({ history }) => {
   const [postData, setPostData] = useState(null);
   const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
-  let page = 1;
+  const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(false);
 
   useGetListData(1, setPostData, setLoading);
 
   useEffect(() => {
-    if (inView && !loading) {
-      page += 1;
+    if (inView) {
       MenuApi.getAllPosts(page).then((res) => {
         if (!res.data) {
           return;
         } else {
           setPostData(() => postData.concat(res.data.results));
+          setPage((prevState) => prevState + 1);
         }
       });
     }
-    setLoading(false);
-  }, [inView, loading]);
+  }, [inView]);
 
   useEffect(() => {
     setLocation(history.location.pathname);
@@ -45,9 +44,8 @@ const ListPage = ({ history }) => {
             {postData &&
               postData.map((posts) => {
                 return (
-                  <div>
+                  <div ref={ref}>
                     <Card posts={posts} key={posts.id} />
-                    <div ref={ref}></div>
                   </div>
                 );
               })}
