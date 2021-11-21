@@ -13,10 +13,11 @@ const WritePage = () => {
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
-  // const id = uuid();
+  const id = uuid();
   const [url, setUrl] = useState('');
   const date = new Date();
   const [showModal, setShowModal] = useState(false);
+  const [check, setCheck] = useState(false);
 
   const getTitle = (e) => {
     const { value } = e.target;
@@ -37,12 +38,34 @@ const WritePage = () => {
   const previewPost = () => {
     setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
   };
+
+  const addPostLocalStorage = () => {
+    const postTitle = {
+      title: title.title,
+      body: content.body,
+      tags: hashTagArr,
+      thumbnail: url,
+    };
+    localStorage.setItem('posts', JSON.stringify(postTitle));
+  };
+
+  const getPostLocalStorage = () => {
+    const post = JSON.parse(localStorage.getItem('posts'));
+    setTitle(post.title);
+    setContent(post.body);
+    setHashTagArr(post.tags);
+    setUrl(post.thumbnail);
+    setCheck(true);
+    console.log(post.body);
+    console.log(typeof post.body);
+  };
+
   const registerPost = async () => {
     try {
       const response = await axios.post(
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
-          id: uuid(),
+          id,
           title: title.title,
           body: content.body,
           tags: hashTagArr,
@@ -81,10 +104,10 @@ const WritePage = () => {
                 <WriteTag onKeyPress={handleKeyEnter} />
               </WriteTagContainer>
             </div>
-            <Input url={url} setUrl={setUrl} />
+            <Input url={url} setUrl={setUrl} value={url} />
           </WriteHeader>
           <EditorContainer>
-            <Editor setContent={setContent} data={content} />
+            <Editor content={content} setContent={setContent} />
           </EditorContainer>
           <WriteFooter>
             <div>
@@ -95,10 +118,27 @@ const WritePage = () => {
                 }}
                 _onClick={openModal}
                 _text="🔙 뒤로가기"
-                // _link="/"
               />
             </div>
             <div>
+              <Button
+                _text="임시저장"
+                _onClick={addPostLocalStorage}
+                _style={{
+                  background: 'rgb(233, 236, 239)',
+                  color: 'rgb(73, 80, 87)',
+                  marginRight: '10px',
+                }}
+              />
+              <Button
+                _text="불러오기"
+                _onClick={getPostLocalStorage}
+                _style={{
+                  background: 'rgb(233, 236, 239)',
+                  color: 'rgb(73, 80, 87)',
+                  marginRight: '10px',
+                }}
+              />
               <Button
                 _text="미리보기"
                 _onClick={previewPost}
