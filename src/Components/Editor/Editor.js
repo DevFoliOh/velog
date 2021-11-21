@@ -1,6 +1,7 @@
 import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 
 export default function Editor({ content, setContent }) {
   return (
@@ -15,11 +16,13 @@ export default function Editor({ content, setContent }) {
         onFocus={(event, editor) => {}}
         onChange={(event, editor) => {
           const data = editor.getData();
-          console.log(typeof data);
-          setContent({
-            ...content,
-            body: data,
-          });
+          // console.log(data);
+          console.log(content);
+          console.log(typeof content);
+          console.log(removeHTMLTagFromString(data));
+          // console.log(typeof data); // string
+          // console.log(typeof removeHTMLTagFromString(data)); // string
+          setContent(removeHTMLTagFromString(data));
         }}
       />
     </div>

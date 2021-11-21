@@ -25,6 +25,7 @@ const ListPage = ({ history }) => {
     if (inView && !loading) {
       setPage((prevState) => prevState + 1);
       MenuApi.getAllPosts(page).then((res) => {
+        console.log(res);
         if (!res.data) {
           return;
         } else {
@@ -39,7 +40,7 @@ const ListPage = ({ history }) => {
   }, []);
 
   return (
-    <Wrapper ref={ref}>
+    <Wrapper>
       <Header location={location} />
       <Container>
         {loading ? (

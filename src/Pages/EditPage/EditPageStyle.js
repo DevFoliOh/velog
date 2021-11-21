@@ -22,6 +22,7 @@ const WriteHeader = styled.div`
 `;
 
 const WriteTitle = styled.input.attrs({
+  placeholder: '제목을 입력하세요',
   type: 'text',
   name: 'title',
 })`

@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import MenuApi from 'Common/api';
-import { useInView } from 'react-intersection-observer';
 
 const useGetListData = (page, setPostData) => {
   const [isLoading, setIsLoading] = useState(false);

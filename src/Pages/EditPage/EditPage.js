@@ -8,55 +8,61 @@ import Input from 'Components/Input/Input';
 import { useSelector } from 'react-redux';
 import useGetData from 'Hooks/useGetData';
 import { formatDate } from 'Common/formatDate';
-import ReactHtmlParser from 'react-html-parser';
+import { removeHTMLTagFromObject } from 'Common/removeHTMLTag';
+import MenuApi from 'Common/api';
+import usePatchEditData from 'Hooks/usePatchEditData';
 
 const EditPage = () => {
-  const [editData, setEditData] = useState({
-    tags: [],
-    title: '',
-    body: '',
-    createdAt: '',
-    updatedAt: '',
-    id: '',
-  });
-  // console.log(editData);
-  // console.log(editData.title);
-  console.log(editData.body);
-  // console.log(editData.tags);
-  // console.log(editData.thumbnail);
-
+  // const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState('');
-  const date = new Date();
+  // 리덕스에서 받아온 id
   const id = useSelector((state) => state.getCardIdReducer.cardId);
-  const [commentData, setCommentData] = useState([]); // 안 넣으면 useGetData가 작동하지 않아서 넣고 나중에 제거
+  console.log(url);
 
-  const setPostData = useCallback((data) => {
-    setEditData(data);
-    setTitle(editData.title);
-    // setContent(ReactHtmlParser(editData.body));
-    setHashTagArr(editData.tags);
-    setUrl(editData.thumbnail);
+  // 2. axois로 서버에서 수정할 데이터를 받아온다
+  const getData = async (id) => {
+    try {
+      setLoading(true);
+      const response = await MenuApi.getPostDetail(id);
+      console.log(response.data);
+      // 3. 데이터 통째로 저장
+      // setData(response.data);
+      const data = response.data;
+      console.log(data);
+
+      // 4. 각 세터에 저장
+      setTitle(data.title);
+      console.log(data.title);
+      console.log(typeof data.title);
+      setContent(removeHTMLTagFromObject(data.body));
+      console.log(content);
+      console.log(typeof content);
+      setHashTagArr(data.tags);
+      setUrl(data.thumbnail);
+
+      console.log(url);
+
+      setLoading(false);
+    } catch (error) {
+      // console.log(error);
+      throw new Error('data load 실패');
+    }
+  };
+
+  // 1. 첫 페이지 로드 시 getData 함수 실행
+  useEffect(() => {
+    getData(id);
   }, []);
-
-  console.log(typeof content);
-  // console.log(ReactHtmlParser(content));
-
-  // 안 넣으면 useGetData가 작동하지 않아서 넣고 나중에 제거
-  const setComment = useCallback((data) => {
-    setCommentData(data);
-  }, []);
-
-  // id에 해당하는 데이터를 받아옴
-  const loading = useGetData(setPostData, setComment, id);
-  console.log(loading);
 
   const editTitle = (e) => {
-    const { value } = e.target;
-    setTitle({ ...title, title: value });
+    const value = e.target.value;
+    console.log(typeof value);
+    setTitle(value);
   };
 
   const handleKeyEnter = (e) => {
@@ -74,9 +80,10 @@ const EditPage = () => {
     setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
   };
 
-  const editPost = async (id) => {
+  const editPost = async () => {
     try {
-      const response = await axios.patch(
+      console.log(id);
+      await axios.patch(
         `https://limitless-sierra-67996.herokuapp.com/v1/posts/${id}`,
         {
           id: id, // 리덕스에서 받은 아이디
@@ -84,13 +91,49 @@ const EditPage = () => {
           body: content,
           tags: hashTagArr,
           thumbnail: url,
-          updatedAt: formatDate(editData.updatedAt), // 수정한 날짜로 바꾸기
+          // updatedAt: formatDate(data.updatedAt), // 수정한 날짜로 변경
         },
       );
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
     console.log('PATCH 성공!');
+  };
+
+  const addLocalStorage = () => {
+    const postInfo = {
+      title: title,
+      content: content,
+      tag: hashTagArr,
+      thumbnail: url,
+    };
+    console.log(postInfo);
+    localStorage.setItem('post', JSON.stringify(postInfo));
+  };
+
+  const loadLocalStorage = () => {
+    console.log('성공!');
+    const loaded = JSON.parse(localStorage.getItem('post'));
+    localStorage.setItem('post', JSON.stringify(loaded));
+
+    // console.log(loaded);
+    // console.log(typeof loaded);
+
+    setTitle(loaded.title);
+    console.log(typeof loaded.title);
+    console.log(typeof title);
+
+    setContent(loaded.content);
+    console.log(typeof loaded.content);
+    console.log(typeof content);
+
+    setHashTagArr(loaded.tag);
+    console.log(typeof loaded.tag);
+    console.log(typeof hashTagArr);
+
+    setUrl(loaded.thumbnail);
+    console.log(loaded.thumbnail);
+    console.log(url);
   };
 
   return (
@@ -111,7 +154,6 @@ const EditPage = () => {
                     );
                   })}
                 </WriteTagContent>
-                <div>{ReactHtmlParser(editData.body)}</div>
                 <WriteTag onKeyPress={handleKeyEnter} />
               </WriteTagContainer>
             </div>
@@ -133,6 +175,24 @@ const EditPage = () => {
             </div>
             <div>
               <Button
+                text="임시저장"
+                _onClick={addLocalStorage}
+                style={{
+                  background: 'rgb(233, 236, 239)',
+                  color: 'rgb(73, 80, 87)',
+                  marginRight: '10px',
+                }}
+              />
+              <Button
+                text="불러오기"
+                _onClick={loadLocalStorage}
+                style={{
+                  background: 'rgb(233, 236, 239)',
+                  color: 'rgb(73, 80, 87)',
+                  marginRight: '10px',
+                }}
+              />
+              <Button
                 text="미리보기"
                 _onClick={previewPost}
                 style={{
@@ -141,11 +201,7 @@ const EditPage = () => {
                   marginRight: '10px',
                 }}
               />
-              <Button
-                text="수정하기"
-                _onClick={(id) => editPost(id)}
-                link="/"
-              />
+              <Button text="수정하기" _onClick={() => editPost()} link="/" />
             </div>
           </WriteFooter>
         </WriteContainer>
