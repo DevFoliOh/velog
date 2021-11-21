@@ -26,16 +26,19 @@ const DetailPage = ({ history }) => {
   const [commentData, setCommentData] = useState([]);
   const [tagArr, setTagArr] = useState([]);
   const [isFixedShare, setIsFixedshare] = useState();
-  const [showModal, setShowModal] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const mainRef = useRef();
 
   const id = useSelector((state) => state.getCardIdReducer.cardId);
 
-  const openModal = (click) => {
-    setShowModal((prev) => !prev);
-    setClickComponent(click);
-  };
+  const onToggleModal = useCallback((click) => {
+    setShowModal(false);
+    if (click) {
+      setClickComponent(click);
+      setShowModal(true);
+    }
+  }, []);
 
   const setPostData = useCallback((data) => {
     setDetailData(data);
@@ -100,6 +103,7 @@ const DetailPage = ({ history }) => {
           deleteComment={deleteComment}
           clickComponent={clickComponent}
           history={history}
+          onToggleModal={onToggleModal}
         />
       )}
       {showModal && clickComponent === 'commentDelete' && (
@@ -111,15 +115,20 @@ const DetailPage = ({ history }) => {
           mainRef={mainRef}
           deleteComment={deleteComment}
           clickComponent={clickComponent}
+          onToggleModal={onToggleModal}
         />
       )}
-      <Header></Header>
+      <Header />
       {loading ? (
         <DetailSkeleton />
       ) : (
         <Body>
           <Title>{detailData.title}</Title>
-          <DetailAction postId={id} history={history} openModal={openModal} />
+          <DetailAction
+            postId={id}
+            history={history}
+            openModal={onToggleModal}
+          />
           <TagList>
             {tagArr &&
               tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
@@ -145,7 +154,7 @@ const DetailPage = ({ history }) => {
             <CommentWrite onTextSubmit={onTextSubmit} />
             <CommentList>
               {commentData.map((comment) => (
-                <CommentView comment={comment} openModal={openModal} />
+                <CommentView comment={comment} openModal={onToggleModal} />
               ))}
             </CommentList>
           </CommentContainer>

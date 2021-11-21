@@ -14,6 +14,7 @@ const Modal = (props) => {
     deleteComment,
     clickComponent,
     history,
+    onToggleModal,
   } = props;
 
   const comment = useSelector((state) => state.currentCommentReducer.comment);
@@ -22,9 +23,9 @@ const Modal = (props) => {
     if (e.target.innerText === '확인') {
       clickComponent === 'postDelete' && onDeleteDetail();
       clickComponent === 'commentDelete' && onDeleteComment();
-      setModalState(false);
+      onToggleModal();
     } else {
-      setModalState(false);
+      onToggleModal();
     }
   };
 
@@ -45,7 +46,7 @@ const Modal = (props) => {
     }
   };
 
-  return modalState ? (
+  return (
     <ModalContainer onClick={(e) => closeModal(e)}>
       <ModalContent>
         <ModalHeader>
@@ -66,7 +67,7 @@ const Modal = (props) => {
         </ModalFooter>
       </ModalContent>
     </ModalContainer>
-  ) : null;
+  );
 };
 
 export default Modal;
