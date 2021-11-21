@@ -17,6 +17,7 @@ const EditPage = () => {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [loadedContent, setLoadedContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState('');
@@ -39,9 +40,20 @@ const EditPage = () => {
       setTitle(data.title);
       console.log(data.title);
       console.log(typeof data.title);
-      setContent(removeHTMLTagFromObject(data.body));
+
+      setLoadedContent({
+        ops: [
+          {
+            insert: data.body,
+          },
+        ],
+      });
+      // setLoadedContent(removeHTMLTagFromObject(data.body));
+      console.log(loadedContent);
+      console.log(typeof loadedContent);
+
       console.log(content);
-      console.log(typeof content);
+
       setHashTagArr(data.tags);
       setUrl(data.thumbnail);
 
@@ -76,8 +88,12 @@ const EditPage = () => {
     setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
   };
 
+  console.log(viewContent);
+
   const previewPost = () => {
+    console.log(viewContent);
     setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
+    console.log(viewContent);
   };
 
   const editPost = async () => {
@@ -160,7 +176,7 @@ const EditPage = () => {
             <Input url={url} setUrl={setUrl} />
           </WriteHeader>
           <EditorContainer>
-            <Editor setContent={setContent} content={content} />
+            <Editor setContent={setContent} loadedContent={loadedContent} />
           </EditorContainer>
           <WriteFooter>
             <div>
@@ -201,7 +217,7 @@ const EditPage = () => {
                   marginRight: '10px',
                 }}
               />
-              <Button text="수정하기" _onClick={() => editPost()} link="/" />
+              <Button text="수정하기" _onClick={() => editPost()} _link="/" />
             </div>
           </WriteFooter>
         </WriteContainer>

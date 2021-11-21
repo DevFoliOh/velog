@@ -1,206 +1,63 @@
-import React from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
+import React, { useRef, useEffect } from 'react';
+import Quill from 'quill';
+import 'quill/dist/quill.bubble.css';
+import styled from 'styled-components';
+import Responsive from 'Common/Responsive';
 
-export default function Editor({ content, setContent }) {
+const Editor = ({ setContent, loadedContent }) => {
+  const quillElement = useRef(null);
+  const quillInstance = useRef(null);
+
+  console.log(loadedContent);
+  console.log(typeof loadedContent);
+
+  useEffect(() => {
+    let quill = new Quill(quillElement.current, {
+      theme: 'bubble',
+      placeholder: '텍스트 스타일을 바꾸려면 드래그하세요.',
+      modules: {
+        toolbar: [
+          [{ header: '1' }, { header: '2' }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ list: 'ordered' }, { list: 'bubble' }],
+          ['blockquote', 'code-block', 'link', 'image'],
+        ],
+      },
+    });
+    console.log(quill.setContents);
+    quill.setContents(loadedContent);
+
+    // onChange 시 content 안에 quill 내용이 들어가게 하기
+    // quill.on('text-change', setContent(quill.getContents()));
+  }, []);
+
   return (
-    <div className="form-wrapper">
-      <CKEditor
-        className="editor"
-        config={{}}
-        data="냠냠"
-        editor={ClassicEditor}
-        onReady={(editor) => {}}
-        onBlur={(event, editor) => {}}
-        onFocus={(event, editor) => {}}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          // console.log(data);
-          console.log(content);
-          console.log(typeof content);
-          console.log(removeHTMLTagFromString(data));
-          // console.log(typeof data); // string
-          // console.log(typeof removeHTMLTagFromString(data)); // string
-          setContent(removeHTMLTagFromString(data));
-        }}
-      />
-    </div>
+    <EditorBlock>
+      <QuillWrapper>
+        <div ref={quillElement} />
+      </QuillWrapper>
+    </EditorBlock>
   );
-}
+};
 
-// import React from 'react';
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
-// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-// import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-// import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-// import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-// import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-// import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-// import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-// import Font from '@ckeditor/ckeditor5-font/src/font';
-// import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-// import List from '@ckeditor/ckeditor5-list/src/list';
-// import Link from '@ckeditor/ckeditor5-link/src/link';
-// import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-// import Image from '@ckeditor/ckeditor5-image/src/image';
-// import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-// import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-// import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-// import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-// import Table from '@ckeditor/ckeditor5-table/src/table';
-// import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-// import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-// import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-// import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-// import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
-// import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
-// import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
-// import Uploader from './Uploader';
+const EditorBlock = styled(Responsive)`
+  margin-top: 2rem;
+  width: 700px;
+  height: 500px;
+  background: #fff;
+  border: 1px solid #ccc;
+`;
 
-// const Editor = (props) => {
-//   return (
-//     <CKEditor
-//       onInit={(editor) => {
-//         editor.ui
-//           .getEditableElement()
-//           .parentElement.insertBefore(
-//             editor.ui.view.toolbar.element,
-//             editor.ui.getEditableElement(),
-//           );
-//       }}
-//       config={{
-//         language: 'ko',
-//         plugins: [
-//           Essentials,
-//           Paragraph,
-//           Bold,
-//           Italic,
-//           Heading,
-//           Indent,
-//           IndentBlock,
-//           Underline,
-//           Strikethrough,
-//           BlockQuote,
-//           Font,
-//           Alignment,
-//           List,
-//           Link,
-//           PasteFromOffice,
-//           Image,
-//           ImageStyle,
-//           ImageToolbar,
-//           ImageUpload,
-//           ImageResize,
-//           Table,
-//           TableToolbar,
-//           TableProperties,
-//           TableCellProperties,
-//           TextTransformation,
-//           Uploader,
-//           SimpleUploadAdapter,
-//         ],
-//         toolbar: props.toolbar
-//           ? props.toolbar
-//           : [
-//               'heading',
-//               '|',
-//               'bold',
-//               'italic',
-//               'underline',
-//               'strikethrough',
-//               '|',
-//               'fontSize',
-//               'fontColor',
-//               'fontBackgroundColor',
-//               '|',
-//               'alignment',
-//               'outdent',
-//               'indent',
-//               'bulletedList',
-//               'numberedList',
-//               'blockQuote',
-//               '|',
-//               'link',
-//               'insertTable',
-//               'insertFileAndImage',
-//               '|',
-//               'undo',
-//               'redo',
-//             ],
-//         fontSize: {
-//           options: [
-//             14,
-//             15,
-//             16,
-//             17,
-//             18,
-//             19,
-//             'default',
-//             21,
-//             22,
-//             23,
-//             24,
-//             25,
-//             26,
-//             27,
-//             28,
-//             29,
-//             30,
-//           ],
-//         },
-//         alignment: {
-//           options: ['justify', 'left', 'center', 'right'],
-//         },
-//         table: {
-//           contentToolbar: [
-//             'tableColumn',
-//             'tableRow',
-//             'mergeTableCells',
-//             'tableProperties',
-//             'tableCellProperties',
-//           ],
-//         },
-//         image: {
-//           resizeUnit: 'px',
-//           toolbar: [
-//             'imageStyle:alignLeft',
-//             'imageStyle:full',
-//             'imageStyle:alignRight',
-//             '|',
-//             'imageTextAlternative',
-//           ],
-//           styles: ['full', 'alignLeft', 'alignRight'],
-//           type: ['JPEG', 'JPG', 'GIF', 'PNG'],
-//         },
-//         typing: {
-//           transformations: {
-//             remove: [
-//               'enDash',
-//               'emDash',
-//               'oneHalf',
-//               'oneThird',
-//               'twoThirds',
-//               'oneForth',
-//               'threeQuarters',
-//             ],
-//           },
-//         },
-//         simpleUpload: {
-//           uploadUrl: '/uploadFile',
-//           withCredentials: true,
-//           headers: {
-//             'upload-folder': props.uploadFolder ? props.uploadFolder : 'root',
-//             'upload-editor': props.uploader ? props.uploader : '',
-//           },
-//         },
-//       }}
-//       editor={DecoupledEditor}
-//       {...props}
-//     />
-//   );
-// };
+const QuillWrapper = styled.div`
+  .ql-editor {
+    padding: 0;
+    min-height: 320px;
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+  .ql-editor.ql-black::before {
+    left: 0px;
+  }
+`;
 
-// export default Editor;
+export default Editor;
