@@ -33,7 +33,6 @@ const DetailPage = ({ history }) => {
   const id = useSelector((state) => state.getCardIdReducer.cardId);
 
   const openModal = (click) => {
-    console.log(click);
     setShowModal((prev) => !prev);
     setClickComponent(click);
   };
@@ -100,6 +99,7 @@ const DetailPage = ({ history }) => {
           mainRef={mainRef}
           deleteComment={deleteComment}
           clickComponent={clickComponent}
+          history={history}
         />
       )}
       {showModal && clickComponent === 'commentDelete' && (

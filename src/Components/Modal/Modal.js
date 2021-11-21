@@ -1,5 +1,5 @@
 import MenuApi from 'Common/api';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { style } from './ModalStyle';
 
@@ -13,13 +13,13 @@ const Modal = (props) => {
     mainRef,
     deleteComment,
     clickComponent,
+    history,
   } = props;
 
   const comment = useSelector((state) => state.currentCommentReducer.comment);
-  comment && console.log(comment);
 
   const closeModal = (e) => {
-    if (e.target.text === '확인') {
+    if (e.target.innerText === '확인') {
       clickComponent === 'postDelete' && onDeleteDetail();
       clickComponent === 'commentDelete' && onDeleteComment();
       setModalState(false);
@@ -30,12 +30,12 @@ const Modal = (props) => {
 
   const onDeleteDetail = async () => {
     await MenuApi.deleteDetail(postId);
+    history.push(modalLink);
   };
 
   const onDeleteComment = async () => {
     const response = await MenuApi.deleteComment(comment.id);
     if (response) {
-      console.log(comment.id);
       deleteComment(comment.id);
       mainRef.current.scrollIntoView({
         behavior: 'smooth',
