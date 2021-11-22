@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import parse from 'html-react-parser';
 import { style } from './PostShareStyle';
 
 const PostShare = ({ isFixedShare, detailData }) => {
@@ -24,24 +25,29 @@ const PostShare = ({ isFixedShare, detailData }) => {
     script.src = 'https://developers.kakao.com/sdk/js/kakao.js';
     script.async = true;
     document.body.appendChild(script);
+    window.Kakao.init('55c3fa766257a08c0961670176a39f3b');
     return () => {
       document.body.removeChild(script);
     };
   }, []);
 
   function sendLinkCustom() {
+    const description = parse(detailData.body).replace(/(<([^>]+)>)/gi, '');
+    let img = detailData.thumbnail;
+    if (img === undefined) {
+      img = 'default.png';
+      console.log(img);
+    }
     try {
-      window.Kakao.init('55c3fa766257a08c0961670176a39f3b');
       window.Kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
           title: detailData.title,
-          description: detailData.body,
-          imageUrl:
-            'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          description: description,
+          imageUrl: `${img}`,
           link: {
-            mobileWebUrl: 'https://developers.kakao.com',
-            webUrl: 'https://developers.kakao.com',
+            mobileWebUrl: `http://localhost:3001/detail/${detailData.id}`,
+            webUrl: `http://localhost:3001/detail/${detailData.id}`,
           },
         },
         buttons: [

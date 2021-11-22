@@ -28,6 +28,14 @@ const HTTP_METHOD = {
     };
   },
 
+  DELETEDETAIL(id) {
+    console.log(id);
+    return {
+      method: 'delete',
+      url: `${BASE_URL}/posts/${id}`,
+    };
+  },
+
   CREATE(data) {
     return {
       method: 'POST',
@@ -89,6 +97,10 @@ const MenuApi = {
 
   getPostDetail(id) {
     return request(HTTP_METHOD.GETDETAIL(id));
+  },
+
+  deleteDetail(id) {
+    return request(HTTP_METHOD.DELETEDETAIL(id));
   },
 
   getCommentData(id) {

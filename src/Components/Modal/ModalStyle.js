@@ -44,7 +44,7 @@ const ModalFooter = styled.div`
   align-items: center;
 `;
 
-const Button = styled(Link)`
+const Button = styled.button`
   width: 120px;
   height: 40px;
   display: flex;

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { style } from './ListPageStyle';
 import Header from 'Components/Header/Header';
 import Card from 'Components/Card/Card';
 import useGetListData from 'Hooks/useGetListData';
 import { useInView } from 'react-intersection-observer';
-import { Link } from 'react-router-dom';
 import MenuApi from 'Common/api';
 import ListSkeleton from 'Components/ListSkeleton/ListSkeleton';
 
@@ -12,26 +11,23 @@ const ListPage = ({ history }) => {
   const [postData, setPostData] = useState(null);
   const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
-  const [page, setPage] = useState(2);
+  let page = 1;
   const [loading, setLoading] = useState(false);
 
-  let result = useGetListData(1, setPostData);
-
-  useEffect(() => {
-    setLoading(result);
-  }, [result]);
+  useGetListData(1, setPostData, setLoading);
 
   useEffect(() => {
     if (inView && !loading) {
-      setPage((prevState) => prevState + 1);
+      page += 1;
       MenuApi.getAllPosts(page).then((res) => {
         if (!res.data) {
           return;
         } else {
-          setPostData((prevState) => [...prevState, ...res.data.results]);
+          setPostData(() => postData.concat(res.data.results));
         }
       });
     }
+    setLoading(false);
   }, [inView, loading]);
 
   useEffect(() => {
@@ -39,7 +35,7 @@ const ListPage = ({ history }) => {
   }, []);
 
   return (
-    <Wrapper ref={ref}>
+    <Wrapper>
       <Header location={location} />
       <Container>
         {loading ? (
