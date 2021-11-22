@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { style } from './WritePageStyle';
 import Button from 'Components/Button/Button';
 import * as axios from 'axios';
@@ -8,19 +8,20 @@ import parse from 'html-react-parser';
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
 
-const WritePage = () => {
+const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
-  // const id = uuid();
+  const id = uuid();
   const [url, setUrl] = useState('');
   const date = new Date();
   const [showModal, setShowModal] = useState(false);
-
+  const [check, setCheck] = useState(false);
+  const [clickComponent, setClickComponent] = useState('');
   const getTitle = (e) => {
     const { value } = e.target;
-    setTitle({ ...title, title: value });
+    setTitle(value);
   };
 
   const handleKeyEnter = (e) => {
@@ -37,12 +38,33 @@ const WritePage = () => {
   const previewPost = () => {
     setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
   };
+
+  const addPostLocalStorage = () => {
+    const postTitle = {
+      title: title,
+      body: content.body,
+      tags: hashTagArr,
+      thumbnail: url,
+    };
+    localStorage.setItem('posts', JSON.stringify(postTitle));
+  };
+
+  const getPostLocalStorage = () => {
+    const post = JSON.parse(localStorage.getItem('posts'));
+    console.log(post);
+    setTitle(post.title);
+    setContent(post.body);
+    setHashTagArr(post.tags);
+    setUrl(post.thumbnail);
+    setCheck(true);
+  };
+
   const registerPost = async () => {
     try {
       const response = await axios.post(
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
-          id: uuid(),
+          id,
           title: title.title,
           body: content.body,
           tags: hashTagArr,
@@ -56,8 +78,16 @@ const WritePage = () => {
     console.log('POST 성공!');
   };
 
-  const openModal = () => {
-    setShowModal((prev) => !prev);
+  const onToggleModal = useCallback((click) => {
+    setShowModal(false);
+    if (click) {
+      setClickComponent(click);
+      setShowModal(true);
+    }
+  }, []);
+
+  const onOpenModal = () => {
+    onToggleModal('goToBack');
   };
 
   return (
@@ -66,7 +96,7 @@ const WritePage = () => {
         <WriteContainer>
           <WriteHeader>
             <div>
-              <WriteTitle onChange={getTitle} />
+              <WriteTitle onChange={getTitle} value={title} />
               <WriteLine />
               <WriteTagContainer>
                 <WriteTagContent>
@@ -81,10 +111,10 @@ const WritePage = () => {
                 <WriteTag onKeyPress={handleKeyEnter} />
               </WriteTagContainer>
             </div>
-            <Input url={url} setUrl={setUrl} />
+            <Input url={url} setUrl={setUrl} value={url} />
           </WriteHeader>
           <EditorContainer>
-            <Editor setContent={setContent} data={content} />
+            <Editor content={content} setContent={setContent} />
           </EditorContainer>
           <WriteFooter>
             <div>
@@ -93,12 +123,32 @@ const WritePage = () => {
                   background: '#fff',
                   color: 'rgb(73, 80, 87)',
                 }}
-                _onClick={openModal}
+                _onClick={onOpenModal}
                 _text="🔙 뒤로가기"
-                // _link="/"
+                _link="/write"
               />
             </div>
             <div>
+              <Button
+                _text="임시저장"
+                _onClick={addPostLocalStorage}
+                _style={{
+                  background: 'rgb(233, 236, 239)',
+                  color: 'rgb(73, 80, 87)',
+                  marginRight: '10px',
+                }}
+                _link="/write"
+              />
+              <Button
+                _text="불러오기"
+                _onClick={getPostLocalStorage}
+                _style={{
+                  background: 'rgb(233, 236, 239)',
+                  color: 'rgb(73, 80, 87)',
+                  marginRight: '10px',
+                }}
+                _link="/write"
+              />
               <Button
                 _text="미리보기"
                 _onClick={previewPost}
@@ -127,6 +177,9 @@ const WritePage = () => {
           title="포스트 작성 취소"
           description="정말 페이지를 벗어나시겠습니까?"
           modalLink="/"
+          onToggleModal={onToggleModal}
+          clickComponent={clickComponent}
+          history={history}
         />
       )}
     </Container>

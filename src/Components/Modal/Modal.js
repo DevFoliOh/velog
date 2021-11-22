@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { style } from './ModalStyle';
 
 const Modal = (props) => {
-  const [modalState, setModalState] = useState(true);
+  // const [modalState, setModalState] = useState(true);
   const {
     title,
     description,
@@ -23,9 +23,11 @@ const Modal = (props) => {
     if (e.target.innerText === '확인') {
       clickComponent === 'postDelete' && onDeleteDetail();
       clickComponent === 'commentDelete' && onDeleteComment();
-      onToggleModal();
+      clickComponent === 'goToBack' && history.push('/');
+      // setModalState(false);
     } else {
       onToggleModal();
+      // setModalState(false);
     }
   };
 
