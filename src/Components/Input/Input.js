@@ -44,6 +44,9 @@ const Input = (props) => {
       .catch((err) => console.log(err));
   };
 
+  console.log(fileInputState);
+  console.log(previewSource);
+
   return (
     <UploadContainer>
       <Preview

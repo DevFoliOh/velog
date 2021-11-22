@@ -19,6 +19,7 @@ const WritePage = ({ history }) => {
   const [showModal, setShowModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
+
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle(value);
@@ -53,19 +54,12 @@ const WritePage = ({ history }) => {
 
   const getPostLocalStorage = () => {
     const post = JSON.parse(localStorage.getItem('posts'));
-<<<<<<< HEAD
-    setTitle({ ...title, title: post.title });
-    setContent(post.body);
-    setHashTagArr(post.tags);
-    setUrl(post.thumbnail);
-=======
     console.log(post);
     setTitle(post.title);
     setContent(post.body);
     setHashTagArr(post.tags);
     setUrl(post.thumbnail);
     setCheck(true);
->>>>>>> 85acf07a6ead3dcb478b2d93e0847c10a9b4ffa8
   };
 
   const registerPost = async () => {
@@ -120,10 +114,10 @@ const WritePage = ({ history }) => {
                 <WriteTag onKeyPress={handleKeyEnter} />
               </WriteTagContainer>
             </div>
-            <Input url={url} setUrl={setUrl} value={url} />
+            <Input url={url} setUrl={setUrl} />
           </WriteHeader>
           <EditorContainer>
-            <Editor content={content} setContent={setContent} />
+            <Editor data={content} setContent={setContent} />
           </EditorContainer>
           <WriteFooter>
             <div>
