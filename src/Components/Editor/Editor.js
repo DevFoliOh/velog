@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 import parse from 'html-react-parser';
-export default function Editor({ loadedContent, setContent }) {
+export default function Editor({ content, loadedContent, setContent }) {
   console.log(loadedContent);
   return (
     <div className="form-wrapper">
       <CKEditor
         className="editor"
         config={{}}
-        data={loadedContent}
+        data={loadedContent !== '' ? loadedContent : content}
         editor={ClassicEditor}
         onReady={() => {}}
         onBlur={(event, editor) => {}}

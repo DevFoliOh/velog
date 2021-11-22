@@ -1,14 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
+import { getImageAction } from 'Modules/getImage/getImage';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Input = ({ url, setUrl }) => {
-  console.log(typeof url);
-
   const inputOpenImageRef = useRef(null);
-
+  const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState();
   const [selectedFile, setSelectedFile] = useState();
+  const { getImage } = getImageAction;
+  const dispatch = useDispatch();
+
+  const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
+
+  useEffect(() => {
+    setPreviewSource(thumbnail);
+  }, [thumbnail]);
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
@@ -16,9 +24,9 @@ const Input = ({ url, setUrl }) => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     previewFile(file);
     setSelectedFile(file);
+    setFileInputState(e.target.value);
   };
 
   const previewFile = (file) => {
@@ -28,13 +36,18 @@ const Input = ({ url, setUrl }) => {
       setPreviewSource(reader.result);
     };
   };
+  useEffect(() => {
+    if (previewSource) {
+      dispatch(getImage(previewSource));
+      // setPreviewSource(props.url);
+    }
+  }, [previewSource]);
 
   const uploadImage = () => {
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append('file', previewSource);
     formData.append('upload_preset', 'rwvzsde8');
     formData.append('cloud_name', 'ddupb73kz');
-
     fetch('https://api.cloudinary.com/v1_1/ddupb73kz/image/upload', {
       method: 'POST',
       body: formData,
@@ -47,26 +60,13 @@ const Input = ({ url, setUrl }) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    setPreviewSource(url);
-  }, [url]);
-
   return (
     <UploadContainer>
-      {previewSource ? (
-        <Preview
-          src={previewSource}
-          onClick={handleOpenImageRef}
-          alt="Thumbnail"
-        />
-      ) : (
-        <Preview
-          src={default_thumb}
-          onClick={handleOpenImageRef}
-          alt="Thumbnail"
-        />
-      )}
-
+      <Preview
+        src={previewSource ? previewSource : default_thumb}
+        onClick={handleOpenImageRef}
+        alt="Thumbnail"
+      />
       <UploadButton onClick={uploadImage}>업로드하기</UploadButton>
       <UploadInputContainer>
         <UploadInput

@@ -47,7 +47,7 @@ const WritePage = ({ history }) => {
       title: title,
       content: content,
       tags: hashTagArr,
-      thumbnail: thumbnail,
+      thumbnail: url,
     };
     localStorage.setItem('posts', JSON.stringify(postTitle));
   };
@@ -74,6 +74,7 @@ const WritePage = ({ history }) => {
           tags: hashTagArr,
         },
       );
+      history.push('/');
     } catch (error) {
       alert(error);
     }
@@ -116,7 +117,7 @@ const WritePage = ({ history }) => {
           <Input url={url} setUrl={setUrl} />
         </WriteHeader>
         <EditorContainer>
-          <Editor setContent={setContent} loadedContent={content} />
+          <Editor setContent={setContent} content={content} />
         </EditorContainer>
         <WriteFooter>
           <div>
