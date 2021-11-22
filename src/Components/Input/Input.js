@@ -3,11 +3,8 @@ import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
 
 const Input = ({ url, setUrl }) => {
-  console.log(typeof url);
-
   const inputOpenImageRef = useRef(null);
-
-  const [previewSource, setPreviewSource] = useState();
+  const [previewSource, setPreviewSource] = useState(url);
   const [selectedFile, setSelectedFile] = useState();
 
   const handleOpenImageRef = () => {
@@ -31,7 +28,7 @@ const Input = ({ url, setUrl }) => {
 
   const uploadImage = () => {
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append('file', previewSource);
     formData.append('upload_preset', 'rwvzsde8');
     formData.append('cloud_name', 'ddupb73kz');
 
@@ -53,19 +50,11 @@ const Input = ({ url, setUrl }) => {
 
   return (
     <UploadContainer>
-      {previewSource ? (
-        <Preview
-          src={previewSource}
-          onClick={handleOpenImageRef}
-          alt="Thumbnail"
-        />
-      ) : (
-        <Preview
-          src={default_thumb}
-          onClick={handleOpenImageRef}
-          alt="Thumbnail"
-        />
-      )}
+      <Preview
+        src={previewSource ? previewSource : default_thumb}
+        onClick={handleOpenImageRef}
+        alt="Thumbnail"
+      />
 
       <UploadButton onClick={uploadImage}>업로드하기</UploadButton>
       <UploadInputContainer>

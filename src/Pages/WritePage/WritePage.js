@@ -83,6 +83,7 @@ const WritePage = ({ history }) => {
   };
 
   const onToggleModal = useCallback((click) => {
+    console.log('??');
     setShowModal(false);
     if (click) {
       setClickComponent(click);
@@ -127,7 +128,7 @@ const WritePage = ({ history }) => {
                 color: 'rgb(73, 80, 87)',
               }}
               text="🔙 뒤로가기"
-              _link="/"
+              _onClick={onOpenModal}
             />
           </div>
           <div>
