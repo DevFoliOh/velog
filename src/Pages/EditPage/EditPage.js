@@ -22,7 +22,7 @@ const EditPage = () => {
   const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState('');
   // 리덕스에서 받아온 id
-  const id = useSelector((state) => state.getCardIdReducer.cardId);
+  const id = useSelector((state) => state.getCardReducer.card.id);
   console.log(url);
 
   // 2. axois로 서버에서 수정할 데이터를 받아온다
