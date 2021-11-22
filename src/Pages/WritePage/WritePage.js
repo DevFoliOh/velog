@@ -21,7 +21,7 @@ const WritePage = ({ history }) => {
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
   const [imgData, setImgData] = useState();
-  const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
+  // const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
 
   const getTitle = (e) => {
     const { value } = e.target;
@@ -43,12 +43,14 @@ const WritePage = ({ history }) => {
     setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
   };
 
+  console.log(url);
+
   const addPostLocalStorage = () => {
     const postTitle = {
       title: title,
-      body: content.body,
+      body: content,
       tags: hashTagArr,
-      thumbnail: thumbnail,
+      thumbnail: url,
     };
     localStorage.setItem('posts', JSON.stringify(postTitle));
   };
@@ -58,9 +60,9 @@ const WritePage = ({ history }) => {
     setTitle(post.title);
     setContent(post.body);
     setHashTagArr(post.tags);
-    setImgData(thumbnail);
+    setUrl(post.thumbnail);
     setCheck(true);
-    console.log(imgData);
+    console.log(url);
   };
 
   const registerPost = async () => {
@@ -70,7 +72,7 @@ const WritePage = ({ history }) => {
         {
           id,
           title: title,
-          body: content.body,
+          body: content,
           tags: hashTagArr,
           thumbnail: url,
           createdAt: date,

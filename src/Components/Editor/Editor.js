@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { getBodyAction } from 'Modules/getBody/getBody';
+import { useDispatch } from 'react-redux';
 
 export default function Editor({ content, setContent }) {
+  const { getBody } = getBodyAction;
+  const dispatch = useDispatch();
   return (
     <div className="form-wrapper">
       <CKEditor
         className="editor"
         config={{}}
-        data=""
+        data={content}
         editor={ClassicEditor}
         onReady={() => {}}
         onBlur={(event, editor) => {}}
         onFocus={(event, editor) => {}}
         onChange={(event, editor) => {
           const data = editor.getData();
-          setContent({
-            ...content,
-            body: data,
-          });
+          // setContent({
+          //   ...content,
+          //   body: data,
+          // });
+          dispatch(getBody(data));
         }}
       ></CKEditor>
     </div>
