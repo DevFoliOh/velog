@@ -36,6 +36,8 @@ const EditPage = ({ history }) => {
 
       setLoadedContent(data.body);
       setContent(data.body);
+      // setLoadedContent(removeHTMLTagFromObject(data.body));
+
       setHashTagArr(data.tags);
 
       setUrl(data.thumbnail);
@@ -50,6 +52,10 @@ const EditPage = ({ history }) => {
   useEffect(() => {
     getData(id);
   }, []);
+
+  useEffect(() => {
+    console.log(typeof url);
+  }, [url]);
 
   const editTitle = (e) => {
     const value = e.target.value;
@@ -97,35 +103,26 @@ const EditPage = ({ history }) => {
     const postInfo = {
       title: title,
       content: content,
-      tag: hashTagArr,
+      tags: hashTagArr,
       thumbnail: url,
     };
-    console.log('로컬에 저장: ' + JSON.stringify(postInfo));
-
-    localStorage.setItem('post', JSON.stringify(postInfo));
-    console.log(postInfo.content);
+    localStorage.setItem('posts', JSON.stringify(postInfo));
   };
 
   const loadLocalStorage = () => {
-    const loaded = JSON.parse(localStorage.getItem('post'));
-    console.log('로컬에서 가져온 body: ' + loaded.content);
-    // console.log('로컬에서 가져온 타입: ' + typeof loaded);
-
+    const loaded = JSON.parse(localStorage.getItem('posts'));
     localStorage.setItem('post', JSON.stringify(loaded));
-
     setTitle(loaded.title);
     // console.log(typeof loaded.title);
     // console.log(typeof title);
 
-    setContent(loaded.content);
-    // console.log(loaded.content);
+    setLoadedContent(loaded.content);
     // console.log(typeof loaded.content);
     console.log(loadedContent);
 
-    setHashTagArr(loaded.tag);
+    setHashTagArr(loaded.tags);
     // console.log(typeof loaded.tag);
     // console.log(typeof hashTagArr);
-
     setUrl(loaded.thumbnail);
     console.log(typeof loaded.thumbnail);
     // console.log(url);

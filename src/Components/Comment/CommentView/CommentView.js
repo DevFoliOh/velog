@@ -10,12 +10,9 @@ const CommentView = ({ comment, openModal }) => {
   const { getCurrentComment } = currentCommentAction;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    current && dispatch(getCurrentComment(current));
-  }, [current, dispatch, getCurrentComment]);
-
   const onOpenModal = () => {
     openModal('commentDelete');
+    current && dispatch(getCurrentComment(current));
   };
 
   useEffect(() => {

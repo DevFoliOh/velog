@@ -24,20 +24,22 @@ const Modal = (props) => {
       clickComponent === 'postDelete' && onDeleteDetail();
       clickComponent === 'commentDelete' && onDeleteComment();
       clickComponent === 'goToBack' && history.push('/');
-      // setModalState(false);
     } else {
       onToggleModal();
-      // setModalState(false);
     }
   };
 
   const onDeleteDetail = async () => {
     await MenuApi.deleteDetail(postId);
     history.push(modalLink);
+    onToggleModal();
   };
 
   const onDeleteComment = async () => {
+    console.log(comment.id);
     const response = await MenuApi.deleteComment(comment.id);
+    console.log(response);
+    onToggleModal();
     if (response) {
       deleteComment(comment.id);
       mainRef.current.scrollIntoView({

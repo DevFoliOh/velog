@@ -29,7 +29,6 @@ const HTTP_METHOD = {
   },
 
   DELETEDETAIL(id) {
-    console.log(id);
     return {
       method: 'delete',
       url: `${BASE_URL}/posts/${id}`,

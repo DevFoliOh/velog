@@ -1,11 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
 
 const Input = ({ url, setUrl }) => {
+  console.log(typeof url);
+
   const inputOpenImageRef = useRef(null);
-  const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState(url);
+
+  const [previewSource, setPreviewSource] = useState();
   const [selectedFile, setSelectedFile] = useState();
 
   const handleOpenImageRef = () => {
@@ -14,9 +16,9 @@ const Input = ({ url, setUrl }) => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
+    console.log(file);
     previewFile(file);
     setSelectedFile(file);
-    setFileInputState(e.target.value);
   };
 
   const previewFile = (file) => {
@@ -32,29 +34,38 @@ const Input = ({ url, setUrl }) => {
     formData.append('file', selectedFile);
     formData.append('upload_preset', 'rwvzsde8');
     formData.append('cloud_name', 'ddupb73kz');
+
     fetch('https://api.cloudinary.com/v1_1/ddupb73kz/image/upload', {
       method: 'POST',
       body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setUrl(data.url);
-      })
-      .then(() => {
-        alert('이미지 업로드가 완료되었습니다.');
-        console.log(url);
       })
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    setPreviewSource(url);
+  }, [url]);
+
   return (
     <UploadContainer>
-      <Preview
-        src={previewSource ? previewSource : default_thumb}
-        onClick={handleOpenImageRef}
-        alt="Thumbnail"
-      />
+      {previewSource ? (
+        <Preview
+          src={previewSource}
+          onClick={handleOpenImageRef}
+          alt="Thumbnail"
+        />
+      ) : (
+        <Preview
+          src={default_thumb}
+          onClick={handleOpenImageRef}
+          alt="Thumbnail"
+        />
+      )}
+
       <UploadButton onClick={uploadImage}>업로드하기</UploadButton>
       <UploadInputContainer>
         <UploadInput
