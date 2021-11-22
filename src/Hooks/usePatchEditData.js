@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 
 const usePatchEditData = (post, setPost) => {
   const [isLoading, setIsLoading] = useState(false);
-  const Id = useSelector((state) => state.getCardIdReducer.cardId);
-  console.log(Id);
+  const Id = useSelector((state) => state.getCardIdReducer.card.id);
 
   const getData = useCallback(async () => {
     try {

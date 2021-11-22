@@ -30,8 +30,7 @@ const DetailPage = ({ history }) => {
   const [showModal, setShowModal] = useState(false);
   const mainRef = useRef();
 
-  const id = useSelector((state) => state.getCardIdReducer.cardId);
-
+  const card = useSelector((state) => state.getCardReducer.card);
   const onToggleModal = useCallback((click) => {
     setShowModal(false);
     if (click) {
@@ -50,21 +49,18 @@ const DetailPage = ({ history }) => {
 
   const deleteComment = useCallback(
     (id) => {
-      console.log(id);
-      console.log(commentData);
       const deleteData = commentData.filter((data) => data.id !== id);
-      console.log(deleteData);
       setCommentData(deleteData);
     },
     [commentData],
   );
 
-  const loading = useGetData(setPostData, setComment, id);
+  const loading = useGetData(setPostData, setComment, card.id);
 
   const onTextSubmit = useCallback(async (text) => {
-    const response = await MenuApi.createComment(id, text);
+    const response = await MenuApi.createComment(card.id, text);
     if (response) {
-      const commentResponse = await MenuApi.getCommentData(id);
+      const commentResponse = await MenuApi.getCommentData(card.id);
       setCommentData(commentResponse.data.results);
       mainRef.current.scrollIntoView({
         behavior: 'smooth',
@@ -98,7 +94,7 @@ const DetailPage = ({ history }) => {
           title="포스트 삭제"
           description="정말로 삭제하시겠습니까?"
           modalLink="/"
-          postId={id}
+          postId={card.id}
           mainRef={mainRef}
           deleteComment={deleteComment}
           clickComponent={clickComponent}
@@ -111,7 +107,7 @@ const DetailPage = ({ history }) => {
           title="댓글 삭제"
           description="댓글을 정말로 삭제하시겠습니까?"
           modalLink=""
-          postId={id}
+          postId={card.id}
           mainRef={mainRef}
           deleteComment={deleteComment}
           clickComponent={clickComponent}
@@ -126,7 +122,7 @@ const DetailPage = ({ history }) => {
         <Body>
           <Title>{detailData.title}</Title>
           <DetailAction
-            postId={id}
+            postId={card.id}
             history={history}
             openModal={onToggleModal}
           />
