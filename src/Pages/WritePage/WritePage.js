@@ -17,12 +17,13 @@ const WritePage = () => {
   const [url, setUrl] = useState('');
   const date = new Date();
   const [showModal, setShowModal] = useState(false);
-  const [check, setCheck] = useState(false);
 
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle({ ...title, title: value });
   };
+
+  console.log(typeof content);
 
   const handleKeyEnter = (e) => {
     if (e.code === 'Enter') {
@@ -51,13 +52,10 @@ const WritePage = () => {
 
   const getPostLocalStorage = () => {
     const post = JSON.parse(localStorage.getItem('posts'));
-    setTitle(post.title);
+    setTitle({ ...title, title: post.title });
     setContent(post.body);
     setHashTagArr(post.tags);
     setUrl(post.thumbnail);
-    setCheck(true);
-    console.log(post.body);
-    console.log(typeof post.body);
   };
 
   const registerPost = async () => {

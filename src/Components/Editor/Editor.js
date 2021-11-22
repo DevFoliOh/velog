@@ -19,6 +19,8 @@ export default function Editor({ content, setContent }) {
             ...content,
             body: data,
           });
+          console.log(typeof data);
+          console.log(typeof content);
         }}
       />
     </div>
