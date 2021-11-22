@@ -112,6 +112,7 @@ const EditPage = ({ history }) => {
       thumbnail: url,
     };
     localStorage.setItem('posts', JSON.stringify(postInfo));
+    console.log('로컬에 저장: ' + JSON.stringify(postInfo));
   };
 
   const loadLocalStorage = () => {
