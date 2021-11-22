@@ -5,8 +5,12 @@ import { useSelector } from 'react-redux';
 const usePatchEditData = (post, setPosts) => {
   // post는 수정된 게시글, setPosts는 전체 게시글 배열을 수정하기 위한 세터
   const [isLoading, setIsLoading] = useState(false);
+<<<<<<< HEAD
   const id = useSelector((state) => state.getCardIdReducer.cardId);
   console.log(id);
+=======
+  const Id = useSelector((state) => state.getCardIdReducer.card.id);
+>>>>>>> 7ac8e6255b47c6573100ef0630547e78bc845a07
 
   const getData = useCallback(async () => {
     try {

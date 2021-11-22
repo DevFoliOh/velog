@@ -1,28 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { style } from './CommentViewStyle';
-import MenuApi from 'Common/api';
 import CommentWrite from '../CommentWrite/CommentWrite';
-import reactDom from 'react-dom';
+import { useDispatch } from 'react-redux';
+import { currentCommentAction } from 'Modules/currentComment/currentComment';
 
-const CommentView = ({ comment, id, setComment, mainRef, deleteComment }) => {
+const CommentView = ({ comment, openModal }) => {
   const [isOpenPatchText, setIsOpenPatch] = useState(false);
-  const [currentComment, setCurrentComment] = useState(comment);
+  const [current, setCurrent] = useState(comment);
+  const { getCurrentComment } = currentCommentAction;
+  const dispatch = useDispatch();
 
-  const onDeleteComment = async () => {
-    const response = await MenuApi.deleteComment(currentComment.id);
-    if (response) {
-      console.log(currentComment.id);
-      deleteComment(currentComment.id);
-      mainRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-        inline: 'end',
-      });
-    }
+  useEffect(() => {
+    current && dispatch(getCurrentComment(current));
+  }, [current, dispatch, getCurrentComment]);
+
+  const onOpenModal = () => {
+    openModal('commentDelete');
   };
 
   useEffect(() => {
-    setCurrentComment(comment);
+    setCurrent(comment);
   }, [comment]);
 
   const onOpenPatchTextArea = () => {
@@ -34,7 +31,7 @@ const CommentView = ({ comment, id, setComment, mainRef, deleteComment }) => {
   };
 
   const onChangeCurrentComment = useCallback((text) => {
-    setCurrentComment(text);
+    setCurrent(text);
   }, []);
 
   return (
@@ -44,20 +41,20 @@ const CommentView = ({ comment, id, setComment, mainRef, deleteComment }) => {
         {isOpenPatchText === false && (
           <CommentAction>
             <ChangeComment onClick={onOpenPatchTextArea}>수정</ChangeComment>
-            <RemoveComment onClick={onDeleteComment}>삭제</RemoveComment>
+            <RemoveComment onClick={onOpenModal}>삭제</RemoveComment>
           </CommentAction>
         )}
       </CommentUserWrap>
       {isOpenPatchText === true ? (
         <CommentWrite
-          currentComment={currentComment.body}
-          CommentId={currentComment.id}
+          currentComment={current.body}
+          CommentId={current.id}
           isOpenPatchText={isOpenPatchText}
           onClosePatchTextArea={onClosePatchTextArea}
           onChangeCurrentComment={onChangeCurrentComment}
         />
       ) : (
-        <CommentTextWrap>{currentComment.body}</CommentTextWrap>
+        <CommentTextWrap>{current.body}</CommentTextWrap>
       )}
     </CommentItem>
   );

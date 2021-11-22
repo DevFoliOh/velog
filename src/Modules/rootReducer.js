@@ -1,16 +1,18 @@
 import { combineReducers } from 'redux';
-import { getCardIdReducer } from './getCardId/getCardId';
+import { getCardReducer } from './getCard/getCard';
+import { currentCommentReducer } from './currentComment/currentComment';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['getCardIdReducer'],
+  whitelist: ['getCardReducer'],
 };
 
 const rootReducer = combineReducers({
-  getCardIdReducer,
+  getCardReducer,
+  currentCommentReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

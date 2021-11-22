@@ -40,6 +40,7 @@ const Input = (props) => {
       .then((data) => {
         props.setUrl(data.url);
       })
+      .then(alert('이미지 업로드가 완료되었습니다.'))
       .catch((err) => console.log(err));
   };
 
