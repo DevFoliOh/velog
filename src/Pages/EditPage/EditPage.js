@@ -25,7 +25,6 @@ const EditPage = ({ history }) => {
   const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState('');
   const id = useSelector((state) => state.getCardReducer.card.id);
-  console.log(id);
 
   // 2. axois로 서버에서 수정할 데이터를 받아온다
   const getData = async (id) => {
@@ -41,6 +40,7 @@ const EditPage = ({ history }) => {
 
       // (quill: Delta 객체)
       setLoadedContent(data.body);
+      setContent(data.body);
       // setLoadedContent(removeHTMLTagFromObject(data.body));
 
       setHashTagArr(data.tags);
@@ -58,7 +58,7 @@ const EditPage = ({ history }) => {
   }, []);
 
   useEffect(() => {
-    console.log(url);
+    console.log(typeof url);
   }, [url]);
 
   const editTitle = (e) => {
@@ -78,13 +78,8 @@ const EditPage = ({ history }) => {
   };
 
   const previewPost = () => {
-    console.log(viewContent);
-    console.log(title);
-    console.log(content);
-    console.log(hashTagArr);
     setViewContent({ title: title, body: content });
   };
-  console.log(viewContent);
 
   const editPost = async () => {
     try {
@@ -111,28 +106,26 @@ const EditPage = ({ history }) => {
     const postInfo = {
       title: title,
       content: content,
-      tag: hashTagArr,
+      tags: hashTagArr,
       thumbnail: url,
     };
-    localStorage.setItem('post', JSON.stringify(postInfo));
+    localStorage.setItem('posts', JSON.stringify(postInfo));
   };
 
   const loadLocalStorage = () => {
-    const loaded = JSON.parse(localStorage.getItem('post'));
+    const loaded = JSON.parse(localStorage.getItem('posts'));
     localStorage.setItem('post', JSON.stringify(loaded));
-
     setTitle(loaded.title);
     // console.log(typeof loaded.title);
     // console.log(typeof title);
 
-    setContent(loaded.content);
+    setLoadedContent(loaded.content);
     // console.log(typeof loaded.content);
     // console.log(typeof content);
 
-    setHashTagArr(loaded.tag);
+    setHashTagArr(loaded.tags);
     // console.log(typeof loaded.tag);
     // console.log(typeof hashTagArr);
-
     setUrl(loaded.thumbnail);
     // console.log(loaded.thumbnail);
     // console.log(url);

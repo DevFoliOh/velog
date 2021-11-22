@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
-
+import parse from 'html-react-parser';
 export default function Editor({ loadedContent, setContent }) {
   console.log(loadedContent);
-  console.log(loadedContent.html);
   return (
     <div className="form-wrapper">
       <CKEditor
@@ -21,7 +20,7 @@ export default function Editor({ loadedContent, setContent }) {
           setContent(removeHTMLTagFromString(data));
           // setContent({
           //   ...loadedContent,
-          //   body: data,
+          //   content: data,
           // });
         }}
       ></CKEditor>
