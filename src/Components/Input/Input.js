@@ -5,6 +5,8 @@ import { getImageAction } from 'Modules/getImage/getImage';
 import { useDispatch } from 'react-redux';
 
 const Input = (props) => {
+  console.log(props.url);
+
   const inputOpenImageRef = useRef(null);
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
@@ -34,6 +36,7 @@ const Input = (props) => {
     if (previewSource) {
       dispatch(getImage(previewSource));
     }
+    console.log(previewSource);
   }, [previewSource]);
 
   const uploadImage = () => {
@@ -53,13 +56,10 @@ const Input = (props) => {
       .catch((err) => console.log(err));
   };
 
-  console.log(fileInputState);
-  console.log(previewSource);
-
   return (
     <UploadContainer>
       <Preview
-        src={previewSource ? props.imgData : default_thumb}
+        src={previewSource ? previewSource : default_thumb}
         onClick={handleOpenImageRef}
         alt="Thumbnail"
       />

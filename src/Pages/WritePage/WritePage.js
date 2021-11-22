@@ -22,14 +22,10 @@ const WritePage = ({ history }) => {
   const [clickComponent, setClickComponent] = useState('');
   const [imgData, setImgData] = useState('');
   const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
-  console.log(thumbnail);
-
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle(value);
   };
-
-  console.log(typeof content);
 
   const handleKeyEnter = (e) => {
     if (e.code === 'Enter') {
@@ -58,12 +54,10 @@ const WritePage = ({ history }) => {
 
   const getPostLocalStorage = () => {
     const post = JSON.parse(localStorage.getItem('posts'));
-    console.log(post);
     setTitle(post.title);
     setContent(post.body);
     setHashTagArr(post.tags);
-    setImgData(thumbnail);
-    console.log(thumbnail);
+    setUrl(thumbnail);
     setCheck(true);
   };
 
@@ -73,11 +67,10 @@ const WritePage = ({ history }) => {
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
           id,
-          title: title.title,
+          title: title,
           body: content.body,
-          tags: hashTagArr,
           thumbnail: url,
-          createdAt: date,
+          tags: hashTagArr,
         },
       );
     } catch (error) {
