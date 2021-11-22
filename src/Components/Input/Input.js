@@ -7,7 +7,7 @@ const Input = ({ url, setUrl }) => {
 
   const inputOpenImageRef = useRef(null);
 
-  const [previewSource, setPreviewSource] = useState();
+  const [previewSource, setPreviewSource] = useState(url);
   const [selectedFile, setSelectedFile] = useState();
 
   const handleOpenImageRef = () => {
@@ -31,7 +31,7 @@ const Input = ({ url, setUrl }) => {
 
   const uploadImage = () => {
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append('file', previewSource);
     formData.append('upload_preset', 'rwvzsde8');
     formData.append('cloud_name', 'ddupb73kz');
 
@@ -42,6 +42,9 @@ const Input = ({ url, setUrl }) => {
       .then((res) => res.json())
       .then((data) => {
         setUrl(data.url);
+        setPreviewSource(data.url);
+
+        alert('이미지 업로드가 완료되었습니다');
       })
       .catch((err) => console.log(err));
   };
@@ -54,7 +57,7 @@ const Input = ({ url, setUrl }) => {
     <UploadContainer>
       {previewSource ? (
         <Preview
-          src={previewSource}
+          src={previewSource ? previewSource : default_thumb}
           onClick={handleOpenImageRef}
           alt="Thumbnail"
         />
