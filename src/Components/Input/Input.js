@@ -9,7 +9,7 @@ const Input = (props) => {
 
   const inputOpenImageRef = useRef(null);
   const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState('');
+  const [previewSource, setPreviewSource] = useState(props.url);
   const [selectedFile, setSelectedFile] = useState();
   const { getImage } = getImageAction;
   const dispatch = useDispatch();

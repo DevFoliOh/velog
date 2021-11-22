@@ -93,6 +93,62 @@ const WritePage = ({ history }) => {
 
   return (
     <Container>
+      <WriteContainer>
+        <WriteHeader>
+          <div>
+            <WriteTitle onChange={getTitle} />
+            <WriteLine />
+            <WriteTagContainer>
+              <WriteTagContent>
+                {hashTagArr.map((hashtag, idx) => {
+                  return (
+                    <div key={idx} onClick={() => removeHashTag(hashtag)}>
+                      <span>{hashtag}</span>
+                    </div>
+                  );
+                })}
+              </WriteTagContent>
+              <WriteTag onKeyPress={handleKeyEnter} />
+            </WriteTagContainer>
+          </div>
+          <Input url={url} setUrl={setUrl} />
+        </WriteHeader>
+        <EditorContainer>
+          <Editor setContent={setContent} data={content} />
+        </EditorContainer>
+        <WriteFooter>
+          <div>
+            <Button
+              style={{
+                background: '#fff',
+                color: 'rgb(73, 80, 87)',
+              }}
+              text="🔙 뒤로가기"
+              _link="/"
+            />
+          </div>
+          <div>
+            <Button
+              text="미리보기"
+              _onClick={previewPost}
+              style={{
+                background: 'rgb(233, 236, 239)',
+                color: 'rgb(73, 80, 87)',
+                marginRight: '10px',
+              }}
+            />
+            <Button text="출간하기" _onClick={registerPost} _link="/" />
+          </div>
+        </WriteFooter>
+      </WriteContainer>
+      <PreviewContainer>
+        {viewContent.map((element, idx) => (
+          <div key={idx}>
+            <h2>{element.title}</h2>
+            <p>{parse(element.body)}</p>
+          </div>
+        ))}
+      </PreviewContainer>
       <>
         <WriteContainer>
           <WriteHeader>

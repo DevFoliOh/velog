@@ -19,6 +19,7 @@ const ListPage = ({ history }) => {
   useEffect(() => {
     if (inView) {
       MenuApi.getAllPosts(page).then((res) => {
+        console.log(res);
         if (!res.data) {
           return;
         } else {
