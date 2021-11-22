@@ -18,7 +18,7 @@ const Input = (props) => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    previewFile(file);
+    previewFile(file || props.imgData);
     setSelectedFile(file);
     setFileInputState(e.target.value);
   };
@@ -36,11 +36,12 @@ const Input = (props) => {
     }
   }, [previewSource]);
 
-  console.log(previewSource);
+  console.log(props.imgData);
+  console.log(selectedFile);
 
   const uploadImage = () => {
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append('file', previewSource);
     formData.append('upload_preset', 'rwvzsde8');
     formData.append('cloud_name', 'ddupb73kz');
     fetch('https://api.cloudinary.com/v1_1/ddupb73kz/image/upload', {

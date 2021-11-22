@@ -5,7 +5,7 @@ export const initialState = {
 };
 
 export const getImageSlice = createSlice({
-  name: 'getImgae',
+  name: 'getImage',
   initialState,
   reducers: {
     getImage: (state, action) => {

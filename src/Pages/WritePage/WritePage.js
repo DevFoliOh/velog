@@ -20,7 +20,7 @@ const WritePage = ({ history }) => {
   const [showModal, setShowModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
-  const [imgData, setImgData] = useState('');
+  const [imgData, setImgData] = useState();
   const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
 
   const getTitle = (e) => {
@@ -60,16 +60,16 @@ const WritePage = ({ history }) => {
     setHashTagArr(post.tags);
     setImgData(thumbnail);
     setCheck(true);
+    console.log(imgData);
   };
 
-  console.log(url);
   const registerPost = async () => {
     try {
       const response = await axios.post(
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
           id,
-          title: title.title,
+          title: title,
           body: content.body,
           tags: hashTagArr,
           thumbnail: url,
