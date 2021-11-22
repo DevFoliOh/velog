@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { getCardIdAction } from 'Modules/getCardId/getCardId';
+import { getCardAction } from 'Modules/getCard/getCard';
 import { useDispatch } from 'react-redux';
 import { style } from './CardStyle';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const Card = ({ posts }) => {
-  const { getCardId } = getCardIdAction;
+  const { getCard } = getCardAction;
   const dispatch = useDispatch();
 
   const formatDate = (date) => {
@@ -26,7 +26,7 @@ const Card = ({ posts }) => {
     return (
       <Wrapper
         onClick={() => {
-          dispatch(getCardId(posts.id));
+          dispatch(getCard(posts));
         }}
         to={`/detail/${posts.id}`}
       >

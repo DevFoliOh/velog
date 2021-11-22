@@ -10,6 +10,7 @@ import rootReducer from 'Modules/rootReducer';
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 const persistor = persistStore(store);
