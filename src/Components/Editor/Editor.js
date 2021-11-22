@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useRef, useEffect } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.bubble.css';
@@ -33,39 +32,36 @@ const Editor = ({ setContent, loadedContent }) => {
   }, []);
 
   // let text = quill.getText();
-=======
-import React, { useState, useEffect } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
->>>>>>> 7ac8e6255b47c6573100ef0630547e78bc845a07
+
+// import React, { useState, useEffect } from 'react';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
   return (
-<<<<<<< HEAD
     <EditorBlock>
       <QuillWrapper>
         <div ref={quillElement} />
       </QuillWrapper>
     </EditorBlock>
-=======
-    <div className="form-wrapper">
-      <CKEditor
-        className="editor"
-        config={{}}
-        data=""
-        editor={ClassicEditor}
-        onReady={() => {}}
-        onBlur={(event, editor) => {}}
-        onFocus={(event, editor) => {}}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          setContent({
-            ...content,
-            body: data,
-          });
-        }}
-      ></CKEditor>
-    </div>
->>>>>>> 7ac8e6255b47c6573100ef0630547e78bc845a07
+
+    // <div className="form-wrapper">
+    //   <CKEditor
+    //     className="editor"
+    //     config={{}}
+    //     data=""
+    //     editor={ClassicEditor}
+    //     onReady={() => {}}
+    //     onBlur={(event, editor) => {}}
+    //     onFocus={(event, editor) => {}}
+    //     onChange={(event, editor) => {
+    //       const data = editor.getData();
+    //       setContent({
+    //         ...content,
+    //         body: data,
+    //       });
+    //     }}
+    //   ></CKEditor>
+    // </div>
   );
 };
 

@@ -92,7 +92,6 @@ const WritePage = ({ history }) => {
 
   return (
     <Container>
-<<<<<<< HEAD
       <WriteContainer>
         <WriteHeader>
           <div>
@@ -149,7 +148,6 @@ const WritePage = ({ history }) => {
           </div>
         ))}
       </PreviewContainer>
-=======
       <>
         <WriteContainer>
           <WriteHeader>
@@ -240,7 +238,6 @@ const WritePage = ({ history }) => {
           history={history}
         />
       )}
->>>>>>> 7ac8e6255b47c6573100ef0630547e78bc845a07
     </Container>
   );
 };
