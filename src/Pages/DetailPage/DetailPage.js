@@ -12,7 +12,9 @@ import DetailAction from 'Components/DetailAction/DetailAction';
 import PostShare from 'Components/PostShare/PostShare';
 import { debounce } from 'lodash';
 import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
-const DetailPage = () => {
+import Modal from 'Components/Modal/Modal';
+
+const DetailPage = ({ history }) => {
   const [detailData, setDetailData] = useState({
     tags: [],
     title: '',
@@ -24,9 +26,19 @@ const DetailPage = () => {
   const [commentData, setCommentData] = useState([]);
   const [tagArr, setTagArr] = useState([]);
   const [isFixedShare, setIsFixedshare] = useState();
+  const [clickComponent, setClickComponent] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const mainRef = useRef();
 
   const id = useSelector((state) => state.getCardIdReducer.cardId);
+
+  const onToggleModal = useCallback((click) => {
+    setShowModal(false);
+    if (click) {
+      setClickComponent(click);
+      setShowModal(true);
+    }
+  }, []);
 
   const setPostData = useCallback((data) => {
     setDetailData(data);
@@ -81,16 +93,48 @@ const DetailPage = () => {
 
   return (
     <Main ref={mainRef}>
-      <Header></Header>
+      {showModal && clickComponent === 'postDelete' && (
+        <Modal
+          title="포스트 삭제"
+          description="정말로 삭제하시겠습니까?"
+          modalLink="/"
+          postId={id}
+          mainRef={mainRef}
+          deleteComment={deleteComment}
+          clickComponent={clickComponent}
+          history={history}
+          onToggleModal={onToggleModal}
+        />
+      )}
+      {showModal && clickComponent === 'commentDelete' && (
+        <Modal
+          title="댓글 삭제"
+          description="댓글을 정말로 삭제하시겠습니까?"
+          modalLink=""
+          postId={id}
+          mainRef={mainRef}
+          deleteComment={deleteComment}
+          clickComponent={clickComponent}
+          onToggleModal={onToggleModal}
+        />
+      )}
+
+      <Header />
       {loading ? (
         <DetailSkeleton />
       ) : (
         <Body>
           <Title>{detailData.title}</Title>
-          <DetailAction />
+          <DetailAction
+            postId={id}
+            history={history}
+            openModal={onToggleModal}
+          />
           <TagList>
             {tagArr &&
-              tagArr.map((tagContent) => <Tag tagContent={tagContent} />)}
+              tagArr.map((tagContent, index) => (
+                <Tag key={index} tagContent={tagContent} />
+              ))}
             {!loading && (
               <PostShare isFixedShare={isFixedShare} detailData={detailData} />
             )}
@@ -114,11 +158,9 @@ const DetailPage = () => {
             <CommentList>
               {commentData.map((comment) => (
                 <CommentView
+                  key={comment.id}
                   comment={comment}
-                  id={id}
-                  setComment={setComment}
-                  mainRef={mainRef}
-                  deleteComment={deleteComment}
+                  openModal={onToggleModal}
                 />
               ))}
             </CommentList>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { style } from './WritePageStyle';
 import Button from 'Components/Button/Button';
 import * as axios from 'axios';
@@ -8,7 +8,7 @@ import parse from 'html-react-parser';
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
 
-const WritePage = () => {
+const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
@@ -17,10 +17,11 @@ const WritePage = () => {
   const [url, setUrl] = useState('');
   const date = new Date();
   const [showModal, setShowModal] = useState(false);
-
+  const [check, setCheck] = useState(false);
+  const [clickComponent, setClickComponent] = useState('');
   const getTitle = (e) => {
     const { value } = e.target;
-    setTitle({ ...title, title: value });
+    setTitle(value);
   };
 
   console.log(typeof content);
@@ -42,7 +43,7 @@ const WritePage = () => {
 
   const addPostLocalStorage = () => {
     const postTitle = {
-      title: title.title,
+      title: title,
       body: content.body,
       tags: hashTagArr,
       thumbnail: url,
@@ -52,10 +53,19 @@ const WritePage = () => {
 
   const getPostLocalStorage = () => {
     const post = JSON.parse(localStorage.getItem('posts'));
+<<<<<<< HEAD
     setTitle({ ...title, title: post.title });
     setContent(post.body);
     setHashTagArr(post.tags);
     setUrl(post.thumbnail);
+=======
+    console.log(post);
+    setTitle(post.title);
+    setContent(post.body);
+    setHashTagArr(post.tags);
+    setUrl(post.thumbnail);
+    setCheck(true);
+>>>>>>> 85acf07a6ead3dcb478b2d93e0847c10a9b4ffa8
   };
 
   const registerPost = async () => {
@@ -77,8 +87,16 @@ const WritePage = () => {
     console.log('POST 성공!');
   };
 
-  const openModal = () => {
-    setShowModal((prev) => !prev);
+  const onToggleModal = useCallback((click) => {
+    setShowModal(false);
+    if (click) {
+      setClickComponent(click);
+      setShowModal(true);
+    }
+  }, []);
+
+  const onOpenModal = () => {
+    onToggleModal('goToBack');
   };
 
   return (
@@ -87,7 +105,7 @@ const WritePage = () => {
         <WriteContainer>
           <WriteHeader>
             <div>
-              <WriteTitle onChange={getTitle} />
+              <WriteTitle onChange={getTitle} value={title} />
               <WriteLine />
               <WriteTagContainer>
                 <WriteTagContent>
@@ -114,8 +132,9 @@ const WritePage = () => {
                   background: '#fff',
                   color: 'rgb(73, 80, 87)',
                 }}
-                _onClick={openModal}
+                _onClick={onOpenModal}
                 _text="🔙 뒤로가기"
+                _link="/write"
               />
             </div>
             <div>
@@ -127,6 +146,7 @@ const WritePage = () => {
                   color: 'rgb(73, 80, 87)',
                   marginRight: '10px',
                 }}
+                _link="/write"
               />
               <Button
                 _text="불러오기"
@@ -136,6 +156,7 @@ const WritePage = () => {
                   color: 'rgb(73, 80, 87)',
                   marginRight: '10px',
                 }}
+                _link="/write"
               />
               <Button
                 _text="미리보기"
@@ -165,6 +186,9 @@ const WritePage = () => {
           title="포스트 작성 취소"
           description="정말 페이지를 벗어나시겠습니까?"
           modalLink="/"
+          onToggleModal={onToggleModal}
+          clickComponent={clickComponent}
+          history={history}
         />
       )}
     </Container>
