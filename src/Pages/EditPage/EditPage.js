@@ -11,12 +11,8 @@ import { formatDate } from 'Common/formatDate';
 import { removeHTMLTagFromObject } from 'Common/removeHTMLTag';
 import MenuApi from 'Common/api';
 import usePatchEditData from 'Hooks/usePatchEditData';
-// import { history } from 'react-router-dom';
-// import { useHistory } from 'react-router-dom';
 
 const EditPage = ({ history }) => {
-  // const history = useHistory();
-  // const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -25,7 +21,6 @@ const EditPage = ({ history }) => {
   const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState('');
   const id = useSelector((state) => state.getCardReducer.card.id);
-  console.log(id);
 
   // 2. axois로 서버에서 수정할 데이터를 받아온다
   const getData = async (id) => {
@@ -39,11 +34,10 @@ const EditPage = ({ history }) => {
       // 4. 각 세터에 저장
       setTitle(data.title);
 
-      // (quill: Delta 객체)
       setLoadedContent(data.body);
-      // setLoadedContent(removeHTMLTagFromObject(data.body));
-
+      setContent(data.body);
       setHashTagArr(data.tags);
+
       setUrl(data.thumbnail);
 
       setLoading(false);
@@ -56,10 +50,6 @@ const EditPage = ({ history }) => {
   useEffect(() => {
     getData(id);
   }, []);
-
-  useEffect(() => {
-    console.log(url);
-  }, [url]);
 
   const editTitle = (e) => {
     const value = e.target.value;
@@ -78,14 +68,10 @@ const EditPage = ({ history }) => {
   };
 
   const previewPost = () => {
-    console.log(viewContent);
-    console.log(title);
-    console.log(content);
-    console.log(hashTagArr);
     setViewContent({ title: title, body: content });
   };
-  console.log(viewContent);
 
+  // 수정하기 버튼을 누르면 수정된 데이터를 서버로 보낸다
   const editPost = async () => {
     try {
       await axios.patch(
@@ -114,11 +100,17 @@ const EditPage = ({ history }) => {
       tag: hashTagArr,
       thumbnail: url,
     };
+    console.log('로컬에 저장: ' + JSON.stringify(postInfo));
+
     localStorage.setItem('post', JSON.stringify(postInfo));
+    console.log(postInfo.content);
   };
 
   const loadLocalStorage = () => {
     const loaded = JSON.parse(localStorage.getItem('post'));
+    console.log('로컬에서 가져온 body: ' + loaded.content);
+    // console.log('로컬에서 가져온 타입: ' + typeof loaded);
+
     localStorage.setItem('post', JSON.stringify(loaded));
 
     setTitle(loaded.title);
@@ -126,15 +118,16 @@ const EditPage = ({ history }) => {
     // console.log(typeof title);
 
     setContent(loaded.content);
+    // console.log(loaded.content);
     // console.log(typeof loaded.content);
-    // console.log(typeof content);
+    console.log(loadedContent);
 
     setHashTagArr(loaded.tag);
     // console.log(typeof loaded.tag);
     // console.log(typeof hashTagArr);
 
     setUrl(loaded.thumbnail);
-    // console.log(loaded.thumbnail);
+    console.log(typeof loaded.thumbnail);
     // console.log(url);
   };
 

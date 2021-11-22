@@ -2,10 +2,10 @@ import React, { useState, useRef } from 'react';
 import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
 
-const Input = (props) => {
+const Input = ({ url, setUrl }) => {
   const inputOpenImageRef = useRef(null);
   const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState(props.url);
+  const [previewSource, setPreviewSource] = useState(url);
   const [selectedFile, setSelectedFile] = useState();
 
   const handleOpenImageRef = () => {
@@ -38,9 +38,13 @@ const Input = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        props.setUrl(data.url);
+        console.log(data);
+        setUrl(data.url);
       })
-      .then(alert('이미지 업로드가 완료되었습니다.'))
+      .then(() => {
+        alert('이미지 업로드가 완료되었습니다.');
+        console.log(url);
+      })
       .catch((err) => console.log(err));
   };
 
