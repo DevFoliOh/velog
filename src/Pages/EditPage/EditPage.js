@@ -11,6 +11,7 @@ import { formatDate } from 'Common/formatDate';
 import { removeHTMLTagFromObject } from 'Common/removeHTMLTag';
 import MenuApi from 'Common/api';
 import usePatchEditData from 'Hooks/usePatchEditData';
+import Modal from 'Components/Modal/Modal';
 // import { history } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom';
 
@@ -24,6 +25,8 @@ const EditPage = ({ history }) => {
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [clickComponent, setClickComponent] = useState('');
   const id = useSelector((state) => state.getCardReducer.card.id);
 
   // 2. axois로 서버에서 수정할 데이터를 받아온다
@@ -131,6 +134,19 @@ const EditPage = ({ history }) => {
     // console.log(url);
   };
 
+  const onToggleModal = useCallback((click) => {
+    console.log('??');
+    setShowModal(false);
+    if (click) {
+      setClickComponent(click);
+      setShowModal(true);
+    }
+  }, []);
+
+  const onOpenModal = () => {
+    onToggleModal('goToBack');
+  };
+
   return (
     <Container>
       {!loading && (
@@ -166,6 +182,7 @@ const EditPage = ({ history }) => {
                 }}
                 text="🔙 뒤로가기"
                 _link="/"
+                _onClick={onOpenModal}
               />
             </div>
             <div>
@@ -208,6 +225,16 @@ const EditPage = ({ history }) => {
           <p>{viewContent.body}</p>
         </div>
       </PreviewContainer>
+      {showModal && (
+        <Modal
+          title="포스트 작성 취소"
+          description="정말 페이지를 벗어나시겠습니까?"
+          modalLink="/"
+          onToggleModal={onToggleModal}
+          clickComponent={clickComponent}
+          history={history}
+        />
+      )}
     </Container>
   );
 };
