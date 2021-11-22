@@ -22,14 +22,11 @@ const WritePage = ({ history }) => {
   const [clickComponent, setClickComponent] = useState('');
   const [imgData, setImgData] = useState('');
   const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
-  console.log(thumbnail);
 
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle(value);
   };
-
-  console.log(typeof content);
 
   const handleKeyEnter = (e) => {
     if (e.code === 'Enter') {
@@ -58,15 +55,14 @@ const WritePage = ({ history }) => {
 
   const getPostLocalStorage = () => {
     const post = JSON.parse(localStorage.getItem('posts'));
-    console.log(post);
     setTitle(post.title);
     setContent(post.body);
     setHashTagArr(post.tags);
     setImgData(thumbnail);
-    console.log(thumbnail);
     setCheck(true);
   };
 
+  console.log(url);
   const registerPost = async () => {
     try {
       const response = await axios.post(
@@ -80,10 +76,10 @@ const WritePage = ({ history }) => {
           createdAt: date,
         },
       );
+      console.log('POST 성공!');
     } catch (error) {
       alert(error);
     }
-    console.log('POST 성공!');
   };
 
   const onToggleModal = useCallback((click) => {

@@ -36,6 +36,8 @@ const Input = (props) => {
     }
   }, [previewSource]);
 
+  console.log(previewSource);
+
   const uploadImage = () => {
     const formData = new FormData();
     formData.append('file', selectedFile);
@@ -53,13 +55,16 @@ const Input = (props) => {
       .catch((err) => console.log(err));
   };
 
-  console.log(fileInputState);
-  console.log(previewSource);
-
   return (
     <UploadContainer>
       <Preview
-        src={previewSource ? props.imgData : default_thumb}
+        src={
+          previewSource
+            ? previewSource
+            : default_thumb && props.imgData
+            ? props.imgData
+            : default_thumb
+        }
         onClick={handleOpenImageRef}
         alt="Thumbnail"
       />
