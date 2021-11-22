@@ -39,9 +39,7 @@ const HTTP_METHOD = {
     return {
       method: 'POST',
       url: `${BASE_URL}/posts`,
-      data: {
-        
-      },
+      data: {},
     };
   },
 
@@ -90,7 +88,6 @@ const HTTP_METHOD = {
 
 const request = async (option) => {
   const response = await axios(option);
-  console.log(response.data);
 
   let responseOK =
     (response && response.statusText === 'OK' && response.status === 200) ||

@@ -117,7 +117,6 @@ const EditPage = ({ history }) => {
 
   const loadLocalStorage = () => {
     const loaded = JSON.parse(localStorage.getItem('posts'));
-    localStorage.setItem('post', JSON.stringify(loaded));
     setTitle(loaded.title);
     setLoadedContent(loaded.content);
     setHashTagArr(loaded.tags);

@@ -16,6 +16,8 @@ const ListPage = ({ history }) => {
 
   useGetListData(1, setPostData, setLoading);
 
+  console.log(loading);
+
   useEffect(() => {
     if (inView) {
       MenuApi.getAllPosts(page).then((res) => {

@@ -76,6 +76,7 @@ const WritePage = ({ history }) => {
           tags: hashTagArr,
         },
       );
+      history.push('/');
       console.log('POST 성공!');
     } catch (error) {
       alert(error);
