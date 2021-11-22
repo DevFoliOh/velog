@@ -14,7 +14,7 @@ import usePatchEditData from 'Hooks/usePatchEditData';
 // import { history } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom';
 
-const EditPage = () => {
+const EditPage = ({ history }) => {
   // const history = useHistory();
   // const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
@@ -40,13 +40,7 @@ const EditPage = () => {
       setTitle(data.title);
 
       // (quill: Delta 객체)
-      setLoadedContent({
-        ops: [
-          {
-            insert: data.body,
-          },
-        ],
-      });
+      setLoadedContent(data.body);
       // setLoadedContent(removeHTMLTagFromObject(data.body));
 
       setHashTagArr(data.tags);
@@ -62,6 +56,10 @@ const EditPage = () => {
   useEffect(() => {
     getData(id);
   }, []);
+
+  useEffect(() => {
+    console.log(url);
+  }, [url]);
 
   const editTitle = (e) => {
     const value = e.target.value;
@@ -80,8 +78,13 @@ const EditPage = () => {
   };
 
   const previewPost = () => {
-    setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
+    console.log(viewContent);
+    console.log(title);
+    console.log(content);
+    console.log(hashTagArr);
+    setViewContent({ title: title, body: content });
   };
+  console.log(viewContent);
 
   const editPost = async () => {
     try {
@@ -97,7 +100,7 @@ const EditPage = () => {
         },
       );
 
-      // history.push('/detail');
+      history.push('/detail');
     } catch (error) {
       console.log(error);
     }
@@ -201,22 +204,16 @@ const EditPage = () => {
                 }}
               />
 
-              <Button
-                text="수정하기"
-                _onClick={() => editPost()}
-                _link="/detail"
-              />
+              <Button text="수정하기" _onClick={() => editPost()} />
             </div>
           </WriteFooter>
         </WriteContainer>
       )}
       <PreviewContainer>
-        {viewContent.map((element, idx) => (
-          <div key={idx}>
-            <h2>{element.title}</h2>
-            <p>{parse(element.body)}</p>
-          </div>
-        ))}
+        <div>
+          <h2>{viewContent.title}</h2>
+          <p>{viewContent.body}</p>
+        </div>
       </PreviewContainer>
     </Container>
   );

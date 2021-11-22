@@ -2,9 +2,9 @@ import React from 'react';
 import { style } from './ButtonStyle';
 
 const Button = (props) => {
-  const { style, _onClick, text, _link } = props;
+  const { style, _onClick, text } = props;
   return (
-    <ButtonContainer to={_link} style={style} onClick={_onClick}>
+    <ButtonContainer style={style} onClick={_onClick}>
       {text}
     </ButtonContainer>
   );
