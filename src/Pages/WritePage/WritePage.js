@@ -42,24 +42,26 @@ const WritePage = ({ history }) => {
     setViewContent({ title: title, body: content, hashTagArr: hashTagArr });
   };
 
+  console.log(url);
+
   const addPostLocalStorage = () => {
     const postTitle = {
       title: title,
       content: content,
       tags: hashTagArr,
-      thumbnail: thumbnail,
+      thumbnail: url,
     };
     localStorage.setItem('posts', JSON.stringify(postTitle));
   };
 
   const getPostLocalStorage = () => {
     const post = JSON.parse(localStorage.getItem('posts'));
-    console.log(post);
     setTitle(post.title);
     setContent(post.content);
     setHashTagArr(post.tags);
     setUrl(post.thumbnail);
     setCheck(true);
+    console.log(url);
   };
 
   const registerPost = async () => {
@@ -74,11 +76,10 @@ const WritePage = ({ history }) => {
           tags: hashTagArr,
         },
       );
-      history.push('/');
+      console.log('POST 성공!');
     } catch (error) {
       alert(error);
     }
-    console.log('POST 성공!');
   };
 
   const onToggleModal = useCallback((click) => {
@@ -117,7 +118,7 @@ const WritePage = ({ history }) => {
           <Input url={url} setUrl={setUrl} />
         </WriteHeader>
         <EditorContainer>
-          <Editor setContent={setContent} content={content} />
+          <Editor content={content} setContent={setContent} />
         </EditorContainer>
         <WriteFooter>
           <div>

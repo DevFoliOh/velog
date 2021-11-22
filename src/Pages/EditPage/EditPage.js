@@ -119,19 +119,9 @@ const EditPage = ({ history }) => {
     const loaded = JSON.parse(localStorage.getItem('posts'));
     localStorage.setItem('post', JSON.stringify(loaded));
     setTitle(loaded.title);
-    // console.log(typeof loaded.title);
-    // console.log(typeof title);
-
     setLoadedContent(loaded.content);
-    // console.log(typeof loaded.content);
-    console.log(loadedContent);
-
     setHashTagArr(loaded.tags);
-    // console.log(typeof loaded.tag);
-    // console.log(typeof hashTagArr);
     setUrl(loaded.thumbnail);
-    console.log(typeof loaded.thumbnail);
-    // console.log(url);
   };
 
   const onToggleModal = useCallback((click) => {

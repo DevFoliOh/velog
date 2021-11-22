@@ -45,8 +45,8 @@ const ListPage = ({ history }) => {
             {postData &&
               postData.map((posts) => {
                 return (
-                  <div ref={ref}>
-                    <Card posts={posts} key={posts.id} />
+                  <div ref={ref} key={posts.id}>
+                    <Card posts={posts} />
                   </div>
                 );
               })}

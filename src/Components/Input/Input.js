@@ -3,10 +3,7 @@ import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
 
 const Input = ({ url, setUrl }) => {
-  console.log(typeof url);
-
   const inputOpenImageRef = useRef(null);
-
   const [previewSource, setPreviewSource] = useState(url);
   const [selectedFile, setSelectedFile] = useState();
 
@@ -55,19 +52,11 @@ const Input = ({ url, setUrl }) => {
 
   return (
     <UploadContainer>
-      {previewSource ? (
-        <Preview
-          src={previewSource ? previewSource : default_thumb}
-          onClick={handleOpenImageRef}
-          alt="Thumbnail"
-        />
-      ) : (
-        <Preview
-          src={default_thumb}
-          onClick={handleOpenImageRef}
-          alt="Thumbnail"
-        />
-      )}
+      <Preview
+        src={previewSource ? previewSource : default_thumb}
+        onClick={handleOpenImageRef}
+        alt="Thumbnail"
+      />
 
       <UploadButton onClick={uploadImage}>업로드하기</UploadButton>
       <UploadInputContainer>

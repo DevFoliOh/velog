@@ -3,9 +3,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 import parse from 'html-react-parser';
-
-export default function Editor({ loadedContent, setContent, content }) {
-  console.log(typeof loadedContent);
+export default function Editor({ content, loadedContent, setContent }) {
   console.log(loadedContent);
   return (
     <div className="form-wrapper">
