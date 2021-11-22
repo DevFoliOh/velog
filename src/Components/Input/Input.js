@@ -1,12 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
+import { getImageAction } from 'Modules/getImage/getImage';
+import { useDispatch } from 'react-redux';
 
 const Input = (props) => {
   const inputOpenImageRef = useRef(null);
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
+  const { getImage } = getImageAction;
+  const dispatch = useDispatch();
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
@@ -26,6 +30,11 @@ const Input = (props) => {
       setPreviewSource(reader.result);
     };
   };
+  useEffect(() => {
+    if (previewSource) {
+      dispatch(getImage(previewSource));
+    }
+  }, [previewSource]);
 
   const uploadImage = () => {
     const formData = new FormData();
@@ -50,7 +59,7 @@ const Input = (props) => {
   return (
     <UploadContainer>
       <Preview
-        src={previewSource ? previewSource : default_thumb}
+        src={previewSource ? props.imgData : default_thumb}
         onClick={handleOpenImageRef}
         alt="Thumbnail"
       />

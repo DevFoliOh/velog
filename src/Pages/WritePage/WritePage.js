@@ -7,6 +7,7 @@ import uuid from 'react-uuid';
 import parse from 'html-react-parser';
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
+import { useSelector } from 'react-redux';
 
 const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
@@ -19,6 +20,9 @@ const WritePage = ({ history }) => {
   const [showModal, setShowModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
+  const [imgData, setImgData] = useState('');
+  const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
+  console.log(thumbnail);
 
   const getTitle = (e) => {
     const { value } = e.target;
@@ -47,7 +51,7 @@ const WritePage = ({ history }) => {
       title: title,
       body: content.body,
       tags: hashTagArr,
-      thumbnail: url,
+      thumbnail: thumbnail,
     };
     localStorage.setItem('posts', JSON.stringify(postTitle));
   };
@@ -58,7 +62,8 @@ const WritePage = ({ history }) => {
     setTitle(post.title);
     setContent(post.body);
     setHashTagArr(post.tags);
-    setUrl(post.thumbnail);
+    setImgData(thumbnail);
+    console.log(thumbnail);
     setCheck(true);
   };
 
@@ -114,7 +119,12 @@ const WritePage = ({ history }) => {
                 <WriteTag onKeyPress={handleKeyEnter} />
               </WriteTagContainer>
             </div>
-            <Input url={url} setUrl={setUrl} />
+            <Input
+              url={url}
+              setUrl={setUrl}
+              imgData={imgData}
+              setImgData={setImgData}
+            />
           </WriteHeader>
           <EditorContainer>
             <Editor data={content} setContent={setContent} />
