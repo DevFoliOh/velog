@@ -31,6 +31,8 @@ const Editor = ({ setContent, loadedContent }) => {
     // quill.on('text-change', setContent(quill.getContents()));
   }, []);
 
+  // let text = quill.getText();
+
   return (
     <EditorBlock>
       <QuillWrapper>

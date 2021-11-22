@@ -32,7 +32,9 @@ const HTTP_METHOD = {
     return {
       method: 'POST',
       url: `${BASE_URL}/posts`,
-      data: data,
+      data: {
+        
+      },
     };
   },
 
