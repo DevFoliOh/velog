@@ -115,7 +115,7 @@ const WritePage = ({ history }) => {
           <Input url={url} setUrl={setUrl} />
         </WriteHeader>
         <EditorContainer>
-          <Editor setContent={setContent} loadedContent={content} />
+          <Editor setContent={setContent} content={content} />
         </EditorContainer>
         <WriteFooter>
           <div>
