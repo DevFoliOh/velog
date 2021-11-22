@@ -31,7 +31,6 @@ const DetailPage = ({ history }) => {
   const mainRef = useRef();
 
   const card = useSelector((state) => state.getCardReducer.card);
-  console.log(card);
   const onToggleModal = useCallback((click) => {
     setShowModal(false);
     if (click) {

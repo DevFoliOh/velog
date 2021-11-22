@@ -22,6 +22,5 @@ export const getCardSlice = createSlice({
   },
 });
 
-// getCardData Action 을 외부에서 dispatch 할 수 있게 export
 export const getCardAction = getCardSlice.actions;
 export const getCardReducer = getCardSlice.reducer;
