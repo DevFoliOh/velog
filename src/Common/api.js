@@ -29,7 +29,6 @@ const HTTP_METHOD = {
   },
 
   DELETEDETAIL(id) {
-    console.log(id);
     return {
       method: 'delete',
       url: `${BASE_URL}/posts/${id}`,
@@ -40,7 +39,9 @@ const HTTP_METHOD = {
     return {
       method: 'POST',
       url: `${BASE_URL}/posts`,
-      data: data,
+      data: {
+        
+      },
     };
   },
 
@@ -62,9 +63,23 @@ const HTTP_METHOD = {
     };
   },
 
+  PATCH(id, dataObj) {
+    return {
+      method: 'PATCH',
+      url: `${BASE_URL}/posts/${id}`,
+      data: {
+        id: id,
+        title: dataObj.title,
+        body: dataObj.body,
+        tags: dataObj.tags,
+        thumbnail: dataObj.url,
+      },
+    };
+  },
+
   PATCHCOMMENT(id, data) {
     return {
-      method: 'patch',
+      method: 'PATCH',
       url: `${BASE_URL}/comments/${id}`,
       data: {
         body: data,
@@ -75,6 +90,8 @@ const HTTP_METHOD = {
 
 const request = async (option) => {
   const response = await axios(option);
+  console.log(response.data);
+
   let responseOK =
     (response && response.statusText === 'OK' && response.status === 200) ||
     (response &&
@@ -117,6 +134,10 @@ const MenuApi = {
 
   deleteComment(id) {
     return request(HTTP_METHOD.DELETECOMMENT(id));
+  },
+
+  patchPost(id, dataObj) {
+    return request(HTTP_METHOD.PATCH(id, dataObj));
   },
 
   patchComment(id, data) {

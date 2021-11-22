@@ -4,7 +4,7 @@ import Button from 'Components/Button/Button';
 import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
 import uuid from 'react-uuid';
-import parse from 'html-react-parser';
+
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
 import { useSelector } from 'react-redux';
@@ -15,14 +15,13 @@ const WritePage = ({ history }) => {
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
   const id = uuid();
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState();
   const date = new Date();
   const [showModal, setShowModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
-  const [imgData, setImgData] = useState();
-  // const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
-
+  const [imgData, setImgData] = useState('');
+  const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle(value);
@@ -40,7 +39,7 @@ const WritePage = ({ history }) => {
   };
 
   const previewPost = () => {
-    setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
+    setViewContent({ title: title, body: content, hashTagArr: hashTagArr });
   };
 
   console.log(url);
@@ -48,7 +47,7 @@ const WritePage = ({ history }) => {
   const addPostLocalStorage = () => {
     const postTitle = {
       title: title,
-      body: content,
+      content: content,
       tags: hashTagArr,
       thumbnail: url,
     };
@@ -58,7 +57,7 @@ const WritePage = ({ history }) => {
   const getPostLocalStorage = () => {
     const post = JSON.parse(localStorage.getItem('posts'));
     setTitle(post.title);
-    setContent(post.body);
+    setContent(post.content);
     setHashTagArr(post.tags);
     setUrl(post.thumbnail);
     setCheck(true);
@@ -73,9 +72,8 @@ const WritePage = ({ history }) => {
           id,
           title: title,
           body: content,
-          tags: hashTagArr,
           thumbnail: url,
-          createdAt: date,
+          tags: hashTagArr,
         },
       );
       console.log('POST 성공!');
@@ -98,91 +96,79 @@ const WritePage = ({ history }) => {
 
   return (
     <Container>
-      <>
-        <WriteContainer>
-          <WriteHeader>
-            <div>
-              <WriteTitle onChange={getTitle} value={title} />
-              <WriteLine />
-              <WriteTagContainer>
-                <WriteTagContent>
-                  {hashTagArr.map((hashtag, idx) => {
-                    return (
-                      <div key={idx} onClick={() => removeHashTag(hashtag)}>
-                        <span>{hashtag}</span>
-                      </div>
-                    );
-                  })}
-                </WriteTagContent>
-                <WriteTag onKeyPress={handleKeyEnter} />
-              </WriteTagContainer>
-            </div>
-            <Input
-              url={url}
-              setUrl={setUrl}
-              imgData={imgData}
-              setImgData={setImgData}
+      <WriteContainer>
+        <WriteHeader>
+          <div>
+            <WriteTitle onChange={getTitle} value={title} />
+            <WriteLine />
+            <WriteTagContainer>
+              <WriteTagContent>
+                {hashTagArr.map((hashtag, idx) => {
+                  return (
+                    <div key={idx} onClick={() => removeHashTag(hashtag)}>
+                      <span>{hashtag}</span>
+                    </div>
+                  );
+                })}
+              </WriteTagContent>
+              <WriteTag onKeyPress={handleKeyEnter} />
+            </WriteTagContainer>
+          </div>
+          <Input url={url} setUrl={setUrl} />
+        </WriteHeader>
+        <EditorContainer>
+          <Editor content={content} setContent={setContent} />
+        </EditorContainer>
+        <WriteFooter>
+          <div>
+            <Button
+              style={{
+                background: '#fff',
+                color: 'rgb(73, 80, 87)',
+              }}
+              text="🔙 뒤로가기"
+              _link="/"
             />
-          </WriteHeader>
-          <EditorContainer>
-            <Editor data={content} setContent={setContent} />
-          </EditorContainer>
-          <WriteFooter>
-            <div>
-              <Button
-                _style={{
-                  background: '#fff',
-                  color: 'rgb(73, 80, 87)',
-                }}
-                _onClick={onOpenModal}
-                _text="🔙 뒤로가기"
-                _link="/write"
-              />
-            </div>
-            <div>
-              <Button
-                _text="임시저장"
-                _onClick={addPostLocalStorage}
-                _style={{
-                  background: 'rgb(233, 236, 239)',
-                  color: 'rgb(73, 80, 87)',
-                  marginRight: '10px',
-                }}
-                _link="/write"
-              />
-              <Button
-                _text="불러오기"
-                _onClick={getPostLocalStorage}
-                _style={{
-                  background: 'rgb(233, 236, 239)',
-                  color: 'rgb(73, 80, 87)',
-                  marginRight: '10px',
-                }}
-                _link="/write"
-              />
-              <Button
-                _text="미리보기"
-                _onClick={previewPost}
-                _style={{
-                  background: 'rgb(233, 236, 239)',
-                  color: 'rgb(73, 80, 87)',
-                  marginRight: '10px',
-                }}
-              />
-              <Button _text="출간하기" _onClick={registerPost} _link="/" />
-            </div>
-          </WriteFooter>
-        </WriteContainer>
+          </div>
+          <div>
+            <Button
+              text="임시저장"
+              _onClick={addPostLocalStorage}
+              style={{
+                background: 'rgb(233, 236, 239)',
+                color: 'rgb(73, 80, 87)',
+                marginRight: '10px',
+              }}
+            />
+            <Button
+              text="불러오기"
+              _onClick={getPostLocalStorage}
+              style={{
+                background: 'rgb(233, 236, 239)',
+                color: 'rgb(73, 80, 87)',
+                marginRight: '10px',
+              }}
+            />
 
-        <PreviewContainer>
-          {viewContent.map((element, idx) => (
-            <div key={idx}>
-              <h2>{element.title}</h2>
-              <p>{parse(element.body)}</p>
-            </div>
-          ))}
-        </PreviewContainer>
-      </>
+            <Button
+              text="미리보기"
+              _onClick={previewPost}
+              style={{
+                background: 'rgb(233, 236, 239)',
+                color: 'rgb(73, 80, 87)',
+                marginRight: '10px',
+              }}
+            />
+            <Button text="출간하기" _onClick={registerPost} _link="/" />
+          </div>
+        </WriteFooter>
+      </WriteContainer>
+      <PreviewContainer>
+        <div>
+          <h2>{viewContent.title}</h2>
+          <p>{viewContent.body}</p>
+        </div>
+      </PreviewContainer>
       {showModal && (
         <Modal
           title="포스트 작성 취소"

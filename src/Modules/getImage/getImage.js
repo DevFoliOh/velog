@@ -10,7 +10,6 @@ export const getImageSlice = createSlice({
   reducers: {
     getImage: (state, action) => {
       state.thumbnail = action.payload;
-      console.log(action.payload);
     },
   },
 });
