@@ -123,7 +123,7 @@ const WritePage = ({ history }) => {
                 color: 'rgb(73, 80, 87)',
               }}
               text="🔙 뒤로가기"
-              link="/"
+              _link="/"
             />
           </div>
           <div>
@@ -136,7 +136,7 @@ const WritePage = ({ history }) => {
                 marginRight: '10px',
               }}
             />
-            <Button text="출간하기" _onClick={registerPost} link="/" />
+            <Button text="출간하기" _onClick={registerPost} _link="/" />
           </div>
         </WriteFooter>
       </WriteContainer>

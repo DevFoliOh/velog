@@ -11,8 +11,11 @@ import { formatDate } from 'Common/formatDate';
 import { removeHTMLTagFromObject } from 'Common/removeHTMLTag';
 import MenuApi from 'Common/api';
 import usePatchEditData from 'Hooks/usePatchEditData';
+// import { history } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const EditPage = () => {
+  // const history = useHistory();
   // const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
@@ -21,26 +24,22 @@ const EditPage = () => {
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState('');
-  // 리덕스에서 받아온 id
   const id = useSelector((state) => state.getCardReducer.card.id);
-  console.log(url);
+  console.log(id);
 
   // 2. axois로 서버에서 수정할 데이터를 받아온다
   const getData = async (id) => {
     try {
       setLoading(true);
       const response = await MenuApi.getPostDetail(id);
-      console.log(response.data);
+
       // 3. 데이터 통째로 저장
-      // setData(response.data);
       const data = response.data;
-      console.log(data);
 
       // 4. 각 세터에 저장
       setTitle(data.title);
-      console.log(data.title);
-      console.log(typeof data.title);
 
+      // (quill: Delta 객체)
       setLoadedContent({
         ops: [
           {
@@ -49,19 +48,12 @@ const EditPage = () => {
         ],
       });
       // setLoadedContent(removeHTMLTagFromObject(data.body));
-      console.log(loadedContent);
-      console.log(typeof loadedContent);
-
-      console.log(content);
 
       setHashTagArr(data.tags);
       setUrl(data.thumbnail);
 
-      console.log(url);
-
       setLoading(false);
     } catch (error) {
-      // console.log(error);
       throw new Error('data load 실패');
     }
   };
@@ -73,7 +65,6 @@ const EditPage = () => {
 
   const editTitle = (e) => {
     const value = e.target.value;
-    console.log(typeof value);
     setTitle(value);
   };
 
@@ -88,17 +79,12 @@ const EditPage = () => {
     setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
   };
 
-  console.log(viewContent);
-
   const previewPost = () => {
-    console.log(viewContent);
     setViewContent(viewContent.concat({ ...title, ...content, hashTagArr }));
-    console.log(viewContent);
   };
 
   const editPost = async () => {
     try {
-      console.log(id);
       await axios.patch(
         `https://limitless-sierra-67996.herokuapp.com/v1/posts/${id}`,
         {
@@ -110,6 +96,8 @@ const EditPage = () => {
           // updatedAt: formatDate(data.updatedAt), // 수정한 날짜로 변경
         },
       );
+
+      // history.push('/detail');
     } catch (error) {
       console.log(error);
     }
@@ -123,33 +111,28 @@ const EditPage = () => {
       tag: hashTagArr,
       thumbnail: url,
     };
-    console.log(postInfo);
     localStorage.setItem('post', JSON.stringify(postInfo));
   };
 
   const loadLocalStorage = () => {
-    console.log('성공!');
     const loaded = JSON.parse(localStorage.getItem('post'));
     localStorage.setItem('post', JSON.stringify(loaded));
 
-    // console.log(loaded);
-    // console.log(typeof loaded);
-
     setTitle(loaded.title);
-    console.log(typeof loaded.title);
-    console.log(typeof title);
+    // console.log(typeof loaded.title);
+    // console.log(typeof title);
 
     setContent(loaded.content);
-    console.log(typeof loaded.content);
-    console.log(typeof content);
+    // console.log(typeof loaded.content);
+    // console.log(typeof content);
 
     setHashTagArr(loaded.tag);
-    console.log(typeof loaded.tag);
-    console.log(typeof hashTagArr);
+    // console.log(typeof loaded.tag);
+    // console.log(typeof hashTagArr);
 
     setUrl(loaded.thumbnail);
-    console.log(loaded.thumbnail);
-    console.log(url);
+    // console.log(loaded.thumbnail);
+    // console.log(url);
   };
 
   return (
@@ -217,7 +200,12 @@ const EditPage = () => {
                   marginRight: '10px',
                 }}
               />
-              <Button text="수정하기" _onClick={() => editPost()} _link="/" />
+
+              <Button
+                text="수정하기"
+                _onClick={() => editPost()}
+                _link="/detail"
+              />
             </div>
           </WriteFooter>
         </WriteContainer>
