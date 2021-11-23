@@ -6,7 +6,8 @@ import Input from 'Components/Input/Input';
 import { useSelector } from 'react-redux';
 import MenuApi from 'Common/api';
 import Modal from 'Components/Modal/Modal';
-
+import parse from 'html-react-parser';
+import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 const EditPage = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
@@ -99,6 +100,9 @@ const EditPage = ({ history }) => {
     onToggleModal('goToBack');
   };
 
+  // viewContent.body &&
+  //   console.log(parse(viewContent.body).replace(/(<([^>]+)>)/gi, ''));
+
   return (
     <Container>
       {!loading && (
@@ -123,7 +127,11 @@ const EditPage = ({ history }) => {
             <Input url={url} setUrl={setUrl} />
           </WriteHeader>
           <EditorContainer>
-            <Editor setContent={setContent} loadedContent={loadedContent} />
+            <Editor
+              setContent={setContent}
+              loadedContent={loadedContent}
+              setLoadedContent={setLoadedContent}
+            />
           </EditorContainer>
           <WriteFooter>
             <div>
@@ -165,7 +173,6 @@ const EditPage = ({ history }) => {
                   marginRight: '10px',
                 }}
               />
-
               <Button text="수정하기" _onClick={() => editPost()} />
             </div>
           </WriteFooter>
@@ -174,7 +181,20 @@ const EditPage = ({ history }) => {
       <PreviewContainer>
         <div>
           <h2>{viewContent.title}</h2>
-          <p>{viewContent.body}</p>
+
+          {viewContent.body &&
+            parse(viewContent.body)
+              .replace(/(<([^>]+)>)/gi, '\n')
+              .split('\n')
+              .map((line) => {
+                console.log(line);
+                return (
+                  <>
+                    <p>{line}</p>
+                    <br />
+                  </>
+                );
+              })}
         </div>
       </PreviewContainer>
       {showModal && (

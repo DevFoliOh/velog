@@ -134,7 +134,9 @@ const DetailPage = ({ history }) => {
             )}
           </TagList>
           <ThumbnailWrap>
-            <Thumbnail src={detailData.thumbnail} alt="thumbnail"></Thumbnail>
+            {detailData.thumbnail && (
+              <Thumbnail src={detailData.thumbnail} alt="thumbnail"></Thumbnail>
+            )}
           </ThumbnailWrap>
           <Content
             dangerouslySetInnerHTML={{ __html: parse(detailData.body) }}

@@ -15,6 +15,13 @@ const ListSkeleton = () => {
           <CardSkeleton />
           <CardSkeleton />
           <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
         </CardList>
       </Container>
     </Main>
