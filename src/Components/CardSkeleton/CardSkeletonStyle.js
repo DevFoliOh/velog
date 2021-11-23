@@ -58,7 +58,6 @@ const CardBox = styled.div`
 
 const ImageWrap = styled.div`
   position: relative;
-  padding-bottom: 55%;
   width: 100%;
   height: 249px;
 `;
@@ -73,10 +72,14 @@ const PostInfoWrap = styled.div`
 `;
 
 const TitleLine = styled.div`
+  width: 150px;
+  height: 12px;
   background-color: #eeeeee;
 `;
 
 const ContentLine = styled.div`
+  width: 200px;
+  height: 12px;
   background-color: #eeeeee;
 `;
 
@@ -84,7 +87,7 @@ const Shimmer = styled.div`
   width: 100%;
   height: 100%;
   background-color: #e0e0e0;
-  box-shadow: 0 0 30px 30px #e0e0e0;
+  box-shadow: 0 0 5px 5px #e0e0e0;
   animation: loading 2s infinite;
 
   @keyframes loading {
