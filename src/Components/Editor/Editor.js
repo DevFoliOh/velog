@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
-
+import parse from 'html-react-parser';
 export default function Editor({ content, loadedContent, setContent }) {
   console.log(loadedContent);
   return (
@@ -10,7 +10,7 @@ export default function Editor({ content, loadedContent, setContent }) {
       <CKEditor
         className="editor"
         config={{}}
-        data={loadedContent !== undefined ? loadedContent : content}
+        data={loadedContent !== '' ? loadedContent : content}
         editor={ClassicEditor}
         onReady={() => {}}
         onBlur={(event, editor) => {}}
@@ -18,6 +18,10 @@ export default function Editor({ content, loadedContent, setContent }) {
         onChange={(event, editor) => {
           const data = editor.getData();
           setContent(removeHTMLTagFromString(data));
+          // setContent({
+          //   ...loadedContent,
+          //   content: data,
+          // });
         }}
       ></CKEditor>
     </div>
