@@ -1,7 +1,7 @@
 import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
+
 export default function Editor({ content, loadedContent, setContent }) {
   return (
     <div className="form-wrapper">
@@ -10,14 +10,17 @@ export default function Editor({ content, loadedContent, setContent }) {
         data={
           loadedContent !== undefined
             ? loadedContent
-            : content !== ''
+            : content !== undefined
             ? content
-            : '게시글을 입력하세요'
+            : ''
         }
+        onInit={(editor) => {
+          console.log('Editor is ready to use!', editor);
+        }}
         editor={ClassicEditor}
         onChange={(event, editor) => {
           const data = editor.getData();
-          setContent(removeHTMLTagFromString(data));
+          setContent(data);
         }}
       ></CKEditor>
     </div>
