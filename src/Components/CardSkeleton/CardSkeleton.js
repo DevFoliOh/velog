@@ -1,6 +1,6 @@
 import { style } from './CardSkeletonStyle';
 
-const CardSkeleton = (props) => {
+const CardSkeleton = () => {
   return (
     <CardBox>
       <ImageWrap>

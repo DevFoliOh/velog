@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ActionWrap = styled.ul`
+const ActionContainer = styled.div`
   display: flex;
   align-items: center;
   font-size: 1rem;
   color: rgb(73, 80, 87);
-  justify-content: flex-end;
+  justify-content: space-between;
+`;
+
+const ActionWrap = styled.ul`
+  display: flex;
 `;
 
 const ActionChange = styled.li`
@@ -36,6 +40,7 @@ const EditLink = styled(Link)`
 `;
 
 export const style = {
+  ActionContainer,
   ActionWrap,
   ActionChange,
   ActionDelete,
