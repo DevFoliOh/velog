@@ -13,7 +13,7 @@ const ListPage = ({ history }) => {
   const [sortedData, setSortedData] = useState(null);
   const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(false);
 
   useGetListData(1, setPostData, setLoading);
