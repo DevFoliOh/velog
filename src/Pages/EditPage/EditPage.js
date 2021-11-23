@@ -6,7 +6,8 @@ import Input from 'Components/Input/Input';
 import { useSelector } from 'react-redux';
 import MenuApi from 'Common/api';
 import Modal from 'Components/Modal/Modal';
-
+import parse from 'html-react-parser';
+import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 const EditPage = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
@@ -181,7 +182,16 @@ const EditPage = ({ history }) => {
       <PreviewContainer>
         <div>
           <h2>{viewContent.title}</h2>
-          <p>{viewContent.body}</p>
+          <p>
+            {viewContent.body.split('\n').map((line) => {
+              return (
+                <span>
+                  {line}
+                  <br />
+                </span>
+              );
+            })}
+          </p>
         </div>
       </PreviewContainer>
       {showModal && (

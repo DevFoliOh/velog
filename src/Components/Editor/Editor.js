@@ -1,14 +1,13 @@
 import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 export default function Editor({
   content,
   loadedContent,
   setContent,
   setLoadedContent,
 }) {
-  console.log(typeof content);
-
   return (
     <div className="form-wrapper">
       <CKEditor
@@ -24,7 +23,7 @@ export default function Editor({
         onChange={(event, editor) => {
           const data = editor.getData();
           setContent(data);
-          setLoadedContent(data);
+          setLoadedContent && setLoadedContent(data);
         }}
       ></CKEditor>
     </div>

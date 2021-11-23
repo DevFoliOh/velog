@@ -6,7 +6,8 @@ import Editor from 'Components/Editor/Editor';
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
 import MenuApi from 'Common/api';
-
+import parse from 'html-react-parser';
+import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -76,6 +77,8 @@ const WritePage = ({ history }) => {
   const onOpenModal = () => {
     onToggleModal('goToBack');
   };
+
+  console.log(typeof viewContent.body);
 
   return (
     <Container>
@@ -148,7 +151,7 @@ const WritePage = ({ history }) => {
       <PreviewContainer>
         <div>
           <h2>{viewContent.title}</h2>
-          <p>{viewContent.body}</p>
+          <div dangerouslySetInnerHTML={{ __html: viewContent.body }}></div>
         </div>
       </PreviewContainer>
       {showModal && (
