@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { style } from './EditPageStyle';
+import { style } from 'Pages/WritePage/WritePageStyle';
 import Button from 'Components/Button/Button';
-import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
 import Input from 'Components/Input/Input';
 import { useSelector } from 'react-redux';
@@ -25,7 +24,6 @@ const EditPage = ({ history }) => {
       setLoading(true);
       const response = await MenuApi.getPostDetail(id);
       const data = response.data;
-
       setTitle(data.title);
       setLoadedContent(data.body);
       setContent(data.body);
@@ -40,8 +38,6 @@ const EditPage = ({ history }) => {
   useEffect(() => {
     getData(id);
   }, []);
-
-  useEffect(() => {}, [url]);
 
   const editTitle = (e) => {
     const value = e.target.value;
@@ -65,21 +61,12 @@ const EditPage = ({ history }) => {
 
   const editPost = async () => {
     try {
-      await axios.patch(
-        `https://limitless-sierra-67996.herokuapp.com/v1/posts/${id}`,
-        {
-          id: id,
-          title: title,
-          body: content,
-          tags: hashTagArr,
-          thumbnail: url,
-        },
-      );
+      await MenuApi.patchPost(id, title, content, url, hashTagArr);
       history.push('/detail');
+      console.log('PATCH 성공!');
     } catch (error) {
       console.log(error);
     }
-    console.log('PATCH 성공!');
   };
 
   const addLocalStorage = () => {

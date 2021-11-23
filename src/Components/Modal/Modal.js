@@ -35,9 +35,7 @@ const Modal = (props) => {
   };
 
   const onDeleteComment = async () => {
-    console.log(comment.id);
     const response = await MenuApi.deleteComment(comment.id);
-    console.log(response);
     onToggleModal();
     if (response) {
       deleteComment(comment.id);

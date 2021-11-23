@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { style } from './ListPageStyle';
 import Header from 'Components/Header/Header';
 import Card from 'Components/Card/Card';

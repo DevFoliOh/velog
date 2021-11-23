@@ -9,7 +9,6 @@ const usePatchEditData = (post, setPosts) => {
   const getData = useCallback(async () => {
     try {
       setIsLoading(true);
-
       const newPost = await MenuApi.patchPost(Id, post);
       if (!newPost) throw Error('No edited data !');
 

@@ -35,12 +35,15 @@ const HTTP_METHOD = {
     };
   },
 
-  CREATE(data) {
+  CREATEPOST(title, content, url, hashTagArr) {
     return {
       method: 'POST',
       url: `${BASE_URL}/posts`,
       data: {
-        
+        title: title,
+        body: content,
+        thumbnail: url,
+        tags: hashTagArr,
       },
     };
   },
@@ -63,16 +66,16 @@ const HTTP_METHOD = {
     };
   },
 
-  PATCH(id, dataObj) {
+  PATCH(id, title, content, url, hashTagArr) {
     return {
       method: 'PATCH',
       url: `${BASE_URL}/posts/${id}`,
       data: {
         id: id,
-        title: dataObj.title,
-        body: dataObj.body,
-        tags: dataObj.tags,
-        thumbnail: dataObj.url,
+        title: title,
+        body: content,
+        tags: hashTagArr,
+        thumbnail: url,
       },
     };
   },
@@ -90,8 +93,6 @@ const HTTP_METHOD = {
 
 const request = async (option) => {
   const response = await axios(option);
-  console.log(response.data);
-
   let responseOK =
     (response && response.statusText === 'OK' && response.status === 200) ||
     (response &&
@@ -124,8 +125,8 @@ const MenuApi = {
     return request(HTTP_METHOD.GETCOMMENT(id));
   },
 
-  createPost(data) {
-    return request(HTTP_METHOD.CREATE({ data }));
+  createPost(title, content, url, hashTagArr) {
+    return request(HTTP_METHOD.CREATEPOST(title, content, url, hashTagArr));
   },
 
   createComment(id, data) {
@@ -136,8 +137,8 @@ const MenuApi = {
     return request(HTTP_METHOD.DELETECOMMENT(id));
   },
 
-  patchPost(id, dataObj) {
-    return request(HTTP_METHOD.PATCH(id, dataObj));
+  patchPost(id, title, content, url, hashTagArr) {
+    return request(HTTP_METHOD.PATCH(id, title, content, url, hashTagArr));
   },
 
   patchComment(id, data) {

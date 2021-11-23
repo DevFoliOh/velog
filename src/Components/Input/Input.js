@@ -5,18 +5,14 @@ import default_thumb from 'Assets/default_image.png';
 const Input = ({ url, setUrl }) => {
   const inputOpenImageRef = useRef(null);
   const [previewSource, setPreviewSource] = useState(url);
-  const [selectedFile, setSelectedFile] = useState();
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
   };
-
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
-    setSelectedFile(file);
   };
-
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -24,13 +20,11 @@ const Input = ({ url, setUrl }) => {
       setPreviewSource(reader.result);
     };
   };
-
   const uploadImage = () => {
     const formData = new FormData();
     formData.append('file', previewSource);
     formData.append('upload_preset', 'rwvzsde8');
     formData.append('cloud_name', 'ddupb73kz');
-
     fetch('https://api.cloudinary.com/v1_1/ddupb73kz/image/upload', {
       method: 'POST',
       body: formData,
@@ -54,7 +48,6 @@ const Input = ({ url, setUrl }) => {
         onClick={handleOpenImageRef}
         alt="Thumbnail"
       />
-
       <UploadButton onClick={uploadImage}>업로드하기</UploadButton>
       <UploadInputContainer>
         <UploadInput
@@ -65,9 +58,7 @@ const Input = ({ url, setUrl }) => {
     </UploadContainer>
   );
 };
-
 export default Input;
-
 const {
   UploadContainer,
   Preview,

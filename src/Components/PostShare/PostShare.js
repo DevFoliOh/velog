@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 import { style } from './PostShareStyle';
+import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 
 const PostShare = ({ isFixedShare, detailData }) => {
   const [shareContainerStyle, setShareContainerStyle] = useState({
@@ -32,7 +33,7 @@ const PostShare = ({ isFixedShare, detailData }) => {
   }, []);
 
   function sendLinkCustom() {
-    const description = parse(detailData.body).replace(/(<([^>]+)>)/gi, '');
+    const description = removeHTMLTagFromString(parse(detailData.body));
     let img = detailData.thumbnail;
     if (img === undefined) {
       img = 'default.png';
@@ -45,15 +46,15 @@ const PostShare = ({ isFixedShare, detailData }) => {
           description: description,
           imageUrl: `${img}`,
           link: {
-            mobileWebUrl: `http://localhost:3001/detail/${detailData.id}`,
-            webUrl: `http://localhost:3001/detail/${detailData.id}`,
+            mobileWebUrl: `http://localhost:3000/detail/${detailData.id}`,
+            webUrl: `http://localhost:3000/detail/${detailData.id}`,
           },
         },
         buttons: [
           {
             title: '웹으로 보기',
             link: {
-              webUrl: `http://localhost:3001/detail/${detailData.id}`,
+              webUrl: `http://localhost:3000/detail/${detailData.id}`,
             },
           },
         ],

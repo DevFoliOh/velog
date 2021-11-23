@@ -3,10 +3,9 @@ import { style } from './WritePageStyle';
 import Button from 'Components/Button/Button';
 import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
-import uuid from 'react-uuid';
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
-import { useSelector } from 'react-redux';
+import MenuApi from 'Common/api';
 
 const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
@@ -58,15 +57,8 @@ const WritePage = ({ history }) => {
 
   const registerPost = async () => {
     try {
-      const response = await axios.post(
-        'https://limitless-sierra-67996.herokuapp.com/v1/posts',
-        {
-          title: title,
-          body: content,
-          thumbnail: url,
-          tags: hashTagArr,
-        },
-      );
+      await MenuApi.createPost(title, content, url, hashTagArr);
+      history.push('/');
       console.log('POST 성공!');
     } catch (error) {
       alert(error);
@@ -140,7 +132,6 @@ const WritePage = ({ history }) => {
                 marginRight: '10px',
               }}
             />
-
             <Button
               text="미리보기"
               _onClick={previewPost}
@@ -150,7 +141,7 @@ const WritePage = ({ history }) => {
                 marginRight: '10px',
               }}
             />
-            <Button text="출간하기" _onClick={registerPost} _link="/" />
+            <Button text="출간하기" _onClick={registerPost} />
           </div>
         </WriteFooter>
       </WriteContainer>
@@ -173,9 +164,7 @@ const WritePage = ({ history }) => {
     </Container>
   );
 };
-
 export default WritePage;
-
 const {
   Container,
   WriteContainer,

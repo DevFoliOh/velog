@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { getCardAction } from 'Modules/getCard/getCard';
 import { useDispatch } from 'react-redux';
 import { style } from './CardStyle';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { formatDate } from 'Common/formatDate';
-
+import parse from 'html-react-parser';
+import defaultImg from 'Assets/default.png';
 const Card = ({ posts }) => {
   const { getCard } = getCardAction;
   const dispatch = useDispatch();
+  const thumbnail = posts.thumbnail;
 
   if (!posts) {
     return (
@@ -17,8 +19,6 @@ const Card = ({ posts }) => {
       </Wrapper>
     );
   } else {
-    const thumbnail = posts.thumbnail;
-
     return (
       <Wrapper
         onClick={() => {
@@ -28,17 +28,19 @@ const Card = ({ posts }) => {
       >
         {thumbnail ? (
           <ImageContainer>
-            <Image src={thumbnail} />
+            <Image src={thumbnail} alt="thumbnail" />
           </ImageContainer>
         ) : (
           <ImageContainer>
-            <Image src="default.png" alt="default" />
+            <Image src={defaultImg} alt="default" />
           </ImageContainer>
         )}
         <PostInfoContainer>
           <PostInfo>
-            <Title>{posts.title || <Skeleton />}</Title>
-            <Content>{posts.body || <Skeleton count={3} />}</Content>
+            <Title>{posts.title}</Title>
+            <Content
+              dangerouslySetInnerHTML={{ __html: parse(posts.body) }}
+            ></Content>
           </PostInfo>
           <DateBox>{formatDate(posts.createdAt)}</DateBox>
         </PostInfoContainer>
@@ -47,7 +49,7 @@ const Card = ({ posts }) => {
   }
 };
 
-export default Card;
+export default React.memo(Card);
 
 const {
   Wrapper,
