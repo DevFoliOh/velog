@@ -6,12 +6,13 @@ import useGetListData from 'Hooks/useGetListData';
 import { useInView } from 'react-intersection-observer';
 import MenuApi from 'Common/api';
 import ListSkeleton from 'Components/ListSkeleton/ListSkeleton';
+import ScrollToTop from 'Components/ScrollToTop/ScrollToTop';
 
 const ListPage = ({ history }) => {
   const [postData, setPostData] = useState(null);
   const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   useGetListData(1, setPostData, setLoading);
@@ -52,6 +53,7 @@ const ListPage = ({ history }) => {
           </CardList>
         )}
       </Container>
+      <ScrollToTop />
     </Wrapper>
   );
 };

@@ -16,7 +16,6 @@ const WritePage = ({ history }) => {
   const [showModal, setShowModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
-
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle(value);
