@@ -85,6 +85,7 @@ const EditPage = ({ history }) => {
     const loaded = JSON.parse(localStorage.getItem('posts'));
     setTitle(loaded.title);
     setLoadedContent(loaded.content);
+    // setContent(loaded.content);
     setHashTagArr(loaded.tags);
     setUrl(loaded.thumbnail);
   };
@@ -125,7 +126,11 @@ const EditPage = ({ history }) => {
             <Input url={url} setUrl={setUrl} />
           </WriteHeader>
           <EditorContainer>
-            <Editor setContent={setContent} loadedContent={loadedContent} />
+            <Editor
+              setContent={setContent}
+              loadedContent={loadedContent}
+              setLoadedContent={setLoadedContent}
+            />
           </EditorContainer>
           <WriteFooter>
             <div>
