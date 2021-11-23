@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const CardBox = styled.div`
   width: 19rem;
+  height: 364px;
   margin: 1rem;
   position: relative;
   display: flex;

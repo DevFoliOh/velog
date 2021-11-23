@@ -16,7 +16,6 @@ const WritePage = ({ history }) => {
   const [showModal, setShowModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
-
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle(value);
@@ -37,8 +36,6 @@ const WritePage = ({ history }) => {
     setViewContent({ title: title, body: content, hashTagArr: hashTagArr });
   };
 
-  console.log(url);
-
   const addPostLocalStorage = () => {
     const postTitle = {
       title: title,
@@ -56,7 +53,6 @@ const WritePage = ({ history }) => {
     setHashTagArr(post.tags);
     setUrl(post.thumbnail);
     setCheck(true);
-    console.log(url);
   };
 
   const registerPost = async () => {

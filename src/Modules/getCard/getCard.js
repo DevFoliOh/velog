@@ -16,8 +16,6 @@ export const getCardSlice = createSlice({
   initialState,
   reducers: {
     getCard: (state, action) => {
-      console.log(action.payload);
-      console.log(state.card.id);
       state.card = action.payload;
     },
   },
