@@ -1,34 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { style } from './InputStyle';
 import default_thumb from 'Assets/default_image.png';
-import { getImageAction } from 'Modules/getImage/getImage';
-import { useDispatch, useSelector } from 'react-redux';
 
 const Input = ({ url, setUrl }) => {
   const inputOpenImageRef = useRef(null);
-  const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState();
-  const [selectedFile, setSelectedFile] = useState();
-  const { getImage } = getImageAction;
-  const dispatch = useDispatch();
-
-  const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
-
-  useEffect(() => {
-    setPreviewSource(thumbnail);
-  }, [thumbnail]);
+  const [previewSource, setPreviewSource] = useState(url);
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
   };
-
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
-    setSelectedFile(file);
-    setFileInputState(e.target.value);
   };
-
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -36,13 +20,6 @@ const Input = ({ url, setUrl }) => {
       setPreviewSource(reader.result);
     };
   };
-  useEffect(() => {
-    if (previewSource) {
-      dispatch(getImage(previewSource));
-      // setPreviewSource(props.url);
-    }
-  }, [previewSource]);
-
   const uploadImage = () => {
     const formData = new FormData();
     formData.append('file', previewSource);
@@ -59,6 +36,10 @@ const Input = ({ url, setUrl }) => {
       .then(alert('이미지 업로드가 완료되었습니다.'))
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    setPreviewSource(url);
+  }, [url]);
 
   return (
     <UploadContainer>
@@ -77,9 +58,7 @@ const Input = ({ url, setUrl }) => {
     </UploadContainer>
   );
 };
-
 export default Input;
-
 const {
   UploadContainer,
   Preview,

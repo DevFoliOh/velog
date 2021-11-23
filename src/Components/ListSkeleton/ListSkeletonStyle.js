@@ -12,7 +12,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-top: 2rem;
-  /* width: 1728px; */
   margin-left: auto;
   margin-right: auto;
   background: #f8f9fa;

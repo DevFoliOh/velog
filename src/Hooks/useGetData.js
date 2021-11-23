@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import MenuApi from 'Common/api';
 
 const useGetData = (setPostData, setComment, id) => {

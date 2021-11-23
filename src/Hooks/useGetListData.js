@@ -1,9 +1,8 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import MenuApi from 'Common/api';
 
 const useGetListData = (page, setPostData, setLoading) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const getData = useCallback(async () => {
+  const getData = async () => {
     try {
       setLoading(true);
       const response = await MenuApi.getAllPosts(page);
@@ -12,11 +11,11 @@ const useGetListData = (page, setPostData, setLoading) => {
     } catch (error) {
       throw new Error('data load 실패');
     }
-  }, []);
+  };
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, []);
 };
 
 export default useGetListData;

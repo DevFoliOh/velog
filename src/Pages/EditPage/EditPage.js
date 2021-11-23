@@ -1,23 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { style } from './EditPageStyle';
+import { style } from 'Pages/WritePage/WritePageStyle';
 import Button from 'Components/Button/Button';
-import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
-import parse from 'html-react-parser';
 import Input from 'Components/Input/Input';
 import { useSelector } from 'react-redux';
-import useGetData from 'Hooks/useGetData';
-import { formatDate } from 'Common/formatDate';
-import { removeHTMLTagFromObject } from 'Common/removeHTMLTag';
 import MenuApi from 'Common/api';
-import usePatchEditData from 'Hooks/usePatchEditData';
 import Modal from 'Components/Modal/Modal';
-// import { history } from 'react-router-dom';
-// import { useHistory } from 'react-router-dom';
 
 const EditPage = ({ history }) => {
-  // const history = useHistory();
-  // const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -29,40 +19,25 @@ const EditPage = ({ history }) => {
   const [clickComponent, setClickComponent] = useState('');
   const id = useSelector((state) => state.getCardReducer.card.id);
 
-  // 2. axois로 서버에서 수정할 데이터를 받아온다
   const getData = async (id) => {
     try {
       setLoading(true);
       const response = await MenuApi.getPostDetail(id);
-
-      // 3. 데이터 통째로 저장
       const data = response.data;
-
-      // 4. 각 세터에 저장
       setTitle(data.title);
-
-      // (quill: Delta 객체)
       setLoadedContent(data.body);
       setContent(data.body);
-      // setLoadedContent(removeHTMLTagFromObject(data.body));
-
       setHashTagArr(data.tags);
       setUrl(data.thumbnail);
-
       setLoading(false);
     } catch (error) {
       throw new Error('data load 실패');
     }
   };
 
-  // 1. 첫 페이지 로드 시 getData 함수 실행
   useEffect(() => {
     getData(id);
   }, []);
-
-  useEffect(() => {
-    console.log(typeof url);
-  }, [url]);
 
   const editTitle = (e) => {
     const value = e.target.value;
@@ -86,23 +61,12 @@ const EditPage = ({ history }) => {
 
   const editPost = async () => {
     try {
-      await axios.patch(
-        `https://limitless-sierra-67996.herokuapp.com/v1/posts/${id}`,
-        {
-          id: id, // 리덕스에서 받은 아이디
-          title: title,
-          body: content,
-          tags: hashTagArr,
-          thumbnail: url,
-          // updatedAt: formatDate(data.updatedAt), // 수정한 날짜로 변경
-        },
-      );
-
+      await MenuApi.patchPost(id, title, content, url, hashTagArr);
       history.push('/detail');
+      console.log('PATCH 성공!');
     } catch (error) {
       console.log(error);
     }
-    console.log('PATCH 성공!');
   };
 
   const addLocalStorage = () => {
@@ -117,25 +81,13 @@ const EditPage = ({ history }) => {
 
   const loadLocalStorage = () => {
     const loaded = JSON.parse(localStorage.getItem('posts'));
-    localStorage.setItem('post', JSON.stringify(loaded));
     setTitle(loaded.title);
-    // console.log(typeof loaded.title);
-    // console.log(typeof title);
-
     setLoadedContent(loaded.content);
-    // console.log(typeof loaded.content);
-    // console.log(typeof content);
-
     setHashTagArr(loaded.tags);
-    // console.log(typeof loaded.tag);
-    // console.log(typeof hashTagArr);
     setUrl(loaded.thumbnail);
-    // console.log(loaded.thumbnail);
-    // console.log(url);
   };
 
   const onToggleModal = useCallback((click) => {
-    console.log('??');
     setShowModal(false);
     if (click) {
       setClickComponent(click);
