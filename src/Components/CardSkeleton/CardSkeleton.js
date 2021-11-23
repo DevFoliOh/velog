@@ -6,25 +6,25 @@ const CardSkeleton = () => {
       <ImageWrap>
         <Shimmer />
       </ImageWrap>
-      <PostInfoWrap>
-        <TitleLine>
+      <ContentWrap>
+        <ContentLineFirst>
           <Shimmer />
-        </TitleLine>
+        </ContentLineFirst>
         <ContentLine>
           <Shimmer />
         </ContentLine>
-        <ContentLine>
-          <Shimmer />
-        </ContentLine>
-        <ContentLine>
-          <Shimmer />
-        </ContentLine>
-      </PostInfoWrap>
+      </ContentWrap>
     </CardBox>
   );
 };
 
 export default CardSkeleton;
 
-const { CardBox, ImageWrap, PostInfoWrap, TitleLine, ContentLine, Shimmer } =
-  style;
+const {
+  CardBox,
+  ImageWrap,
+  ContentLine,
+  ContentLineFirst,
+  ContentWrap,
+  Shimmer,
+} = style;

@@ -38,7 +38,8 @@ const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: left;
+
   background: #f8f9fa;
 `;
 

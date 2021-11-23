@@ -9,18 +9,9 @@ const CardBox = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
   border-radius: 6px;
-  background-color: white;
-
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 16px 0px;
-  -webkit-transition: box-shadow 0.25s ease-in 0s,
-    -webkit-transform 0.25s ease-in 0s;
+  background-color: #eeeeee;
   transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
-
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;
-  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -59,36 +50,38 @@ const CardBox = styled.div`
 const ImageWrap = styled.div`
   position: relative;
   width: 100%;
-  height: 249px;
+  height: 150px;
+  overflow: hidden;
 `;
 
-const PostInfoWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  min-height: 165px;
-  flex: 1 1 0;
+const ContentWrap = styled.div`
+  flex-wrap: wrap;
+  background-color: white;
+  height: 165px;
 `;
 
-const TitleLine = styled.div`
-  width: 150px;
-  height: 12px;
+const ContentLineFirst = styled.div`
+  width: 100px;
+  height: 20px;
+  margin: 20px 20px 0 20px;
   background-color: #eeeeee;
+  overflow: hidden;
 `;
 
 const ContentLine = styled.div`
   width: 200px;
-  height: 12px;
+  height: 20px;
+  margin: 20px 20px 0 20px;
   background-color: #eeeeee;
+  overflow: hidden;
 `;
 
 const Shimmer = styled.div`
-  width: 100%;
+  width: 40%;
   height: 100%;
   background-color: #e0e0e0;
-  box-shadow: 0 0 5px 5px #e0e0e0;
-  animation: loading 2s infinite;
+  box-shadow: 0 0 30px 30px #e0e0e0;
+  animation: loading 1s infinite;
 
   @keyframes loading {
     0% {
@@ -106,8 +99,8 @@ const Shimmer = styled.div`
 export const style = {
   CardBox,
   ImageWrap,
-  PostInfoWrap,
-  TitleLine,
   ContentLine,
+  ContentLineFirst,
+  ContentWrap,
   Shimmer,
 };
