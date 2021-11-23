@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { style } from './ListPageStyle';
 import Header from 'Components/Header/Header';
 import Card from 'Components/Card/Card';
@@ -44,8 +44,8 @@ const ListPage = ({ history }) => {
             {postData &&
               postData.map((posts) => {
                 return (
-                  <div ref={ref}>
-                    <Card posts={posts} key={posts.id} />
+                  <div ref={ref} key={posts.id}>
+                    <Card posts={posts} />
                   </div>
                 );
               })}

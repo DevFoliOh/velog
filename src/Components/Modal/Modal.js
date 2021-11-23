@@ -1,10 +1,9 @@
 import MenuApi from 'Common/api';
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { style } from './ModalStyle';
 
 const Modal = (props) => {
-  // const [modalState, setModalState] = useState(true);
   const {
     title,
     description,
@@ -24,20 +23,20 @@ const Modal = (props) => {
       clickComponent === 'postDelete' && onDeleteDetail();
       clickComponent === 'commentDelete' && onDeleteComment();
       clickComponent === 'goToBack' && history.push('/');
-      // setModalState(false);
     } else {
       onToggleModal();
-      // setModalState(false);
     }
   };
 
   const onDeleteDetail = async () => {
     await MenuApi.deleteDetail(postId);
     history.push(modalLink);
+    onToggleModal();
   };
 
   const onDeleteComment = async () => {
     const response = await MenuApi.deleteComment(comment.id);
+    onToggleModal();
     if (response) {
       deleteComment(comment.id);
       mainRef.current.scrollIntoView({

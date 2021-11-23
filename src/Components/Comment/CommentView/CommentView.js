@@ -3,19 +3,16 @@ import { style } from './CommentViewStyle';
 import CommentWrite from '../CommentWrite/CommentWrite';
 import { useDispatch } from 'react-redux';
 import { currentCommentAction } from 'Modules/currentComment/currentComment';
-
+import avatar from 'Assets/avatar.png';
 const CommentView = ({ comment, openModal }) => {
   const [isOpenPatchText, setIsOpenPatch] = useState(false);
   const [current, setCurrent] = useState(comment);
   const { getCurrentComment } = currentCommentAction;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    current && dispatch(getCurrentComment(current));
-  }, [current, dispatch, getCurrentComment]);
-
   const onOpenModal = () => {
     openModal('commentDelete');
+    current && dispatch(getCurrentComment(current));
   };
 
   useEffect(() => {
@@ -37,7 +34,7 @@ const CommentView = ({ comment, openModal }) => {
   return (
     <CommentItem>
       <CommentUserWrap>
-        <CommentUser src="/avatar.png" />
+        <CommentUser src={avatar} />
         {isOpenPatchText === false && (
           <CommentAction>
             <ChangeComment onClick={onOpenPatchTextArea}>수정</ChangeComment>

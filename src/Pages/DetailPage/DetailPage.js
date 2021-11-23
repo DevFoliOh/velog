@@ -13,6 +13,7 @@ import PostShare from 'Components/PostShare/PostShare';
 import { debounce } from 'lodash';
 import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
 import Modal from 'Components/Modal/Modal';
+import avatar from 'Assets/avatar.png';
 
 const DetailPage = ({ history }) => {
   const [detailData, setDetailData] = useState({
@@ -31,6 +32,7 @@ const DetailPage = ({ history }) => {
   const mainRef = useRef();
 
   const card = useSelector((state) => state.getCardReducer.card);
+
   const onToggleModal = useCallback((click) => {
     setShowModal(false);
     if (click) {
@@ -121,11 +123,7 @@ const DetailPage = ({ history }) => {
       ) : (
         <Body>
           <Title>{detailData.title}</Title>
-          <DetailAction
-            postId={card.id}
-            history={history}
-            openModal={onToggleModal}
-          />
+          <DetailAction openModal={onToggleModal} detailData={detailData} />
           <TagList>
             {tagArr &&
               tagArr.map((tagContent, index) => (
@@ -136,13 +134,13 @@ const DetailPage = ({ history }) => {
             )}
           </TagList>
           <ThumbnailWrap>
-            <Thumbnail src={detailData.thumbnail}></Thumbnail>
+            <Thumbnail src={detailData.thumbnail} alt="thumbnail"></Thumbnail>
           </ThumbnailWrap>
           <Content
             dangerouslySetInnerHTML={{ __html: parse(detailData.body) }}
           ></Content>
           <UserContainer>
-            <UserImg src="/avatar.png" />
+            <UserImg src={avatar} alt="user" />
             <UserDescriptionWrap>
               <UserDescriptionTitle>User</UserDescriptionTitle>
               <UserDescriptionSubTitle>Front-end</UserDescriptionSubTitle>

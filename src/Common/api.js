@@ -29,18 +29,22 @@ const HTTP_METHOD = {
   },
 
   DELETEDETAIL(id) {
-    console.log(id);
     return {
       method: 'delete',
       url: `${BASE_URL}/posts/${id}`,
     };
   },
 
-  CREATE(data) {
+  CREATEPOST(title, content, url, hashTagArr) {
     return {
       method: 'POST',
       url: `${BASE_URL}/posts`,
-      data: data,
+      data: {
+        title: title,
+        body: content,
+        thumbnail: url,
+        tags: hashTagArr,
+      },
     };
   },
 
@@ -62,9 +66,23 @@ const HTTP_METHOD = {
     };
   },
 
+  PATCH(id, title, content, url, hashTagArr) {
+    return {
+      method: 'PATCH',
+      url: `${BASE_URL}/posts/${id}`,
+      data: {
+        id: id,
+        title: title,
+        body: content,
+        tags: hashTagArr,
+        thumbnail: url,
+      },
+    };
+  },
+
   PATCHCOMMENT(id, data) {
     return {
-      method: 'patch',
+      method: 'PATCH',
       url: `${BASE_URL}/comments/${id}`,
       data: {
         body: data,
@@ -107,8 +125,8 @@ const MenuApi = {
     return request(HTTP_METHOD.GETCOMMENT(id));
   },
 
-  createPost(data) {
-    return request(HTTP_METHOD.CREATE({ data }));
+  createPost(title, content, url, hashTagArr) {
+    return request(HTTP_METHOD.CREATEPOST(title, content, url, hashTagArr));
   },
 
   createComment(id, data) {
@@ -117,6 +135,10 @@ const MenuApi = {
 
   deleteComment(id) {
     return request(HTTP_METHOD.DELETECOMMENT(id));
+  },
+
+  patchPost(id, title, content, url, hashTagArr) {
+    return request(HTTP_METHOD.PATCH(id, title, content, url, hashTagArr));
   },
 
   patchComment(id, data) {

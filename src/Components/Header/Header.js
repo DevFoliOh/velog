@@ -1,5 +1,6 @@
 import React from 'react';
 import { style } from './HeaderStyle';
+import avatar from 'Assets/avatar.png';
 
 const Header = ({ location }) => {
   return (
@@ -54,7 +55,7 @@ const Header = ({ location }) => {
           </Search>
           <WriteBtn to="/write">새 글 작성</WriteBtn>
           <Profile>
-            <ProfileImg src="/avatar.png" alt="profile" />
+            <ProfileImg src={avatar} alt="profile" />
             <Dropdown
               stroke="currentColor"
               fill="currentColor"
