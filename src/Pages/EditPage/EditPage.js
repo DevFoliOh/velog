@@ -106,6 +106,9 @@ const EditPage = ({ history }) => {
     onToggleModal('goToBack');
   };
 
+  // viewContent.body &&
+  //   console.log(parse(viewContent.body).replace(/(<([^>]+)>)/gi, ''));
+
   return (
     <Container>
       {!loading && (
@@ -176,7 +179,6 @@ const EditPage = ({ history }) => {
                   marginRight: '10px',
                 }}
               />
-
               <Button text="수정하기" _onClick={() => editPost()} />
             </div>
           </WriteFooter>
@@ -185,17 +187,20 @@ const EditPage = ({ history }) => {
       <PreviewContainer>
         <div>
           <h2>{viewContent.title}</h2>
-          <p>
-            {viewContent.body}
-            {/* {viewContent.body.split('\n').map((line) => {
-              return (
-                <span>
-                  {line}
-                  <br />
-                </span>
-              );
-            })} */}
-          </p>
+
+          {viewContent.body &&
+            parse(viewContent.body)
+              .replace(/(<([^>]+)>)/gi, '\n')
+              .split('\n')
+              .map((line) => {
+                console.log(line);
+                return (
+                  <>
+                    <p>{line}</p>
+                    <br />
+                  </>
+                );
+              })}
         </div>
       </PreviewContainer>
       {showModal && (
