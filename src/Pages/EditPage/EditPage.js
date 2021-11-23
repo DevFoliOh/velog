@@ -37,6 +37,9 @@ const EditPage = ({ history }) => {
     }
   };
 
+  // console.log(data.body);
+  console.log(content);
+
   useEffect(() => {
     getData(id);
   }, []);
@@ -183,14 +186,15 @@ const EditPage = ({ history }) => {
         <div>
           <h2>{viewContent.title}</h2>
           <p>
-            {viewContent.body.split('\n').map((line) => {
+            {viewContent.body}
+            {/* {viewContent.body.split('\n').map((line) => {
               return (
                 <span>
                   {line}
                   <br />
                 </span>
               );
-            })}
+            })} */}
           </p>
         </div>
       </PreviewContainer>
