@@ -1,10 +1,9 @@
 import MenuApi from 'Common/api';
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { style } from './ModalStyle';
 
 const Modal = (props) => {
-  // const [modalState, setModalState] = useState(true);
   const {
     title,
     description,

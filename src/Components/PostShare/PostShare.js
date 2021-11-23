@@ -36,7 +36,6 @@ const PostShare = ({ isFixedShare, detailData }) => {
     let img = detailData.thumbnail;
     if (img === undefined) {
       img = 'default.png';
-      console.log(img);
     }
     try {
       window.Kakao.Link.sendDefault({

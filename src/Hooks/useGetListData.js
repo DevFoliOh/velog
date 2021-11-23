@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback } from 'react';
 import MenuApi from 'Common/api';
 
 const useGetListData = (page, setPostData, setLoading) => {
-  const [isLoading, setIsLoading] = useState(false);
   const getData = useCallback(async () => {
     try {
       setLoading(true);

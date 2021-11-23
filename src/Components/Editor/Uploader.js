@@ -11,20 +11,12 @@ import { findOptimalInsertionRange } from '@ckeditor/ckeditor5-widget/src/utils'
 const _UPLOAD_FILE_LIMIT = 50000000;
 
 const createImageTypeRegExp = (types) => {
-  // Sanitize the MIME type name which may include: "+", "-" or ".".
   const regExpSafeNames = types.map((type) => type.replace('+', '\\+'));
 
   return new RegExp(`^image\\/(${regExpSafeNames.join('|')})$`);
 };
 
 class FileUploadCommand extends Command {
-  /**
-   * Executes the command.
-   *
-   * @fires execute
-   * @param {Object} options Options for the executed command.
-   * @param {File|Array.<File>} options.file The image file or an array of image files to upload.
-   */
   execute(options) {
     const editor = this.editor;
     const model = editor.model;
@@ -49,11 +41,6 @@ class FileUploadCommand extends Command {
   }
 }
 
-// Handles uploading single file.
-//
-// @param {module:engine/model/writer~writer} writer
-// @param {module:engine/model/model~Model} model
-// @param {File} file
 function uploadFile(writer, model, fileRepository, file) {
   const loader = fileRepository.createLoader(file);
 

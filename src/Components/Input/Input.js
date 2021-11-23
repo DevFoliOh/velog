@@ -13,7 +13,6 @@ const Input = ({ url, setUrl }) => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     previewFile(file);
     setSelectedFile(file);
   };

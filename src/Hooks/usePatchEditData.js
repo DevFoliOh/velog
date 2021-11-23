@@ -3,7 +3,6 @@ import MenuApi from 'Common/api';
 import { useSelector } from 'react-redux';
 
 const usePatchEditData = (post, setPosts) => {
-  // post는 수정된 게시글, setPosts는 전체 게시글 배열을 수정하기 위한 세터
   const [isLoading, setIsLoading] = useState(false);
   const Id = useSelector((state) => state.getCardIdReducer.card.id);
 
@@ -12,7 +11,6 @@ const usePatchEditData = (post, setPosts) => {
       setIsLoading(true);
 
       const newPost = await MenuApi.patchPost(Id, post);
-      console.log(newPost);
       if (!newPost) throw Error('No edited data !');
 
       setPosts((posts) => {

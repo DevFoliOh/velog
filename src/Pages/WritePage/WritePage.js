@@ -4,7 +4,6 @@ import Button from 'Components/Button/Button';
 import * as axios from 'axios';
 import Editor from 'Components/Editor/Editor';
 import uuid from 'react-uuid';
-
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
 import { useSelector } from 'react-redux';
@@ -14,14 +13,10 @@ const WritePage = ({ history }) => {
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [viewContent, setViewContent] = useState([]);
-  const id = uuid();
   const [url, setUrl] = useState();
-  const date = new Date();
   const [showModal, setShowModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [clickComponent, setClickComponent] = useState('');
-  const [imgData, setImgData] = useState('');
-  const thumbnail = useSelector((state) => state.getImageReducer.thumbnail);
   const getTitle = (e) => {
     const { value } = e.target;
     setTitle(value);
@@ -42,8 +37,6 @@ const WritePage = ({ history }) => {
     setViewContent({ title: title, body: content, hashTagArr: hashTagArr });
   };
 
-  console.log(url);
-
   const addPostLocalStorage = () => {
     const postTitle = {
       title: title,
@@ -61,7 +54,6 @@ const WritePage = ({ history }) => {
     setHashTagArr(post.tags);
     setUrl(post.thumbnail);
     setCheck(true);
-    console.log(url);
   };
 
   const registerPost = async () => {
@@ -69,7 +61,6 @@ const WritePage = ({ history }) => {
       const response = await axios.post(
         'https://limitless-sierra-67996.herokuapp.com/v1/posts',
         {
-          id,
           title: title,
           body: content,
           thumbnail: url,
@@ -83,7 +74,6 @@ const WritePage = ({ history }) => {
   };
 
   const onToggleModal = useCallback((click) => {
-    console.log('??');
     setShowModal(false);
     if (click) {
       setClickComponent(click);

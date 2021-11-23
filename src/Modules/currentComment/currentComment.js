@@ -14,6 +14,5 @@ export const currentCommentSlice = createSlice({
   },
 });
 
-// getCardData Action 을 외부에서 dispatch 할 수 있게 export
 export const currentCommentAction = currentCommentSlice.actions;
 export const currentCommentReducer = currentCommentSlice.reducer;

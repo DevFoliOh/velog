@@ -73,14 +73,10 @@ const PostInfoWrap = styled.div`
 
 const TitleLine = styled.div`
   background-color: #eeeeee;
-  /* width: 100px;
-  height: 30px; */
 `;
 
 const ContentLine = styled.div`
   background-color: #eeeeee;
-  /* width: 100px;
-  height: 20px; */
 `;
 
 const Shimmer = styled.div`

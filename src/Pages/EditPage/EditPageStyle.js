@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  /* max-width: 600px; */
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -103,7 +102,6 @@ const WriteFooter = styled.div`
 
 const PreviewContainer = styled.div`
   display: flex;
-  /* width: 50vw; */
   justify-content: center;
   align-items: center;
   margin: 0 auto;

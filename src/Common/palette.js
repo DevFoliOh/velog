@@ -1,4 +1,3 @@
-// source: https://yeun.github.io/open-color/
 const palette = {
   gray: [
     '#f8f9fa',

@@ -10,7 +10,6 @@ export const getBodySlice = createSlice({
   reducers: {
     getBody: (state, action) => {
       state.body = action.payload;
-      console.log(action.payload);
     },
   },
 });
