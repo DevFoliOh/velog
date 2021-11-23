@@ -7,7 +7,13 @@ export default function Editor({ content, loadedContent, setContent }) {
     <div className="form-wrapper">
       <CKEditor
         className="editor"
-        data={loadedContent !== '' ? loadedContent : content}
+        data={
+          loadedContent !== undefined
+            ? loadedContent
+            : content !== ''
+            ? content
+            : '게시글을 입력하세요'
+        }
         editor={ClassicEditor}
         onChange={(event, editor) => {
           const data = editor.getData();
