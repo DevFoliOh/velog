@@ -7,7 +7,10 @@ const HTTP_METHOD = {
     return {
       method: 'GET',
       url: `${BASE_URL}/posts`,
-      params: { page: page },
+      params: {
+        page: page,
+        // createdAt: 'asc',
+      },
     };
   },
 

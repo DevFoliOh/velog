@@ -6,9 +6,11 @@ import useGetListData from 'Hooks/useGetListData';
 import { useInView } from 'react-intersection-observer';
 import MenuApi from 'Common/api';
 import ListSkeleton from 'Components/ListSkeleton/ListSkeleton';
+import Button from 'Components/Button/Button';
 
 const ListPage = ({ history }) => {
   const [postData, setPostData] = useState(null);
+  const [sortedData, setSortedData] = useState(null);
   const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
   const [page, setPage] = useState(2);
