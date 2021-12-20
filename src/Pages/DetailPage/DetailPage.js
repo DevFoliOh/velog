@@ -10,7 +10,7 @@ import useGetData from 'Hooks/useGetData';
 import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';
 import DetailAction from 'Components/DetailAction/DetailAction';
 import PostShare from 'Components/PostShare/PostShare';
-import { debounce } from 'lodash';
+import { throttle } from 'lodash';
 import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
 import Modal from 'Components/Modal/Modal';
 import avatar from 'Assets/avatar.png';
@@ -73,6 +73,7 @@ const DetailPage = ({ history }) => {
   }, []);
 
   const onFixedShareComponent = () => {
+    console.log(window.pageYOffset);
     if (window.pageYOffset > 220) {
       setIsFixedshare(true);
     } else {
@@ -81,7 +82,7 @@ const DetailPage = ({ history }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', debounce(onFixedShareComponent, 10));
+    window.addEventListener('scroll', throttle(onFixedShareComponent, 50));
   }, []);
 
   useEffect(() => {
