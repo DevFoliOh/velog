@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Wrapper = styled(Link)`
   width: 19rem;
   margin: 1rem;
-  position: relative;
+position: relative;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

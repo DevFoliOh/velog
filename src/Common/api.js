@@ -40,7 +40,7 @@ const HTTP_METHOD = {
       method: 'POST',
       url: `${BASE_URL}/posts`,
       data: {
-        title: title,
+        title: title, // 자바스크립트 문법 상 title: title === title 
         body: content,
         thumbnail: url,
         tags: hashTagArr,
