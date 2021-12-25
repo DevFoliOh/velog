@@ -7,11 +7,6 @@ export default function Image(props) {
   return <ElImage src={src} alt={alt} />;
 }
 
-Image.defaultProps = {
-  src: '',
-  alt: '',
-};
-
 const ElImage = styled.img`
   position: absolute;
   top: 0;
@@ -20,4 +15,6 @@ const ElImage = styled.img`
   height: 100%;
   display: block;
   object-fit: cover;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 `;

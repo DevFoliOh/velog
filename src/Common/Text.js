@@ -49,14 +49,14 @@ const ElText = styled.p`
   letter-spacing: -0.0004em;
   margin: ${(props) => props.margin};
   font-weight: ${(props) => props.bold};
-  color: ${(props) => (props.clamp ? 'rgb(53, 77, 102)' : props.color)};
+  color: ${(props) => (props.color ? 'rgb(53, 77, 102)' : props.color)};
 
   ${(props) =>
     props.clamp
       ? 'display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; text-overflow: ellipsis;height: 3.9375rem; overflow: hidden; '
       : ''}
 
-  word-break: ${(props) => props.wordBr};
+  ${(props) => (props.wordBr ? `word-break: ${props.wordBr}` : '')};
   ${(props) => (props.wrap ? `overflow-wrap: ${props.wrap}` : '')};
 `;
 

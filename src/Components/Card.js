@@ -4,11 +4,20 @@ import { Link } from 'react-router-dom';
 import { getCardAction } from 'Modules/getCard/getCard';
 import { useDispatch } from 'react-redux';
 import { formatDate } from 'lib/formatDate';
-// import { Grid, Text, Image, Icon, Anchor } from 'Common';
+import { Grid, Text, Icon, Anchor } from 'Common';
 import parse from 'html-react-parser';
 import defaultImg from 'Assets/default.png';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+
+const PostInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  min-height: 165px;
+  flex: 1 1 0;
+`;
 
 const Card = ({ post }) => {
   const { getCard } = getCardAction;
@@ -39,13 +48,21 @@ const Card = ({ post }) => {
           </ImageContainer>
         )}
         <PostInfoContainer>
-          <PostInfo>
+          <div>
             <Title>{post.title}</Title>
             <Content
               dangerouslySetInnerHTML={{ __html: parse(post.body) }}
             ></Content>
-          </PostInfo>
-          <DateBox>{formatDate(post.createdAt)}</DateBox>
+          </div>
+          <SubInfo>
+            <Text size="13px" color="rgb(134, 142, 150)">
+              {formatDate(post.createdAt)}
+            </Text>
+            <span>·</span>
+            <Text size="13px" color="rgb(134, 142, 150)">
+              8개의 댓글
+            </Text>
+          </SubInfo>
         </PostInfoContainer>
       </Wrapper>
     );
@@ -119,21 +136,11 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const PostInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  min-height: 165px;
-  flex: 1 1 0;
-`;
-
-const PostInfo = styled.div`
-  color: black;
-  text-decoration: none;
-  &:focus {
-    color: black;
-  }
+const SubInfo = styled.div`
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgb(134, 142, 150);
+  /* height: 18px; */
 `;
 
 const Title = styled.b`
@@ -161,14 +168,3 @@ const DateBox = styled.div`
   font-size: 13px;
   color: rgb(134, 142, 150);
 `;
-
-export const style = {
-  Wrapper,
-  ImageContainer,
-  Image,
-  PostInfoContainer,
-  PostInfo,
-  Title,
-  Content,
-  DateBox,
-};

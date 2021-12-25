@@ -1,6 +1,7 @@
 import React from 'react';
 import { style } from './HeaderStyle';
 import avatar from 'Assets/avatar.png';
+import Navbar from 'Components/Navbar';
 
 const Header = ({ location }) => {
   return (
