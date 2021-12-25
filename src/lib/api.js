@@ -6,10 +6,9 @@ const HTTP_METHOD = {
   GETAll(page) {
     return {
       method: 'GET',
-      url: `${BASE_URL}/posts`,
+      url: `${BASE_URL}/posts?sortBy=createdAt:desc`,
       params: {
         page: page,
-        // createdAt: 'asc',
       },
     };
   },

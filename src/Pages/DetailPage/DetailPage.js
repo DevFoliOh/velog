@@ -7,7 +7,7 @@ import parse from 'html-react-parser';
 import MenuApi from 'lib/api';
 import { useSelector } from 'react-redux';
 import useGetData from 'Hooks/useGetData';
-import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';
+import DetailSkeleton from 'Components/DetailSkeleton';
 import DetailAction from 'Components/DetailAction/DetailAction';
 import PostShare from 'Components/PostShare/PostShare';
 import { debounce } from 'lodash';

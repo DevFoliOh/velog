@@ -60,14 +60,14 @@ const Navbar = ({ sort, setSort, setPostData }) => {
 };
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 3rem;
   margin-top: 1.5rem;
   display: flex;
+  -webkit-box-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
   align-items: center;
   position: relative;
-  background: lightpink;
+  margin-top: 2rem;
 `;
 
 const LeftDiv = styled.div`

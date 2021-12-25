@@ -1,4 +1,18 @@
+import React from 'react';
 import styled from 'styled-components';
+import CardSkeleton from 'Components/CardSkeleton';
+
+const ListSkeleton = () => {
+  const cardArr = Array.from({ length: 8 }, () => <CardSkeleton />);
+
+  return (
+    <Main>
+      <Container>
+        <CardList>{cardArr}</CardList>
+      </Container>
+    </Main>
+  );
+};
 
 const Main = styled.div`
   width: 100%;
@@ -41,4 +55,4 @@ const CardList = styled.div`
   background: #f8f9fa;
 `;
 
-export const style = { Main, Container, CardList };
+export default ListSkeleton;

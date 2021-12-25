@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { style } from './InputStyle';
+import { style } from './ImgUploadStyle';
 import default_thumb from 'Assets/default_image.png';
 
 const Input = ({ url, setUrl }) => {

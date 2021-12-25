@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { style } from './ListPageStyle';
+import styled from 'styled-components';
 import Header from 'Components/Header/Header';
 import Card from 'Components/Card';
 import Navbar from 'Components/Navbar';
 import useGetListData from 'Hooks/useGetListData';
 import { useInView } from 'react-intersection-observer';
 import MenuApi from 'lib/api';
-import ListSkeleton from 'Components/ListSkeleton/ListSkeleton';
+import ListSkeleton from 'Components/ListSkeleton';
 import ScrollToTop from 'Components/ScrollToTop/ScrollToTop';
 
 const ListPage = ({ history }) => {
@@ -51,6 +51,7 @@ const ListPage = ({ history }) => {
   return (
     <Wrapper>
       <Header location={location} />
+
       <Container>
         <Navbar sort={sort} setSort={setSort} setPostData={setPostData} />
 
@@ -58,25 +59,33 @@ const ListPage = ({ history }) => {
           <ListSkeleton />
         ) : sort ? (
           <CardList>
-            {sortedData &&
-              sortedData.map((post) => {
-                return (
-                  <div ref={ref} key={post.id}>
-                    <Card post={post} />
-                  </div>
-                );
-              })}
+            <Main>
+              <CardWrap>
+                {sortedData &&
+                  sortedData.map((post) => {
+                    return (
+                      <div ref={ref} key={post.id}>
+                        <Card post={post} />
+                      </div>
+                    );
+                  })}
+              </CardWrap>
+            </Main>
           </CardList>
         ) : (
           <CardList>
-            {postData &&
-              postData.map((post) => {
-                return (
-                  <div ref={ref} key={post.id}>
-                    <Card post={post} />
-                  </div>
-                );
-              })}
+            <Main>
+              <CardWrap>
+                {postData &&
+                  postData.map((post) => {
+                    return (
+                      <div ref={ref} key={post.id}>
+                        <Card post={post} />
+                      </div>
+                    );
+                  })}
+              </CardWrap>
+            </Main>
           </CardList>
         )}
       </Container>
@@ -85,6 +94,45 @@ const ListPage = ({ history }) => {
   );
 };
 
-export default ListPage;
+const Wrapper = styled.div`
+  box-sizing: inherit;
+  display: block;
+`;
 
-const { Wrapper, Container, CardList } = style;
+const Container = styled.div`
+  width: 100%;
+  margin: 0 auto 1rem;
+  background: #f8f9fa;
+
+  @media (max-width: 1919px) {
+    width: 1376px;
+  }
+  @media (max-width: 1440px) {
+    width: 1024px;
+    margin: 0 auto;
+  }
+  @media (max-width: 1056px) {
+    width: calc(100% - 2rem);
+  }
+  @media (max-width: 767px) {
+    width: calc(100% - 2rem);
+  }
+`;
+
+const CardList = styled.div`
+  width: 100%;
+  margin: 2rem auto;
+  background: #f8f9fa;
+`;
+
+const Main = styled.div`
+  flex: 1 1 0%;
+`;
+
+const CardWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export default ListPage;

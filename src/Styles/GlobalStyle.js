@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         color: ${palette.gray[11]};
         box-sizing: border-box;
+        background: rgb(248, 249, 250);
+        height: 100%;
+        overflow-y: initial;
     };
 
     button {

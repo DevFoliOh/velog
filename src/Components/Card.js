@@ -10,15 +10,6 @@ import defaultImg from 'Assets/default.png';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const PostInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  min-height: 165px;
-  flex: 1 1 0;
-`;
-
 const Card = ({ post }) => {
   const { getCard } = getCardAction;
   const dispatch = useDispatch();
@@ -134,6 +125,15 @@ const Image = styled.img`
   border-top-right-radius: 6px;
   display: block;
   object-fit: cover;
+`;
+
+const PostInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  min-height: 165px;
+  flex: 1 1 0;
 `;
 
 const SubInfo = styled.div`

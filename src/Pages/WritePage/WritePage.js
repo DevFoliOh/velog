@@ -3,7 +3,7 @@ import { style } from './WritePageStyle';
 import { Button } from 'Common';
 import * as axios from 'axios';
 import Editor from 'Components/Editor';
-import Input from 'Components/Input/Input';
+import Input from 'Components/ImgUpload/ImgUpload';
 import Modal from 'Components/Modal/Modal';
 import MenuApi from 'lib/api';
 import parse from 'html-react-parser';

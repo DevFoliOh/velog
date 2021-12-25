@@ -6,5 +6,6 @@ import Button from './Button';
 import Icon from './Icon';
 import Responsive from './Responsive';
 import Anchor from './Anchor';
+import Shimmer from './Shimmer';
 
-export { Grid, Text, Image, Input, Button, Icon, Responsive, Anchor };
+export { Grid, Text, Image, Input, Button, Icon, Responsive, Anchor, Shimmer };
