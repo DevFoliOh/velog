@@ -1,4 +1,4 @@
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { style } from './ModalStyle';

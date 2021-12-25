@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 
 const useGetListData = (page, setPostData, setLoading) => {
   const getData = async () => {

@@ -3,26 +3,12 @@ import { style } from './ListSkeletonStyle';
 import CardSkeleton from 'Components/CardSkeleton/CardSkeleton';
 
 const ListSkeleton = () => {
+  const cardArr = Array.from({ length: 16 }, () => <CardSkeleton />);
+
   return (
     <Main>
       <Container>
-        <CardList>
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-        </CardList>
+        <CardList>{cardArr}</CardList>
       </Container>
     </Main>
   );

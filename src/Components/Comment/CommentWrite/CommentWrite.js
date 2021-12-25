@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { style } from './CommentWriteStyle';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 
 const CommentWrite = ({
   onTextSubmit,

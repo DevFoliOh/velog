@@ -39,7 +39,6 @@ const CardList = styled.div`
   flex-wrap: wrap;
   align-items: stretch;
   justify-content: left;
-
   background: #f8f9fa;
 `;
 

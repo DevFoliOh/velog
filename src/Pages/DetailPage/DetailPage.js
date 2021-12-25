@@ -4,7 +4,7 @@ import { style } from './DetailPageStyle';
 import Tag from 'Components/Tag/Tag';
 import CommentView from 'Components/Comment/CommentView/CommentView';
 import parse from 'html-react-parser';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 import { useSelector } from 'react-redux';
 import useGetData from 'Hooks/useGetData';
 import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';

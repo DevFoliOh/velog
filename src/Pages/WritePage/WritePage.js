@@ -1,13 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { style } from './WritePageStyle';
-import Button from 'Components/Button/Button';
+import { Button } from 'Common';
 import * as axios from 'axios';
-import Editor from 'Components/Editor/Editor';
+import Editor from 'Components/Editor';
 import Input from 'Components/Input/Input';
 import Modal from 'Components/Modal/Modal';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 import parse from 'html-react-parser';
-import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
+import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
+
 const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');

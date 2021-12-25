@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { style } from './ListPageStyle';
 import Header from 'Components/Header/Header';
-import Card from 'Components/Card/Card';
+import Card from 'Components/Card';
 import useGetListData from 'Hooks/useGetListData';
 import { useInView } from 'react-intersection-observer';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 import ListSkeleton from 'Components/ListSkeleton/ListSkeleton';
 import ScrollToTop from 'Components/ScrollToTop/ScrollToTop';
 
 const ListPage = ({ history }) => {
   const [postData, setPostData] = useState(null);
-  const [sortedData, setSortedData] = useState(null);
   const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
   const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(false);
 
   useGetListData(1, setPostData, setLoading);
-
-  console.log(loading);
 
   useEffect(() => {
     if (inView) {
@@ -46,10 +43,10 @@ const ListPage = ({ history }) => {
         ) : (
           <CardList>
             {postData &&
-              postData.map((posts) => {
+              postData.map((post) => {
                 return (
-                  <div ref={ref} key={posts.id}>
-                    <Card posts={posts} />
+                  <div ref={ref} key={post.id}>
+                    <Card post={post} />
                   </div>
                 );
               })}

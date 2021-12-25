@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { style } from 'Pages/WritePage/WritePageStyle';
-import Button from 'Components/Button/Button';
-import Editor from 'Components/Editor/Editor';
+import { Button } from 'Common';
+import Editor from 'Components/Editor';
 import Input from 'Components/Input/Input';
 import { useSelector } from 'react-redux';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 import Modal from 'Components/Modal/Modal';
 import parse from 'html-react-parser';
-import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
+import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
+
 const EditPage = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');

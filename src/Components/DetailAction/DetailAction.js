@@ -1,4 +1,4 @@
-import { formatDate } from 'Common/formatDate';
+import { formatDate } from 'lib/formatDate';
 import React from 'react';
 import { style } from './DetailActionStyle';
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 
 const useGetData = (setPostData, setComment, id) => {
   const [isLoading, setIsLoading] = useState(false);

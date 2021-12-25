@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 import { style } from './PostShareStyle';
-import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
+import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
 const PostShare = ({ isFixedShare, detailData }) => {
   const [shareContainerStyle, setShareContainerStyle] = useState({

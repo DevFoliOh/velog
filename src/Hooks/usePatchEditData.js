@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import MenuApi from 'Common/api';
+import MenuApi from 'lib/api';
 import { useSelector } from 'react-redux';
 
 const usePatchEditData = (post, setPosts) => {
