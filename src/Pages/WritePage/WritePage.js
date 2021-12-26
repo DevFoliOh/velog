@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { style } from './WritePageStyle';
-import { Button } from 'Common';
 import * as axios from 'axios';
+import { Button, Grid, Icon } from 'Common';
 import Editor from 'Components/Editor';
 import Input from 'Components/ImgUpload/ImgUpload';
 import Modal from 'Components/Modal/Modal';
@@ -103,31 +103,43 @@ const WritePage = ({ history }) => {
           </div>
           <Input url={url} setUrl={setUrl} />
         </WriteHeader>
+
         <EditorContainer>
           <Editor content={content} setContent={setContent} />
         </EditorContainer>
+
         <WriteFooter>
           <div>
             <Button
-              style={{
-                background: '#fff',
-                color: 'rgb(73, 80, 87)',
-              }}
-              text="🔙 뒤로가기"
+              bg="#fff"
+              color="rgb(73, 80, 87)"
+              padding="8px 4px"
               _onClick={onOpenModal}
-            />
+            >
+              <Icon icon="exitArrow" width={20} height={20} />
+              &nbsp; 나가기
+            </Button>
           </div>
           <div>
             <Button
-              text="임시저장"
+              width="112px"
+              bold
+              bg="rgb(233, 236, 239)"
+              color="rgb(73, 80, 87)"
               _onClick={addPostLocalStorage}
-              style={{
-                background: 'rgb(233, 236, 239)',
-                color: 'rgb(73, 80, 87)',
-                marginRight: '10px',
-              }}
-            />
+            >
+              임시저장
+            </Button>
             <Button
+              width="112px"
+              bold
+              bg="rgb(18, 184, 134)"
+              margin="0 0 0 12px"
+              _onClick={registerPost}
+            >
+              출간하기
+            </Button>
+            {/* <Button
               text="불러오기"
               _onClick={getPostLocalStorage}
               style={{
@@ -135,8 +147,10 @@ const WritePage = ({ history }) => {
                 color: 'rgb(73, 80, 87)',
                 marginRight: '10px',
               }}
-            />
-            <Button
+            >
+              불러오기
+            </Button> */}
+            {/* <Button
               text="미리보기"
               _onClick={previewPost}
               style={{
@@ -144,11 +158,11 @@ const WritePage = ({ history }) => {
                 color: 'rgb(73, 80, 87)',
                 marginRight: '10px',
               }}
-            />
-            <Button text="출간하기" _onClick={registerPost} />
+            /> */}
           </div>
         </WriteFooter>
       </WriteContainer>
+
       <PreviewContainer>
         <div>
           <h2>{viewContent.title}</h2>

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import _ from 'lodash';
+import { useInView } from 'react-intersection-observer';
+import MenuApi from 'lib/api';
+import useGetListData from 'Hooks/useGetListData';
 import Header from 'Components/Header/Header';
 import Card from 'Components/Card';
 import Navbar from 'Components/Navbar';
-import useGetListData from 'Hooks/useGetListData';
-import { useInView } from 'react-intersection-observer';
-import MenuApi from 'lib/api';
 import ListSkeleton from 'Components/ListSkeleton';
-import ScrollToTop from 'Components/ScrollToTop/ScrollToTop';
+import ScrollToTop from 'Components/ScrollToTop';
+import InfinityScroll from 'Components/InfinityScroll';
 
 const ListPage = ({ history }) => {
   const [postData, setPostData] = useState([]);
@@ -61,6 +63,7 @@ const ListPage = ({ history }) => {
           <CardList>
             <Main>
               <CardWrap>
+                {/* <InfinityScroll callNext={scroll} is_next={inView}> */}
                 {sortedData &&
                   sortedData.map((post) => {
                     return (
@@ -69,6 +72,7 @@ const ListPage = ({ history }) => {
                       </div>
                     );
                   })}
+                {/* </InfinityScroll> */}
               </CardWrap>
             </Main>
           </CardList>
@@ -76,6 +80,7 @@ const ListPage = ({ history }) => {
           <CardList>
             <Main>
               <CardWrap>
+                {/* <InfinityScroll callNext={scroll} is_next={inView}> */}
                 {postData &&
                   postData.map((post) => {
                     return (
@@ -84,6 +89,7 @@ const ListPage = ({ history }) => {
                       </div>
                     );
                   })}
+                {/* </InfinityScroll> */}
               </CardWrap>
             </Main>
           </CardList>
@@ -132,7 +138,7 @@ const Main = styled.div`
 const CardWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
 `;
 
 export default ListPage;

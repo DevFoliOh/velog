@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import MenuApi from 'lib/api';
 import Modal from 'Components/Modal/Modal';
 import parse from 'html-react-parser';
-import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
 const EditPage = ({ history }) => {
   const [loading, setLoading] = useState(false);
@@ -30,16 +29,12 @@ const EditPage = ({ history }) => {
       setLoadedContent(data.body);
       setContent(data.body);
       setHashTagArr(data.tags);
-
       setUrl(data.thumbnail);
       setLoading(false);
     } catch (error) {
       throw new Error('data load 실패');
     }
   };
-
-  // console.log(data.body);
-  console.log(content);
 
   useEffect(() => {
     getData(id);
@@ -90,7 +85,6 @@ const EditPage = ({ history }) => {
     const loaded = JSON.parse(localStorage.getItem('posts'));
     setTitle(loaded.title);
     setLoadedContent(loaded.content);
-    // setContent(loaded.content);
     setHashTagArr(loaded.tags);
     setUrl(loaded.thumbnail);
   };
@@ -106,9 +100,6 @@ const EditPage = ({ history }) => {
   const onOpenModal = () => {
     onToggleModal('goToBack');
   };
-
-  // viewContent.body &&
-  //   console.log(parse(viewContent.body).replace(/(<([^>]+)>)/gi, ''));
 
   return (
     <Container>

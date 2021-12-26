@@ -7,6 +7,8 @@ export default function Button(props) {
     height,
     bg,
     color,
+    size,
+    bold,
     padding,
     margin,
     border,
@@ -20,6 +22,8 @@ export default function Button(props) {
     height,
     bg,
     color,
+    size,
+    bold,
     padding,
     margin,
     border,
@@ -38,12 +42,14 @@ Button.defaultProps = {
   height: '40px',
   bg: palette.gray[3],
   color: '#fff',
-  disable: false,
+  size: '1.125rem',
+  bold: false,
   padding: '0 20px',
   margin: '0',
   border: 'none',
-  children: null,
+  disable: false,
   type: 'button',
+  children: null,
   _onClick: () => {},
 };
 
@@ -51,12 +57,15 @@ const ElButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  border-radius: 4px;
+  ${(props) => (props.width ? `width: ${props.width}` : '')};
+  ${(props) => (props.height ? `height: ${props.height}` : '')};
   background: ${(props) => props.bg};
-  pointer-events: ${(props) => (props.disable ? 'none' : 'auto')};
+  font-size: ${(props) => props.size};
+  ${(props) => (props.bold ? 'font-weight: 600' : '')};
   color: ${(props) => props.color};
-  border-radius: 5px;
-  margin: ${(props) => props.margin};
+  ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
+  padding: ${(props) => props.padding};
+  ${(props) => (props.disable ? 'pointer-events: none' : '')};
   border: ${(props) => props.border};
 `;
