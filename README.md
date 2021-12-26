@@ -8,7 +8,7 @@
 ## 📌 velog 클론코딩
 
 ## :timer_clock: 개발기간
-+ 2021년 11월 16일 ~ 2021년 11월 23일
++ 2021년 11월 16일 ~ 2021년 11월 23일 <br/>
 👉 클론한 사이트: https://velog.io/
 
 <br/>
@@ -27,14 +27,12 @@
  <img src="https://img.shields.io/badge/Swagger-v1.7.0-lime?logo=Swagger"/>
  </p>
 
- <br/>
 
 ## 🔮 역할 배분
-❄ 김은태: WritePage 담당, CKEditor 도입
-❄ 송창엽: DetailPage 담당, 공통 컴포넌트 제작
-❄ 윤예나: ListPage 및 EditPage 담당, 코드 개선
+❄ 김은태: WritePage 담당, CKEditor 도입<br/>
+❄ 송창엽: DetailPage 담당, 공통 컴포넌트 제작<br/>
+❄ 윤예나: ListPage 및 EditPage 담당, 코드 개선<br/>
 
-<br/>
 
 ## ✨ 구현 목록
 
@@ -80,25 +78,18 @@
 ✔ WritePage, EditPage: 나가기 버튼 클릭 시 페이지 이탈 여부 재확인<br/>
 ✔ DetailPage: 게시글 삭제 및 댓글 삭제 버튼 클릭 시 삭제 여부 재확인
 
-<br/>
 
 ## 🚀 코드 개선사항
 
-✔ 미리보기
-+ WritePage와 EditPage의 작성 내용을 작성 중 실시간 미리보기로 변경
+✔ 미리보기 기능 => 실시간 미리보기
++ 에디터의 작성 내용을 실시간 미리보기로 확인할 수 있도록 변경
 
 ✔ 게시글 최신순 정렬
-+ ListPage의 게시글을 등록된 순서에서 최신 순으로 렌더링하도록 변경
++ ListPage의 게시글을 최신순으로 렌더링하도록 변경
 
+✔ 임시저장 기능 => 자동으로 불러오기
++ 작성 중이던 페이지를 새로고침하거나 다시 들어오면 자동으로 localStorage에 저장된 내용을 불러오도록 변경
 
-
-##💻 실행 방법
-
-### 설치
-
-`npm install`
-
-### 실행
-
-`npm start` 또는 `yarn start`
+✔ 스타일 컴포넌트 모듈화
++ Common 폴더의 요소들을 활용하여 페이지 내의 뷰 컴포넌트 모듈화 (진행중) 
 
