@@ -5,97 +5,84 @@
 <h1 align='middle'><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h1>
 
 
-## 📌 프로젝트 소개
+## 📌 velog 클론코딩
 
-### Velog(벨로그) 서비스
-
-> ❕ **Velog를 벤치 마킹한 블로그 서비스입니다. **❗
-
-- `Swagger UI`제공하는 서버를 이용하여 프로젝트를 진행했습니다.
-- `Swagger UI의 API Documentation`의 API를 사용하여 개발을 진행하였습니다.
+### :timer_clock: 개발기간
++ 2021년 11월 16일 ~ 2021년 11월 23일 <br/><br/>
+👉 클론한 사이트: https://velog.io/
 
 <br/>
 
 ![image](https://user-images.githubusercontent.com/66353903/142976104-d163bec4-f0a3-468b-adfa-0f21572a8d1f.png)
 
+### 🛠 기술 스택
 
-<br/>
-
-## 📑 구현 목록
-
-`게시글 목록 조회`
-
-- Server에 저장되는 포스트를 가져와서 렌더링
-- 첫 렌더는 포스트10개로 제한되며, 무한 스크롤적용으로 스크롤시 10개씩 추가 렌더링
-- Scroll to Top버튼으로 페이지 맨 상단으로 이동
-- 게시글 로딩시 스켈레톤 UI적용
-- 게시글 반응형 적용
-
-<br/>
-
-`게시글 등록`
-
-- CKEditor5로 마크다운 에디터 적용
-- 제목, 태그, 본문, 썸네일 등록 가능
-- 작성내용들을 미리 확인할 수 있는 미리보기 기능
-- 작성중인 내용저장을 위한 임시저장 기능(localStorage에 데이터저장)
-- 임시저장한 데이터 불러오기 기능
-- '뒤로가기'버튼 클릭시 안내를 위한 모달창 생성
-- '출간하기'버튼 클릭시 서버에 업로드되며, 메인페이지로 이동
-- 썸네일 등록 및 미리보기 기능
-
-<br/>
-
-`게시글 상세 조회`
-
-- 서버에 저장된 포스트의 id값에 따라 선택된 포스트의 데이터 호출
-- 상세페이지 로딩시 스켈레톤UI 적용
-- 게시글 공유를 위한 카카오톡 공유 기능 적용
-- textarea로 댓글 작성 기능 구현
-- 총 댓글의 갯수 표시
-- 각각의 댓글 수정 및 삭제 기능 구현
-- '수정'버튼 클릭시 작성되어있던 내용이 textarea에 반영되서 수정
-- 댓글 및 포스트 삭제시 서버에서 데이터 삭제
-- '댓글 및 포스트 삭제' 버튼 클릭시 삭제 재확인을 위한 모달창 생성
-
-<br/>
-
-`게시글 수정`
-
-- 해당 포스트의 게시글 수정페이지 진입시 해당포스트의 데이터를 각 부분에 맞게 가져옴(제목, 태그, 썸네일, 본문내용)
-- 서버에서 가져온 내용들을 수정 및 삭제 가능
-- 수정한 내용을 임시저장하기 위한 임시저장 기능
-- 임시저장한 내용을 가져오기 위한 불러오기 기능
-- 수정하던 내용을 미리보기위한 미리보기 기능
-- 수정완료 후 '수정하기' 버튼 클릭시 PATCH의 형태로 서버에 업로드 및 상세페이지로 이동
-- '뒤로가기'버튼 클릭시 안내를 위한 모달창 생성
-
-<br/>
-
-`게시글 삭제`
-
-- 게시글 및 댓글 삭제를 위한 Modal컴포넌트 생성
-- 해당 모달은 재사용을 고려하여 구현
-- 게시글 작성중 뒤로가기, 게시글 삭제, 댓글 삭제에 사용
-
-<br/>
-
-## 💻 실행 방법
-
-### 설치
-
-`npm install`
-
-### 실행
-
-`npm start`
+ <p align='left'>
+ <img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
+ <img src="https://img.shields.io/badge/ReduxToolkit-^1.6.2-purple?logo=Redux"/>
+ <img src="https://img.shields.io/badge/StyledComponents-v5.3.3-pink?logo=styled-components"/> 
+ <img src="https://img.shields.io/badge/Swagger-v1.7.0-lime?logo=Swagger"/>
+ </p>
 
 
-<br/>
+### 🔮 역할 배분
+❄ 김은태: WritePage 담당, CKEditor 도입<br/>
+❄ 송창엽: DetailPage 담당, 공통 컴포넌트 제작<br/>
+❄ 윤예나: ListPage 및 EditPage 담당, 코드 개선<br/>
 
-## ⚙ 기술 스택
 
-- React.js
-- Redux
-- Swagger UI API Document
-- Styled-Components
+### ✨ 구현 목록
+
+#### 🔹 ListPage: `게시글 목록 조회`
+
+✔ 전체 게시글을 가져와서 렌더링<br/>
+✔ 무한스크롤: 첫 렌더링 시 게시글 10개로 제한, 스크롤 시 10장씩 추가 렌더링<br/>
+✔ Top 버튼: 일정 높이를 스크롤하면 렌더링, 클릭 시 페이지 최상단으로 이동<br/>
+
+
+#### 🔹 WritePage: `게시글 등록`
+
+✔ 마크다운 WYSIWYG 에디터인 CKEditor5 적용<br/>
+✔ 기존 velog와 달리 썸네일이미지를 따로 등록 및 확인할 수 있는 공간 추가<br/>
+✔ 미리보기: 우측 Preview 공간에서 작성 중인 내용을 확인<br/>
+✔ 임시저장: 작성 중인 내용을 localStorage에 저장<br/>
+✔ 불러오기: localStorage에 저장된 내용을 불러옴<br/>
+✔ 출간하기: 작성한 내용을 서버에 업로드<br/>
+
+
+#### 🔹 DetailPage: `게시글 상세 조회`
+
+✔ 리덕스에 저장된 id에 해당하는 게시글을 불러옴<br/>
+✔ 카카오톡 공유 기능 (실제 카카오톡으로 링크가 전달되고 채팅창 썸네일 미리보기까지 구현)<br/>
+✔ 댓글 기능: 댓글 작성, 수정, 조회, 삭제 기능 구현<br/>
+✔ 댓글 수정 시 댓글창이 그대로 input창으로 변경되고 수정 후 바로 뷰에 반영<br/>
+✔ 댓글 상단에 댓글 추가 및 삭제에 따른 댓글 총 개수 표시<br/>
+
+
+#### 🔹 EditPage: `게시글 수정`
+
+✔ 서버에 저장된 게시글을 작성 중이던 상태처럼 불러옴 (WritePage와 동일한 뷰)<br/>
+✔ 미리보기, 임시저장, 불러오기: WritePage와 동일<br/>
+✔ 수정하기: 수정한 내용을 서버에 업로드<br/>
+
+
+### 🎨 공통
+
+#### 🔸 Skeleton UI
+✔ 게시글을 불러오는 동안 사용자의 시각적 경험 개선 (DetailPage와 ListPage)
+
+#### 🔸 Modal창 활용
+✔ 나가기 버튼 클릭 시 페이지 이탈 여부 재확인 (WritePage, EditPage) <br/>
+✔ 게시글 삭제 및 댓글 삭제 버튼 클릭 시 삭제 여부 재확인 (DetailPage)
+
+
+### 🚀 코드 개선사항
+
++ 미리보기 기능: 에디터의 작성 내용을 실시간 미리보기로 확인할 수 있도록 변경 <br/>
+
++ 게시글 최신순 정렬: ListPage의 게시글을 최신순으로 렌더링하도록 변경 <br/>
+
++ 임시저장 기능: 작성 중이던 페이지를 새로고침하면 localStorage의 내용을 자동으로 불러오도록 변경 <br/>
+
++ 스타일 컴포넌트 모듈화: Common 폴더를 활용하여 페이지 내의 뷰 컴포넌트 모듈화 (진행중)  <br/>
+
