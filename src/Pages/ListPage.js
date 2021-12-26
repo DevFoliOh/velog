@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import _ from 'lodash';
 import { useInView } from 'react-intersection-observer';
 import MenuApi from 'lib/api';
 import useGetListData from 'Hooks/useGetListData';
@@ -103,6 +102,7 @@ const ListPage = ({ history }) => {
 const Wrapper = styled.div`
   box-sizing: inherit;
   display: block;
+  background: #f8f9fa;
 `;
 
 const Container = styled.div`

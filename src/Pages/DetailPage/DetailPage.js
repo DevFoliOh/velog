@@ -94,12 +94,12 @@ const DetailPage = ({ history }) => {
       {showModal && clickComponent === 'postDelete' && (
         <Modal
           title="포스트 삭제"
-          description="정말로 삭제하시겠습니까?"
+          content="정말로 삭제하시겠습니까?"
           modalLink="/"
           postId={card.id}
           mainRef={mainRef}
           deleteComment={deleteComment}
-          clickComponent={clickComponent}
+          command={clickComponent}
           history={history}
           onToggleModal={onToggleModal}
         />

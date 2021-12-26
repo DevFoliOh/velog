@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { style } from 'Pages/WritePage/WritePageStyle';
 import { Button } from 'Common';
 import Editor from 'Components/Editor';
-import Input from 'Components/ImgUpload/ImgUpload';
+import ImgUpload from 'Components/ImgUpload';
 import { useSelector } from 'react-redux';
 import MenuApi from 'lib/api';
 import Modal from 'Components/Modal/Modal';
@@ -122,7 +122,7 @@ const EditPage = ({ history }) => {
                 <WriteTag onKeyPress={handleKeyEnter} />
               </WriteTagContainer>
             </div>
-            <Input url={url} setUrl={setUrl} />
+            <ImgUpload url={url} setUrl={setUrl} />
           </WriteHeader>
           <EditorContainer>
             <Editor

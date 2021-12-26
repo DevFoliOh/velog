@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { style } from './WritePageStyle';
-import * as axios from 'axios';
 import { Grid, Button, Icon } from 'Common';
 import Editor from 'Components/Editor';
-import ImgUpload from 'Components/ImgUpload/ImgUpload';
+import ImgUpload from 'Components/ImgUpload';
 import Modal from 'Components/Modal/Modal';
 import MenuApi from 'lib/api';
-import parse from 'html-react-parser';
 import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
 const WritePage = ({ history }) => {
@@ -17,15 +15,12 @@ const WritePage = ({ history }) => {
 
   const [exitModal, setExitModal] = useState(false);
   const [saveModal, setSaveModal] = useState(false);
-
-  const [check, setCheck] = useState(false);
   const [command, setCommand] = useState('');
 
   const handleKeyEnter = (e) => {
     if (e.code === 'Enter') {
       setHashTagArr([...hashTagArr, e.target.value]);
       e.target.value = '';
-      console.log(hashTagArr);
     }
   };
 
@@ -38,19 +33,17 @@ const WritePage = ({ history }) => {
       await MenuApi.createPost(title, content, url, hashTagArr);
       history.push('/');
       console.log('POST 성공!');
+
+      localStorage.removeItem('posts');
     } catch (error) {
       alert(error);
     }
   };
 
   const onAddLocalStorage = () => {
-    console.log(title);
-    console.log(content);
-    console.log(hashTagArr);
-
     const post = {
       title,
-      body: content,
+      body: removeHTMLTagFromString(content),
       tags: hashTagArr,
       thumbnail: url,
     };
@@ -59,10 +52,6 @@ const WritePage = ({ history }) => {
   };
 
   const onToggleModal = useCallback((text) => {
-    console.log(title);
-    console.log(content);
-    console.log(hashTagArr);
-
     setExitModal(false);
     setSaveModal(false);
 
@@ -87,7 +76,6 @@ const WritePage = ({ history }) => {
       setContent(post.body);
       setHashTagArr(post.tags);
       setUrl(post.thumbnail);
-      setCheck(true);
     }
   }, []);
 
