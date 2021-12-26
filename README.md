@@ -20,24 +20,26 @@
 + 2021년 11월 16일 ~ 2021년 11월 23일
 
 ## 🛠 기술 스택
-  
- <img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
-    <img src="https://img.shields.io/badge/ReduxToolkit-^1.6.2-purple?logo=Redux"/>
-    <img src="https://img.shields.io/badge/StyledComponents-v5.2.3-pink?logo=styled-components"/> 
 
-## API Spec
+ <p align='center'>
+ <img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
+ <img src="https://img.shields.io/badge/ReduxToolkit-^1.6.2-purple?logo=Redux"/>
+ <img src="https://img.shields.io/badge/StyledComponents-v5.2.3-pink?logo=styled-components"/> 
+ </p>
+
+## 🧪 API Spec
   <img src="https://img.shields.io/badge/Swagger-v1.7.0-lime?logo=Swagger"/>
   
   <br/>
 
-##🔮 역할 배분
+## 🔮 역할 배분
 - 김은태: WritePage 담당, CKEditor 도입
 - 송창엽: DetailPage 담당, 공통 컴포넌트 제작
 - 윤예나: ListPage 및 EditPage 담당, 코드 개선
 
 <br/>
 
-##✨ 구현 목록
+## ✨ 구현 목록
 
 ### ListPage: `게시글 목록 조회`
 
@@ -72,7 +74,7 @@
 ✔ 수정하기: 수정한 내용을 서버에 업로드
 
 
-##🎨 공통
+## 🎨 공통
 
 ### Skeleton UI
 ✔ DetailPage와 ListPage: 게시글을 불러오는 동안 사용자의 시각적 경험 개선
@@ -83,7 +85,7 @@
 
 <br/>
 
-##🚀 코드 개선사항
+## 🚀 코드 개선사항
 
 ✔ 미리보기
 + WritePage와 EditPage의 작성 내용을 작성 중 실시간 미리보기로 변경
