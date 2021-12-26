@@ -16,11 +16,7 @@ const WriteHeader = styled.div`
   padding: 30px 50px 0;
 `;
 
-const WriteTitle = styled.input.attrs({
-  placeholder: '제목을 입력하세요',
-  type: 'text',
-  name: 'title',
-})`
+const WriteTitle = styled.input`
   width: 100%;
   height: 66px;
   font-size: 30px;
@@ -57,11 +53,7 @@ const WriteTagContent = styled.div`
   }
 `;
 
-const WriteTag = styled.input.attrs({
-  placeholder: '태그를 입력하세요',
-  type: 'text',
-  name: 'tag',
-})`
+const WriteTag = styled.input`
   width: 100%;
   height: 30px;
   font-size: 20px;

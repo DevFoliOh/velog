@@ -2,17 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import { style } from './ImgUploadStyle';
 import default_thumb from 'Assets/default_image.png';
 
-const Input = ({ url, setUrl }) => {
+const ImgUpload = ({ url, setUrl }) => {
   const inputOpenImageRef = useRef(null);
   const [previewSource, setPreviewSource] = useState(url);
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
   };
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
   };
+
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -20,6 +22,7 @@ const Input = ({ url, setUrl }) => {
       setPreviewSource(reader.result);
     };
   };
+
   const uploadImage = () => {
     const formData = new FormData();
     formData.append('file', previewSource);
@@ -60,7 +63,9 @@ const Input = ({ url, setUrl }) => {
     </UploadContainer>
   );
 };
-export default Input;
+
+export default ImgUpload;
+
 const {
   UploadContainer,
   Preview,

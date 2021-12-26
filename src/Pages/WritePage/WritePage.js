@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { style } from './WritePageStyle';
 import * as axios from 'axios';
-import { Button, Grid, Icon } from 'Common';
+import { Grid, Button, Icon } from 'Common';
 import Editor from 'Components/Editor';
-import Input from 'Components/ImgUpload/ImgUpload';
+import ImgUpload from 'Components/ImgUpload/ImgUpload';
 import Modal from 'Components/Modal/Modal';
 import MenuApi from 'lib/api';
 import parse from 'html-react-parser';
@@ -13,48 +13,24 @@ const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
-  const [viewContent, setViewContent] = useState([]);
   const [url, setUrl] = useState();
-  const [showModal, setShowModal] = useState(false);
+
+  const [exitModal, setExitModal] = useState(false);
+  const [saveModal, setSaveModal] = useState(false);
+
   const [check, setCheck] = useState(false);
-  const [clickComponent, setClickComponent] = useState('');
-  const getTitle = (e) => {
-    const { value } = e.target;
-    setTitle(value);
-  };
+  const [command, setCommand] = useState('');
 
   const handleKeyEnter = (e) => {
     if (e.code === 'Enter') {
       setHashTagArr([...hashTagArr, e.target.value]);
       e.target.value = '';
+      console.log(hashTagArr);
     }
   };
 
   const removeHashTag = (hashtag) => {
     setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
-  };
-
-  const previewPost = () => {
-    setViewContent({ title: title, body: content, hashTagArr: hashTagArr });
-  };
-
-  const addPostLocalStorage = () => {
-    const postTitle = {
-      title: title,
-      content: content,
-      tags: hashTagArr,
-      thumbnail: url,
-    };
-    localStorage.setItem('posts', JSON.stringify(postTitle));
-  };
-
-  const getPostLocalStorage = () => {
-    const post = JSON.parse(localStorage.getItem('posts'));
-    setTitle(post.title);
-    setContent(post.content);
-    setHashTagArr(post.tags);
-    setUrl(post.thumbnail);
-    setCheck(true);
   };
 
   const registerPost = async () => {
@@ -67,26 +43,68 @@ const WritePage = ({ history }) => {
     }
   };
 
-  const onToggleModal = useCallback((click) => {
-    setShowModal(false);
-    if (click) {
-      setClickComponent(click);
-      setShowModal(true);
+  const onAddLocalStorage = () => {
+    console.log(title);
+    console.log(content);
+    console.log(hashTagArr);
+
+    const post = {
+      title,
+      body: content,
+      tags: hashTagArr,
+      thumbnail: url,
+    };
+
+    localStorage.setItem('posts', JSON.stringify(post));
+  };
+
+  const onToggleModal = useCallback((text) => {
+    console.log(title);
+    console.log(content);
+    console.log(hashTagArr);
+
+    setExitModal(false);
+    setSaveModal(false);
+
+    if (text === 'goToBack') {
+      setCommand(text);
+      setExitModal(true);
+    }
+
+    if (text === 'saveLocalStorage') {
+      setCommand(text);
+      setSaveModal(true);
     }
   }, []);
 
-  const onOpenModal = () => {
-    onToggleModal('goToBack');
-  };
+  useEffect(() => {
+    const post = JSON.parse(localStorage.getItem('posts'));
 
-  console.log(typeof viewContent.body);
+    if (!post) {
+      return;
+    } else {
+      setTitle(post.title);
+      setContent(post.body);
+      setHashTagArr(post.tags);
+      setUrl(post.thumbnail);
+      setCheck(true);
+    }
+  }, []);
 
   return (
     <Container>
       <WriteContainer>
         <WriteHeader>
           <div>
-            <WriteTitle onChange={getTitle} value={title} />
+            <WriteTitle
+              type="text"
+              name="title"
+              placeholder="제목을 입력하세요"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
             <WriteLine />
             <WriteTagContainer>
               <WriteTagContent>
@@ -98,10 +116,15 @@ const WritePage = ({ history }) => {
                   );
                 })}
               </WriteTagContent>
-              <WriteTag onKeyPress={handleKeyEnter} />
+              <WriteTag
+                type="text"
+                name="tag"
+                placeholder="태그를 입력하세요"
+                onKeyPress={handleKeyEnter}
+              />
             </WriteTagContainer>
           </div>
-          <Input url={url} setUrl={setUrl} />
+          <ImgUpload url={url} setUrl={setUrl} />
         </WriteHeader>
 
         <EditorContainer>
@@ -114,7 +137,7 @@ const WritePage = ({ history }) => {
               bg="#fff"
               color="rgb(73, 80, 87)"
               padding="8px 4px"
-              _onClick={onOpenModal}
+              _onClick={() => onToggleModal('goToBack')}
             >
               <Icon icon="exitArrow" width={20} height={20} />
               &nbsp; 나가기
@@ -126,7 +149,10 @@ const WritePage = ({ history }) => {
               bold
               bg="rgb(233, 236, 239)"
               color="rgb(73, 80, 87)"
-              _onClick={addPostLocalStorage}
+              _onClick={() => {
+                onToggleModal('saveLocalStorage');
+                onAddLocalStorage();
+              }}
             >
               임시저장
             </Button>
@@ -139,44 +165,34 @@ const WritePage = ({ history }) => {
             >
               출간하기
             </Button>
-            {/* <Button
-              text="불러오기"
-              _onClick={getPostLocalStorage}
-              style={{
-                background: 'rgb(233, 236, 239)',
-                color: 'rgb(73, 80, 87)',
-                marginRight: '10px',
-              }}
-            >
-              불러오기
-            </Button> */}
-            {/* <Button
-              text="미리보기"
-              _onClick={previewPost}
-              style={{
-                background: 'rgb(233, 236, 239)',
-                color: 'rgb(73, 80, 87)',
-                marginRight: '10px',
-              }}
-            /> */}
           </div>
         </WriteFooter>
       </WriteContainer>
 
       <PreviewContainer>
         <div>
-          <h2>{viewContent.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: viewContent.body }}></div>
+          <h2>{title}</h2>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
         </div>
       </PreviewContainer>
-      {showModal && (
+
+      {exitModal && (
         <Modal
           title="포스트 작성 취소"
-          description="정말 페이지를 벗어나시겠습니까?"
+          content="정말 페이지를 벗어나시겠습니까?"
           modalLink="/"
-          onToggleModal={onToggleModal}
-          clickComponent={clickComponent}
+          command={command}
           history={history}
+          onToggleModal={onToggleModal}
+        />
+      )}
+
+      {saveModal && (
+        <Modal
+          title="포스트 임시 저장"
+          content="작성중인 포스트를 임시저장하였습니다."
+          command={command}
+          onToggleModal={onToggleModal}
         />
       )}
     </Container>

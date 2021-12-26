@@ -6,12 +6,12 @@ import { style } from './ModalStyle';
 const Modal = (props) => {
   const {
     title,
-    description,
+    content,
     modalLink,
     postId,
     mainRef,
     deleteComment,
-    clickComponent,
+    command,
     history,
     onToggleModal,
   } = props;
@@ -20,9 +20,10 @@ const Modal = (props) => {
 
   const closeModal = (e) => {
     if (e.target.innerText === '확인') {
-      clickComponent === 'postDelete' && onDeleteDetail();
-      clickComponent === 'commentDelete' && onDeleteComment();
-      clickComponent === 'goToBack' && history.push('/');
+      command === 'postDelete' && onDeleteDetail();
+      command === 'commentDelete' && onDeleteComment();
+      command === 'goToBack' && history.push('/');
+      command === 'saveLocalStorage' && onToggleModal();
     } else {
       onToggleModal();
     }
@@ -37,6 +38,7 @@ const Modal = (props) => {
   const onDeleteComment = async () => {
     const response = await MenuApi.deleteComment(comment.id);
     onToggleModal();
+
     if (response) {
       deleteComment(comment.id);
       mainRef.current.scrollIntoView({
@@ -52,7 +54,7 @@ const Modal = (props) => {
       <ModalContent>
         <ModalHeader>
           <ModalTitle>{title}</ModalTitle>
-          <ModalDesc>{description}</ModalDesc>
+          <ModalDesc>{content}</ModalDesc>
         </ModalHeader>
         <ModalFooter>
           <Button
