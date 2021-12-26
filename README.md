@@ -20,7 +20,7 @@
 
 ## ⚙ 기술 스택
 
-- React.js, Redux(redux-toolkit), styled-components
+- React.js, Redux(redux-toolkit), styled-components <br />
 (백엔드 API: Swagger UI API Document)
 
 <br/>
