@@ -20,8 +20,8 @@
 
 ## ⚙ 기술 스택
 
-- 프론트엔드: React.js, Redux(redux-toolkit), styled-components
-- 백엔드: Swagger UI API Document
+- React.js, Redux(redux-toolkit), styled-components
+(백엔드 API: Swagger UI API Document)
 
 <br/>
 
