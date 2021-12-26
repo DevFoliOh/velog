@@ -7,7 +7,7 @@
 
 ## 📌 velog 클론코딩
 
-해당 사이트를 클론하였습니다 👉 https://velog.io/
+👉클론한 사이트: https://velog.io/
 
 <br/>
 
