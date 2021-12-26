@@ -1,18 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Header from 'Components/Header/Header';
 import { style } from './DetailPageStyle';
-import Tag from 'Components/Tag/Tag';
-import CommentView from 'Components/Comment/CommentView/CommentView';
+import { Header, Tag, PostShare, Modal, DetailSkeleton } from 'Components';
+import CommentView from 'Components/Comment/CommentView';
 import parse from 'html-react-parser';
 import MenuApi from 'lib/api';
 import { useSelector } from 'react-redux';
-import useGetData from 'Hooks/useGetData';
-import DetailSkeleton from 'Components/DetailSkeleton';
-import DetailAction from 'Components/DetailAction/DetailAction';
-import PostShare from 'Components/PostShare/PostShare';
+import useGetData from 'Hooks/useGetPost';
+import DetailAction from 'Components/DetailAction';
 import { debounce } from 'lodash';
-import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
-import Modal from 'Components/Modal/Modal';
+import CommentWrite from 'Components/Comment/CommentWrite';
 import avatar from 'Assets/avatar.png';
 
 const DetailPage = ({ history }) => {
@@ -27,16 +23,17 @@ const DetailPage = ({ history }) => {
   const [commentData, setCommentData] = useState([]);
   const [tagArr, setTagArr] = useState([]);
   const [isFixedShare, setIsFixedshare] = useState();
-  const [clickComponent, setClickComponent] = useState('');
+  const [command, setCommand] = useState('');
   const [showModal, setShowModal] = useState(false);
   const mainRef = useRef();
 
   const card = useSelector((state) => state.getCardReducer.card);
 
-  const onToggleModal = useCallback((click) => {
+  const onToggleModal = useCallback((text) => {
     setShowModal(false);
-    if (click) {
-      setClickComponent(click);
+
+    if (text) {
+      setCommand(text);
       setShowModal(true);
     }
   }, []);
@@ -61,9 +58,11 @@ const DetailPage = ({ history }) => {
 
   const onTextSubmit = useCallback(async (text) => {
     const response = await MenuApi.createComment(card.id, text);
+
     if (response) {
       const commentResponse = await MenuApi.getCommentData(card.id);
       setCommentData(commentResponse.data.results);
+
       mainRef.current.scrollIntoView({
         behavior: 'smooth',
         block: 'end',
@@ -91,28 +90,26 @@ const DetailPage = ({ history }) => {
 
   return (
     <Main ref={mainRef}>
-      {showModal && clickComponent === 'postDelete' && (
+      {showModal && command === 'postDelete' && (
         <Modal
           title="포스트 삭제"
           content="정말로 삭제하시겠습니까?"
-          modalLink="/"
           postId={card.id}
           mainRef={mainRef}
           deleteComment={deleteComment}
-          command={clickComponent}
+          command={command}
           history={history}
           onToggleModal={onToggleModal}
         />
       )}
-      {showModal && clickComponent === 'commentDelete' && (
+      {showModal && command === 'commentDelete' && (
         <Modal
           title="댓글 삭제"
-          description="댓글을 정말로 삭제하시겠습니까?"
-          modalLink=""
+          content="댓글을 정말로 삭제하시겠습니까?"
           postId={card.id}
           mainRef={mainRef}
           deleteComment={deleteComment}
-          clickComponent={clickComponent}
+          command={command}
           onToggleModal={onToggleModal}
         />
       )}

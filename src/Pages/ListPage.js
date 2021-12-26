@@ -2,13 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import MenuApi from 'lib/api';
-import useGetListData from 'Hooks/useGetListData';
-import Header from 'Components/Header/Header';
-import Card from 'Components/Card';
-import Navbar from 'Components/Navbar';
-import ListSkeleton from 'Components/ListSkeleton';
-import ScrollToTop from 'Components/ScrollToTop';
-import InfinityScroll from 'Components/InfinityScroll';
+import useGetListData from 'Hooks/useGetAllPosts';
+import { Header, Card, Navbar, ScrollToTop, ListSkeleton } from 'Components';
 
 const ListPage = ({ history }) => {
   const [postData, setPostData] = useState([]);
@@ -43,7 +38,6 @@ const ListPage = ({ history }) => {
       postData.sort((a, b) => {
         const prevDate = a.createdAt;
         const nextDate = b.createdAt;
-        console.log(prevDate);
         return prevDate > nextDate ? -1 : prevDate < nextDate ? 1 : 0;
       }),
     );
@@ -62,7 +56,6 @@ const ListPage = ({ history }) => {
           <CardList>
             <Main>
               <CardWrap>
-                {/* <InfinityScroll callNext={scroll} is_next={inView}> */}
                 {sortedData &&
                   sortedData.map((post) => {
                     return (
@@ -71,7 +64,6 @@ const ListPage = ({ history }) => {
                       </div>
                     );
                   })}
-                {/* </InfinityScroll> */}
               </CardWrap>
             </Main>
           </CardList>
@@ -79,7 +71,6 @@ const ListPage = ({ history }) => {
           <CardList>
             <Main>
               <CardWrap>
-                {/* <InfinityScroll callNext={scroll} is_next={inView}> */}
                 {postData &&
                   postData.map((post) => {
                     return (
@@ -88,7 +79,6 @@ const ListPage = ({ history }) => {
                       </div>
                     );
                   })}
-                {/* </InfinityScroll> */}
               </CardWrap>
             </Main>
           </CardList>

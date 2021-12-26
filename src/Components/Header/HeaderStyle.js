@@ -44,7 +44,7 @@ const LogoImg = styled.svg`
   display: block;
 `;
 
-const RightContent = styled.div`
+const RightNav = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -92,19 +92,10 @@ const WriteBtn = styled(Link)`
 `;
 
 const Profile = styled.div`
+  position: relative;
   cursor: pointer;
   display: flex;
   align-items: center;
-`;
-
-const ProfileImg = styled.img`
-  display: block;
-  height: 2.5rem;
-  width: 2.5rem;
-  box-shadow: rgb(0 0 0 / 9%) 0px 0px 8px;
-  border-radius: 50%;
-  object-fit: cover;
-  transition: all 0.125s ease-in 0s;
 `;
 
 const Dropdown = styled.svg`
@@ -124,11 +115,10 @@ export const style = {
   HeaderContent,
   Logo,
   LogoImg,
-  RightContent,
+  RightNav,
   Search,
   WriteBtn,
   Profile,
-  ProfileImg,
   Dropdown,
   LogoLink,
 };

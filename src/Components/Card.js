@@ -7,57 +7,47 @@ import { formatDate } from 'lib/formatDate';
 import { Grid, Text, Icon, Anchor } from 'Common';
 import parse from 'html-react-parser';
 import defaultImg from 'Assets/default.png';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 const Card = ({ post }) => {
   const { getCard } = getCardAction;
   const dispatch = useDispatch();
   const thumbnail = post.thumbnail;
 
-  if (!post) {
-    return (
-      <Wrapper>
-        <Skeleton height={400} />;
-      </Wrapper>
-    );
-  } else {
-    return (
-      <Wrapper
-        onClick={() => {
-          dispatch(getCard(post));
-        }}
-        to={`/detail/${post.id}`}
-      >
-        {thumbnail ? (
-          <ImageContainer>
-            <Image src={thumbnail} alt="thumbnail" />
-          </ImageContainer>
-        ) : (
-          <ImageContainer>
-            <Image src={defaultImg} alt="default" />
-          </ImageContainer>
-        )}
-        <PostInfoContainer>
-          <div>
-            <Title>{post.title}</Title>
-            <Content
-              dangerouslySetInnerHTML={{ __html: parse(post.body) }}
-            ></Content>
-          </div>
-          <SubInfo>
-            <Text size="13px" color="rgb(134, 142, 150)">
-              {formatDate(post.createdAt)}
-            </Text>
-            <span>·</span>
-            <Text size="13px" color="rgb(134, 142, 150)">
-              8개의 댓글
-            </Text>
-          </SubInfo>
-        </PostInfoContainer>
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper
+      onClick={() => {
+        dispatch(getCard(post));
+      }}
+      to={`/detail/${post.id}`}
+    >
+      {thumbnail ? (
+        <ImageContainer>
+          <Image src={thumbnail} alt="thumbnail" />
+        </ImageContainer>
+      ) : (
+        <ImageContainer>
+          <Image src={defaultImg} alt="default" />
+        </ImageContainer>
+      )}
+      <PostInfoContainer>
+        <div>
+          <Title>{post.title}</Title>
+          <Content
+            dangerouslySetInnerHTML={{ __html: parse(post.body) }}
+          ></Content>
+        </div>
+        <SubInfo>
+          <Text size="13px" color="rgb(134, 142, 150)">
+            {formatDate(post.createdAt)}
+          </Text>
+          <span>·</span>
+          <Text size="13px" color="rgb(134, 142, 150)">
+            8개의 댓글
+          </Text>
+        </SubInfo>
+      </PostInfoContainer>
+    </Wrapper>
+  );
 };
 
 export default React.memo(Card);
@@ -121,8 +111,6 @@ const Image = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
   display: block;
   object-fit: cover;
 `;
@@ -162,9 +150,4 @@ const Content = styled.p`
   font-size: 0.875rem;
   color: rgb(73, 80, 87);
   margin-bottom: 2rem;
-`;
-
-const DateBox = styled.div`
-  font-size: 13px;
-  color: rgb(134, 142, 150);
 `;

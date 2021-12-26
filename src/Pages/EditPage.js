@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { style } from 'Pages/WritePage/WritePageStyle';
 import { Button } from 'Common';
-import Editor from 'Components/Editor';
-import ImgUpload from 'Components/ImgUpload';
+import { Editor, ImgUpload, Modal } from 'Components';
 import { useSelector } from 'react-redux';
 import MenuApi from 'lib/api';
-import Modal from 'Components/Modal/Modal';
 import parse from 'html-react-parser';
 
 const EditPage = ({ history }) => {

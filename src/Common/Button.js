@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { palette } from 'Styles/palette';
 
-export default function Button(props) {
+export const Button = (props) => {
   const {
+    flex,
     width,
     height,
     bg,
@@ -13,11 +14,13 @@ export default function Button(props) {
     margin,
     border,
     disable,
+    hoverBg,
     children,
     _onClick,
   } = props;
 
   const styles = {
+    flex,
     width,
     height,
     bg,
@@ -28,6 +31,7 @@ export default function Button(props) {
     margin,
     border,
     disable,
+    hoverBg,
   };
 
   return (
@@ -35,12 +39,13 @@ export default function Button(props) {
       {children}
     </ElButton>
   );
-}
+};
 
 Button.defaultProps = {
-  width: '100%',
+  flex: 'flex',
+  width: '150px',
   height: '40px',
-  bg: palette.gray[3],
+  bg: palette.teal[1],
   color: '#fff',
   size: '1.125rem',
   bold: false,
@@ -48,13 +53,14 @@ Button.defaultProps = {
   margin: '0',
   border: 'none',
   disable: false,
+  hoverBg: '',
   type: 'button',
   children: null,
   _onClick: () => {},
 };
 
 const ElButton = styled.button`
-  display: flex;
+  display: ${(props) => props.flex};
   align-items: center;
   justify-content: center;
   border-radius: 4px;
@@ -68,4 +74,9 @@ const ElButton = styled.button`
   padding: ${(props) => props.padding};
   ${(props) => (props.disable ? 'pointer-events: none' : '')};
   border: ${(props) => props.border};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.hoverBg};
+  }
 `;

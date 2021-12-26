@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Shimmer } from 'Common';
+import { Shimmer } from 'Common';
 
-const DetailSkeleton = () => {
+export const DetailSkeleton = () => {
   const titleArr = Array.from({ length: 3 }, () => (
     <Shimmer width="100px" height="60px" margin="0 1em 2rem 0" />
   ));
@@ -66,5 +66,3 @@ const Content = styled.section`
   flex-direction: column;
   margin-top: 2rem;
 `;
-
-export default DetailSkeleton;

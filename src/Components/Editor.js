@@ -2,12 +2,12 @@ import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-export default function Editor({
+export const Editor = ({
   content,
   loadedContent,
   setContent,
   setLoadedContent,
-}) {
+}) => {
   return (
     <div className="form-wrapper">
       <CKEditor
@@ -28,4 +28,4 @@ export default function Editor({
       ></CKEditor>
     </div>
   );
-}
+};

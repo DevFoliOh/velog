@@ -1,20 +1,41 @@
 import styled from 'styled-components';
-import { Grid } from 'Common';
 
-export default function Image(props) {
-  const { src, alt } = props;
+export const Image = (props) => {
+  const { src, alt, position, top, left, width, height, shadow, radius } =
+    props;
 
-  return <ElImage src={src} alt={alt} />;
-}
+  const styles = {
+    position,
+    top,
+    left,
+    width,
+    height,
+    shadow,
+    radius,
+  };
+
+  return <ElImage {...styles} src={src} alt={alt} />;
+};
+
+Image.defaultProps = {
+  position: false,
+  top: false,
+  left: false,
+  width: '100%',
+  height: '100%',
+  shadow: '',
+  radius: '50%',
+};
 
 const ElImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  ${(props) => (props.position ? `position: absolute` : '')};
+  ${(props) => (props.top ? `top: 0` : '')};
+  ${(props) => (props.left ? `left: 0` : '')};
+  ${(props) => (props.shadow ? `box-shadow: ${props.shadow}` : '')};
+  ${(props) => (props.radius ? `border-radius: ${props.radius}` : '')};
   display: block;
+  width: ${(props) => (props.width ? props.width : '')};
+  height: ${(props) => (props.height ? props.height : '')};
   object-fit: cover;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  cursor: pointer;
 `;

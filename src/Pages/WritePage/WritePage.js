@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import styled from 'styled-components';
 import { style } from './WritePageStyle';
 import { Grid, Button, Icon } from 'Common';
-import Editor from 'Components/Editor';
-import ImgUpload from 'Components/ImgUpload';
-import Modal from 'Components/Modal/Modal';
+import { Editor, ImgUpload, Modal, Tag } from 'Components';
 import MenuApi from 'lib/api';
 import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
@@ -12,21 +11,17 @@ const WritePage = ({ history }) => {
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
   const [url, setUrl] = useState();
-
-  const [exitModal, setExitModal] = useState(false);
-  const [saveModal, setSaveModal] = useState(false);
   const [command, setCommand] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
-  const handleKeyEnter = (e) => {
-    if (e.code === 'Enter') {
-      setHashTagArr([...hashTagArr, e.target.value]);
-      e.target.value = '';
+  const onToggleModal = useCallback((text) => {
+    setShowModal(false);
+
+    if (text) {
+      setCommand(text);
+      setShowModal(true);
     }
-  };
-
-  const removeHashTag = (hashtag) => {
-    setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
-  };
+  }, []);
 
   const registerPost = async () => {
     try {
@@ -51,20 +46,19 @@ const WritePage = ({ history }) => {
     localStorage.setItem('posts', JSON.stringify(post));
   };
 
-  const onToggleModal = useCallback((text) => {
-    setExitModal(false);
-    setSaveModal(false);
-
-    if (text === 'goToBack') {
-      setCommand(text);
-      setExitModal(true);
+  const handleKeyEnter = (e) => {
+    if (e.code === 'Enter') {
+      setHashTagArr([...hashTagArr, e.target.value]);
+      e.target.value = '';
     }
+  };
 
-    if (text === 'saveLocalStorage') {
-      setCommand(text);
-      setSaveModal(true);
-    }
-  }, []);
+  const removeHashTag = useCallback(
+    (hashtag) => {
+      setHashTagArr(hashTagArr.filter((element) => hashtag !== element));
+    },
+    [hashTagArr],
+  );
 
   useEffect(() => {
     const post = JSON.parse(localStorage.getItem('posts'));
@@ -98,9 +92,13 @@ const WritePage = ({ history }) => {
               <WriteTagContent>
                 {hashTagArr.map((hashtag, idx) => {
                   return (
-                    <div key={idx} onClick={() => removeHashTag(hashtag)}>
-                      <span>{hashtag}</span>
-                    </div>
+                    <Tag
+                      key={idx}
+                      tagContent={hashtag}
+                      _onClick={() => removeHashTag(hashtag)}
+                    >
+                      {hashtag}
+                    </Tag>
                   );
                 })}
               </WriteTagContent>
@@ -164,18 +162,17 @@ const WritePage = ({ history }) => {
         </div>
       </PreviewContainer>
 
-      {exitModal && (
+      {showModal && command === 'goToBack' && (
         <Modal
           title="포스트 작성 취소"
           content="정말 페이지를 벗어나시겠습니까?"
-          modalLink="/"
-          command={command}
           history={history}
+          command={command}
           onToggleModal={onToggleModal}
         />
       )}
 
-      {saveModal && (
+      {showModal && command === 'saveLocalStorage' && (
         <Modal
           title="포스트 임시 저장"
           content="작성중인 포스트를 임시저장하였습니다."

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Shimmer(props) {
+export const Shimmer = (props) => {
   const { width, height, margin, bg } = props;
 
   const styles = {
@@ -16,7 +16,7 @@ export default function Shimmer(props) {
       <Effect />
     </Wrapper>
   );
-}
+};
 
 Shimmer.defaultProps = {
   width: '200px',

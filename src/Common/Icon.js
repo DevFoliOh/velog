@@ -11,15 +11,9 @@ const IconSet = {
   exitArrow: {
     path: 'M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z',
   },
-  search: {
-    path: 'M 13.66 7.36 a 6.3 6.3 0 1 1 -12.598 0 a 6.3 6.3 0 0 1 12.598 0 Z m -1.73 5.772 a 7.36 7.36 0 1 1 1.201 -1.201 l 3.636 3.635 c 0.31 0.31 0.31 0.815 0 1.126 l -0.075 0.075 a 0.796 0.796 0 0 1 -1.126 0 l -3.636 -3.635 Z',
-  },
-  mail: {
-    path: 'M 16 16.871 L 1.019 5 H 30.98 L 16 16.871 Z m 0 3.146 L 1 8.131 V 27 h 30 V 8.131 L 16 20.017 Z',
-  },
 };
 
-export default function Icon(props) {
+export const Icon = (props) => {
   const { icon, width, height, viewBox, fill, color } = props;
 
   return (
@@ -39,4 +33,4 @@ export default function Icon(props) {
       />
     </svg>
   );
-}
+};

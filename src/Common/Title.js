@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { palette } from 'Styles/palette';
 
-export default function Text(props) {
+export const Title = (props) => {
   const { h1, h3, h4, children } = props;
 
   return (
@@ -17,7 +17,7 @@ export default function Text(props) {
       )}
     </>
   );
-}
+};
 
 Text.defaultProps = {
   size: '1.125rem',
@@ -30,19 +30,6 @@ Text.defaultProps = {
   wrap: 'break-word',
   children: null,
 };
-
-const ElText = styled.p`
-  font-size: ${(props) =>
-    props.h1 ? '3rem' : props.h3 ? '1.5rem' : '1.125rem'};
-  line-height: 1.5;
-  letter-spacing: -0.0004em;
-  margin: ${(props) => (props.h1 ? '0 0 32px' : '24px 0 16px')};
-  font-weight: ${(props) => (props.h1 ? '800' : props.h3 ? '700' : '600')};
-  color: ${(props) =>
-    props.h1 || props.h3 ? palette.gray[9] : palette.gray[10]};
-  ${(props) => (props.wordBr ? `word-break: ${props.wordBr}` : '')};
-  ${(props) => (props.wrap ? `overflow-wrap: ${props.wrap}` : '')};
-`;
 
 const H1 = styled.h1`
   font-size: 3rem;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function Grid(props) {
+export const Grid = (props) => {
   const {
     is_flex,
     column,
@@ -35,7 +35,7 @@ export default function Grid(props) {
   };
 
   return <GridBox {...styles}>{children}</GridBox>;
-}
+};
 
 Grid.defaultProps = {
   is_flex: false,
@@ -43,19 +43,19 @@ Grid.defaultProps = {
   flex: false,
   align: '',
   justify: '',
-  padding: '0',
-  margin: '0',
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  flexWrap: 'wrap',
-  maxHeight: '0',
-  minHeight: '0',
+  padding: '',
+  margin: '',
+  position: '',
+  top: '',
+  left: '',
+  flexWrap: '',
+  maxHeight: '',
+  minHeight: '',
   children: null,
 };
 
 const GridBox = styled.div`
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
   ${(props) => (props.is_flex ? 'display: flex' : '')};
   ${(props) => (props.column ? 'flex-direction: column' : '')};
   ${(props) => (props.flex ? 'flex: 1 1 0%' : '')};

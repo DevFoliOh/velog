@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from 'Common';
 
-const Navbar = ({ sort, setSort, setPostData }) => {
+export const Navbar = ({ sort, setSort, setPostData }) => {
   return (
     <Wrapper>
       <LeftDiv>

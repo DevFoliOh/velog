@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { throttle } from 'lodash';
 import { FaArrowUp } from 'react-icons/fa';
 
-function ScrollToTop() {
+export const ScrollToTop = () => {
   const [scroll, setScroll] = useState(0);
   const [btnStatus, setBtnStatus] = useState(false);
 
@@ -49,7 +49,7 @@ function ScrollToTop() {
       )}
     </>
   );
-}
+};
 
 const TopButton = styled.button`
   position: fixed;

@@ -42,7 +42,7 @@ const WriteTagContent = styled.div`
   display: flex;
   margin-bottom: 10px;
 
-  div {
+  /* div {
     height: 32px;
     line-height: 36px;
     border-radius: 16px;
@@ -50,7 +50,7 @@ const WriteTagContent = styled.div`
     padding: 5px 10px;
     margin-right: 10px;
     cursor: pointer;
-  }
+  } */
 `;
 
 const WriteTag = styled.input`

@@ -1,43 +1,43 @@
 import styled from 'styled-components';
 import { palette } from 'Styles/palette';
 
-export default function Text(props) {
+export const Text = (props) => {
   const {
-    clamp,
     size,
     line,
     letter,
     margin,
     bold,
     color,
+    clamp,
     wordBr,
     wrap,
     children,
   } = props;
 
   const styles = {
-    clamp,
     size,
     line,
     letter,
     margin,
     bold,
     color,
+    clamp,
     wordBr,
     wrap,
   };
 
   return <ElText {...styles}>{children}</ElText>;
-}
+};
 
 Text.defaultProps = {
-  clamp: false,
   size: '1.125rem',
   line: '1.7',
   letter: '-0.004em',
-  margin: '18px 0 18px',
+  margin: '0',
   bold: '400',
-  color: palette.gray[10],
+  color: palette.gray[12],
+  clamp: false,
   wordBr: 'keep-all',
   wrap: 'break-word',
   children: null,
@@ -58,21 +58,4 @@ const ElText = styled.p`
 
   ${(props) => (props.wordBr ? `word-break: ${props.wordBr}` : '')};
   ${(props) => (props.wrap ? `overflow-wrap: ${props.wrap}` : '')};
-`;
-
-const P = styled.p`
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin: 0px 0px 1.5rem;
-  color: rgb(73, 80, 87);
-
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  height: 3.9375rem;
-  overflow: hidden;
-
-  word-break: break-word; // 또는 keep-all
-  overflow-wrap: break-word;
 `;

@@ -1,5 +1,25 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { formatDate } from 'lib/formatDate';
+
+const DetailAction = ({ openModal, detailData }) => {
+  const onOpenModal = () => {
+    openModal('postDelete');
+  };
+
+  return (
+    <ActionContainer>
+      <div>{formatDate(detailData.createdAt)}</div>
+      <ActionWrap>
+        <EditLink to={`/edit/${detailData.id}`}>
+          <ActionChange>수정</ActionChange>
+        </EditLink>
+        <ActionDelete onClick={onOpenModal}>삭제</ActionDelete>
+      </ActionWrap>
+    </ActionContainer>
+  );
+};
 
 const ActionContainer = styled.div`
   display: flex;
@@ -39,10 +59,4 @@ const EditLink = styled(Link)`
   color: rgb(134, 142, 150);
 `;
 
-export const style = {
-  ActionContainer,
-  ActionWrap,
-  ActionChange,
-  ActionDelete,
-  EditLink,
-};
+export default DetailAction;

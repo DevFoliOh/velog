@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Grid, Icon, Responsive } from 'Common';
 import { palette } from 'Styles/palette';
 
-export default function Input(props) {
+export const Input = (props) => {
   const { icon, value, _onChange } = props;
 
   return (
@@ -27,7 +27,7 @@ export default function Input(props) {
       </InputGrid>
     </Responsive>
   );
-}
+};
 
 Input.defaultProps = {
   icon: '',

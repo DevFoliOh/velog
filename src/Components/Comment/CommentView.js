@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { style } from './CommentViewStyle';
-import CommentWrite from '../CommentWrite/CommentWrite';
+import styled from 'styled-components';
+import CommentWrite from './CommentWrite';
 import { useDispatch } from 'react-redux';
 import { currentCommentAction } from 'Modules/currentComment/currentComment';
 import avatar from 'Assets/avatar.png';
+import { Image } from 'Common';
+
 const CommentView = ({ comment, openModal }) => {
   const [isOpenPatchText, setIsOpenPatch] = useState(false);
   const [current, setCurrent] = useState(comment);
@@ -34,7 +36,13 @@ const CommentView = ({ comment, openModal }) => {
   return (
     <CommentItem>
       <CommentUserWrap>
-        <CommentUser src={avatar} />
+        <Image
+          src={avatar}
+          alt="user"
+          width="3.4rem"
+          height="3.4rem"
+          radius="50%"
+        />
         {isOpenPatchText === false && (
           <CommentAction>
             <ChangeComment onClick={onOpenPatchTextArea}>수정</ChangeComment>
@@ -57,14 +65,40 @@ const CommentView = ({ comment, openModal }) => {
   );
 };
 
-export default React.memo(CommentView);
+const CommentItem = styled.li`
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgb(233, 236, 239);
+`;
 
-const {
-  CommentItem,
-  CommentUserWrap,
-  CommentUser,
-  CommentTextWrap,
-  CommentAction,
-  ChangeComment,
-  RemoveComment,
-} = style;
+const CommentUserWrap = styled.div`
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const CommentTextWrap = styled.div`
+  font-size: 1.125rem;
+  color: rgb(34, 36, 38);
+  line-height: 1.7;
+  letter-spacing: -0.004em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+`;
+
+const CommentAction = styled.div`
+  font-size: 0.875rem;
+  color: rgb(134, 142, 150);
+`;
+
+const ChangeComment = styled.span`
+  cursor: pointer;
+`;
+
+const RemoveComment = styled.span`
+  margin-left: 0.5rem;
+  cursor: pointer;
+`;
+
+export default React.memo(CommentView);

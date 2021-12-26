@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Shimmer } from 'Common';
 
-const ListSkeleton = () => {
+export const ListSkeleton = () => {
   const cardArr = Array.from({ length: 8 }, () => (
     <CardBox>
       <ImageWrap>
@@ -118,5 +118,3 @@ const ContentWrap = styled.div`
   background-color: white;
   height: 165px;
 `;
-
-export default ListSkeleton;

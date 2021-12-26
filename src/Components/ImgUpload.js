@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import default_thumb from 'Assets/default_image.png';
 
-const ImgUpload = ({ url, setUrl }) => {
+export const ImgUpload = ({ url, setUrl }) => {
   const imgInputRef = useRef(null);
   const [previewSource, setPreviewSource] = useState(url);
 

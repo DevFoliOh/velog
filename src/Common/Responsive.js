@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default function Responsive({ children }) {
+export const Responsive = ({ children }) => {
   return <ElResponsive>{children}</ElResponsive>;
-}
+};
 
 const ElResponsive = styled.div`
   width: 768px;
