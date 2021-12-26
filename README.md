@@ -22,9 +22,8 @@
 ## 🛠 기술 스택
   
  <img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
-    <img src="https://img.shields.io/badge/redux-toolkit-^1.6.2-purple?logo=Redux"/>
+    <img src="https://img.shields.io/badge/ReduxToolkit-^1.6.2-purple?logo=Redux"/>
     <img src="https://img.shields.io/badge/StyledComponents-v5.2.3-pink?logo=styled-components"/> 
-<br/>
 
 ## API Spec
   <img src="https://img.shields.io/badge/Swagger-v1.7.0-lime?logo=Swagger"/>
