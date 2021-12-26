@@ -5,9 +5,9 @@
 <h1 align='middle'><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h1>
 
 
-## 📌 프로젝트 소개
+## 📌 velog 클론코딩
 
-### Velog 서비스
+해당 사이트를 클론하였습니다 https://velog.io/
 
 <br/>
 
