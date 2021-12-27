@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { Grid, Button, Icon, Text } from 'Common';
+import { Grid, Button, Icon, Text, Input } from 'Common';
 import { Editor, ImgUpload, Modal, Tag } from 'Components';
-import { useSelector } from 'react-redux';
 import MenuApi from 'lib/api';
-import parse from 'html-react-parser';
+import { useSelector } from 'react-redux';
 import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
 export const EditPage = ({ history }) => {
@@ -29,18 +28,14 @@ export const EditPage = ({ history }) => {
 
   const getPost = async (id) => {
     try {
-      setLoading(true);
       const response = await MenuApi.getPostDetail(id);
       const data = response.data;
-
       setTitle(data.title);
       setContent(data.body);
       setHashTagArr(data.tags);
       setUrl(data.thumbnail);
-
-      setLoading(false);
     } catch (error) {
-      throw new Error('data load 실패');
+      throw new Error('수정할 게시글 받아오기 실패');
     }
   };
 
@@ -60,17 +55,15 @@ export const EditPage = ({ history }) => {
     try {
       await MenuApi.patchPost(id, title, content, url, hashTagArr);
       history.push('/detail');
-      console.log('PATCH 성공!');
-
       localStorage.removeItem('posts');
     } catch (error) {
-      console.log(error);
+      throw new Error('게시글 수정 실패');
     }
   };
 
   const addLocalStorage = () => {
     const post = {
-      title: title,
+      title,
       body: content,
       tags: hashTagArr,
       thumbnail: url,
@@ -95,99 +88,102 @@ export const EditPage = ({ history }) => {
 
   return (
     <Grid is_flex width="100%" height="100%">
-      {!loading && (
-        <Grid is_flex column bg="#fff">
-          <Grid is_flex justify="space-between" padding="30px 50px 0">
-            <div>
-              <TitleInput
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              />
-              <Grid
-                width="64px"
-                height="6px"
-                bg="rgb(133, 133, 133)"
-                margin="1.5rem 0 1rem"
-              />
-              <Grid is_flex flexWrap="wrap">
-                <Grid is_flex margin="0 0 10px">
-                  {hashTagArr.map((hashtag, idx) => {
-                    return (
-                      <Tag
-                        key={idx}
-                        tagContent={hashtag}
-                        _onClick={() => removeHashTag(hashtag)}
-                      >
-                        {hashtag}
-                      </Tag>
-                    );
-                  })}
-                </Grid>
-                <TagInput
-                  type="text"
-                  name="tag"
-                  placeholder="태그를 입력하세요"
-                  onKeyPress={handleKeyEnter}
-                />
+      <Grid is_flex column bg="#fff">
+        <Grid is_flex justify="space-between" padding="30px 50px 0">
+          <div>
+            <TitleInput
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+            <Grid
+              width="64px"
+              height="6px"
+              bg="rgb(133, 133, 133)"
+              margin="1.5rem 0 1rem"
+            />
+            <Grid is_flex flexWrap="wrap">
+              <Grid is_flex margin="0 0 10px">
+                {hashTagArr.map((hashtag, idx) => {
+                  return (
+                    <Tag
+                      key={idx}
+                      tagContent={hashtag}
+                      _onClick={() => removeHashTag(hashtag)}
+                    >
+                      {hashtag}
+                    </Tag>
+                  );
+                })}
               </Grid>
-            </div>
-            <ImgUpload url={url} setUrl={setUrl} />
-          </Grid>
-
-          <EditorContainer>
-            <Editor content={content} setContent={setContent} />
-          </EditorContainer>
-
-          <Grid
-            width="100%"
-            height="4rem"
-            is_flex
-            align="center"
-            justify="space-between"
-            padding="0 50px"
-            bg="gba(255, 255, 255, 0.85)"
-            shadow="rgb(0 0 0 / 10%) 0px 0px 8px"
-          >
-            <div>
-              <Button
-                bg="#fff"
-                color="rgb(73, 80, 87)"
-                padding="8px 4px"
-                _onClick={() => onToggleModal('goToBack')}
-              >
-                <Icon icon="exitArrow" width={20} height={20} />
-                &nbsp; 나가기
-              </Button>
-            </div>
-
-            <Grid is_flex>
-              <Button
-                width="112px"
-                bold
-                bg="rgb(233, 236, 239)"
-                color="rgb(73, 80, 87)"
-                _onClick={() => {
-                  addLocalStorage();
-                  onToggleModal('saveLocalStorage');
-                }}
-              >
-                임시저장
-              </Button>
-              <Button
-                width="112px"
-                bold
-                bg="rgb(18, 184, 134)"
-                margin="0 0 0 12px"
-                _onClick={patchPost}
-              >
-                수정하기
-              </Button>
+              <TagInput
+                type="text"
+                name="tag"
+                placeholder="태그를 입력하세요"
+                onKeyPress={handleKeyEnter}
+              />
             </Grid>
+          </div>
+          <ImgUpload
+            url={url}
+            setUrl={setUrl}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        </Grid>
+
+        <EditorContainer>
+          <Editor content={content} setContent={setContent} />
+        </EditorContainer>
+
+        <Grid
+          width="100%"
+          height="4rem"
+          is_flex
+          align="center"
+          justify="space-between"
+          padding="0 50px"
+          bg="gba(255, 255, 255, 0.85)"
+          shadow="rgb(0 0 0 / 10%) 0px 0px 8px"
+        >
+          <div>
+            <Button
+              bg="#fff"
+              color="rgb(73, 80, 87)"
+              padding="8px 4px"
+              _onClick={() => onToggleModal('goToBack')}
+            >
+              <Icon icon="exitArrow" width={20} height={20} />
+              &nbsp; 나가기
+            </Button>
+          </div>
+
+          <Grid is_flex>
+            <Button
+              width="112px"
+              bold
+              bg="rgb(233, 236, 239)"
+              color="rgb(73, 80, 87)"
+              _onClick={() => {
+                addLocalStorage();
+                onToggleModal('saveLocalStorage');
+              }}
+            >
+              임시저장
+            </Button>
+            <Button
+              width="112px"
+              bold
+              bg="rgb(18, 184, 134)"
+              margin="0 0 0 12px"
+              _onClick={patchPost}
+            >
+              수정하기
+            </Button>
           </Grid>
         </Grid>
-      )}
+      </Grid>
 
       <PreviewContainer>
         <Grid is_flex column>
@@ -201,7 +197,7 @@ export const EditPage = ({ history }) => {
       {showModal && command === 'goToBack' && (
         <Modal
           title="포스트 작성 취소"
-          content="정말 페이지를 벗어나시겠습니까?"
+          content="페이지를 벗어나시겠습니까? 수정중인 내용은 저장됩니다."
           history={history}
           command={command}
           onToggleModal={onToggleModal}

@@ -6,10 +6,11 @@ import MenuApi from 'lib/api';
 import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
 export const WritePage = ({ history }) => {
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
-  const [url, setUrl] = useState();
+  const [url, setUrl] = useState('');
   const [command, setCommand] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -26,11 +27,9 @@ export const WritePage = ({ history }) => {
     try {
       await MenuApi.createPost(title, content, url, hashTagArr);
       history.push('/');
-      console.log('POST 성공!');
-
       localStorage.removeItem('posts');
     } catch (error) {
-      alert(error);
+      throw new Error('게시글 등록 실패');
     }
   };
 
@@ -46,6 +45,7 @@ export const WritePage = ({ history }) => {
   };
 
   useEffect(() => {
+    // 페이지 새로고침 시 로컬스토리지에 저장한 임시 데이터 불러오기
     const post = JSON.parse(localStorage.getItem('posts'));
 
     if (!post) {
@@ -56,6 +56,10 @@ export const WritePage = ({ history }) => {
       setHashTagArr(post.tags);
       setUrl(post.thumbnail);
     }
+
+    return () => {
+      localStorage.removeItem('posts');
+    };
   }, []);
 
   const handleKeyEnter = (e) => {
@@ -114,7 +118,12 @@ export const WritePage = ({ history }) => {
               />
             </Grid>
           </div>
-          <ImgUpload url={url} setUrl={setUrl} />
+          <ImgUpload
+            url={url}
+            setUrl={setUrl}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </Grid>
 
         <EditorContainer>
@@ -179,7 +188,7 @@ export const WritePage = ({ history }) => {
       {showModal && command === 'goToBack' && (
         <Modal
           title="포스트 작성 취소"
-          content="정말 페이지를 벗어나시겠습니까?"
+          content="정말 페이지를 벗어나시겠습니까? 작성중인 내용은 저장되지 않습니다."
           history={history}
           command={command}
           onToggleModal={onToggleModal}

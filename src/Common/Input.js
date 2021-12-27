@@ -35,6 +35,23 @@ Input.defaultProps = {
   _onChange: () => {},
 };
 
+const InputGrid = styled.div`
+  display: flex;
+  border: 1px solid rgb(173, 181, 189);
+  -webkit-box-align: center;
+  align-items: center;
+  transition: all 0.125s ease-in 0s;
+  cursor: text;
+  height: 4rem;
+  padding: 0 1.5rem;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    height: 2.25rem;
+    padding: 0 1rem;
+  }
+`;
+
 const ElInput = styled.input`
   display: block;
   font-size: 1.5rem;
@@ -53,22 +70,5 @@ const ElInput = styled.input`
     font-size: 1.125rem;
     line-height: 1.5;
     height: auto;
-  }
-`;
-
-const InputGrid = styled.div`
-  display: flex;
-  border: 1px solid rgb(173, 181, 189);
-  -webkit-box-align: center;
-  align-items: center;
-  transition: all 0.125s ease-in 0s;
-  cursor: text;
-  height: 4rem;
-  padding: 0 1.5rem;
-  margin-bottom: 1.5rem;
-
-  @media (max-width: 768px) {
-    height: 2.25rem;
-    padding: 0 1rem;
   }
 `;

@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import default_thumb from 'Assets/default_image.png';
+import loadingSpinner from 'Assets/spinning-loading.gif';
 
-export const ImgUpload = ({ url, setUrl }) => {
+export const ImgUpload = ({ url, setUrl, loading, setLoading }) => {
   const imgInputRef = useRef(null);
   const [previewSource, setPreviewSource] = useState(url);
 
   const onImgChange = (e) => {
+    setLoading(true);
     const formData = new FormData();
 
     formData.append('file', e.target.files[0]);
@@ -21,20 +23,25 @@ export const ImgUpload = ({ url, setUrl }) => {
       .then((data) => {
         setUrl(data.url);
         setPreviewSource(data.url);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     setPreviewSource(url);
-  }, [url]);
+  }, [url, loading]);
 
   return (
     <div>
-      <Preview
-        src={previewSource ? previewSource : default_thumb}
-        alt="Thumbnail"
-      />
+      {loading ? (
+        <Preview src={loadingSpinner} alt="Thumbnail" />
+      ) : (
+        <Preview
+          src={previewSource ? previewSource : default_thumb}
+          alt="Thumbnail"
+        />
+      )}
       <UploadButton onClick={() => imgInputRef.current.click()}>
         썸네일 이미지 등록
       </UploadButton>

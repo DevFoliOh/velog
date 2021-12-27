@@ -8,8 +8,6 @@ export const ScrollToTop = () => {
   const [btnStatus, setBtnStatus] = useState(false);
 
   const handleFollow = () => {
-    console.log('스크롤');
-
     setScroll(window.pageYOffset);
 
     if (scroll > 200) {
