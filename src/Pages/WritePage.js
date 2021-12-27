@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { style } from './WritePageStyle';
-import { Grid, Button, Icon } from 'Common';
+import { Grid, Button, Icon, Text, Input } from 'Common';
 import { Editor, ImgUpload, Modal, Tag } from 'Components';
 import MenuApi from 'lib/api';
 import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
-const WritePage = ({ history }) => {
+export const WritePage = ({ history }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [hashTagArr, setHashTagArr] = useState([]);
@@ -35,16 +34,29 @@ const WritePage = ({ history }) => {
     }
   };
 
-  const onAddLocalStorage = () => {
+  const addLocalStorage = () => {
     const post = {
       title,
-      body: removeHTMLTagFromString(content),
+      body: content,
       tags: hashTagArr,
       thumbnail: url,
     };
 
     localStorage.setItem('posts', JSON.stringify(post));
   };
+
+  useEffect(() => {
+    const post = JSON.parse(localStorage.getItem('posts'));
+
+    if (!post) {
+      return;
+    } else {
+      setTitle(post.title);
+      setContent(post.body);
+      setHashTagArr(post.tags);
+      setUrl(post.thumbnail);
+    }
+  }, []);
 
   const handleKeyEnter = (e) => {
     if (e.code === 'Enter') {
@@ -60,25 +72,12 @@ const WritePage = ({ history }) => {
     [hashTagArr],
   );
 
-  useEffect(() => {
-    const post = JSON.parse(localStorage.getItem('posts'));
-
-    if (!post) {
-      return;
-    } else {
-      setTitle(post.title);
-      setContent(post.body);
-      setHashTagArr(post.tags);
-      setUrl(post.thumbnail);
-    }
-  }, []);
-
   return (
-    <Container>
-      <WriteContainer>
-        <WriteHeader>
+    <Grid is_flex height="100vh">
+      <Grid is_flex column>
+        <Grid is_flex justify="space-between" padding="30px 50px 0">
           <div>
-            <WriteTitle
+            <TitleInput
               type="text"
               name="title"
               placeholder="제목을 입력하세요"
@@ -87,9 +86,14 @@ const WritePage = ({ history }) => {
                 setTitle(e.target.value);
               }}
             />
-            <WriteLine />
-            <WriteTagContainer>
-              <WriteTagContent>
+            <Grid
+              width="64px"
+              height="6px"
+              bg="rgb(133, 133, 133)"
+              margin="1.5rem 0 1rem"
+            />
+            <Grid is_flex flexWrap="wrap">
+              <Grid is_flex margin="0 0 10px">
                 {hashTagArr.map((hashtag, idx) => {
                   return (
                     <Tag
@@ -101,23 +105,32 @@ const WritePage = ({ history }) => {
                     </Tag>
                   );
                 })}
-              </WriteTagContent>
-              <WriteTag
+              </Grid>
+              <TagInput
                 type="text"
                 name="tag"
                 placeholder="태그를 입력하세요"
                 onKeyPress={handleKeyEnter}
               />
-            </WriteTagContainer>
+            </Grid>
           </div>
           <ImgUpload url={url} setUrl={setUrl} />
-        </WriteHeader>
+        </Grid>
 
         <EditorContainer>
           <Editor content={content} setContent={setContent} />
         </EditorContainer>
 
-        <WriteFooter>
+        <Grid
+          width="100%"
+          height="4rem"
+          is_flex
+          align="center"
+          justify="space-between"
+          padding="0 50px"
+          bg="gba(255, 255, 255, 0.85)"
+          shadow="rgb(0 0 0 / 10%) 0px 0px 8px"
+        >
           <div>
             <Button
               bg="#fff"
@@ -129,15 +142,16 @@ const WritePage = ({ history }) => {
               &nbsp; 나가기
             </Button>
           </div>
-          <div>
+
+          <Grid is_flex>
             <Button
               width="112px"
               bold
               bg="rgb(233, 236, 239)"
               color="rgb(73, 80, 87)"
               _onClick={() => {
+                addLocalStorage();
                 onToggleModal('saveLocalStorage');
-                onAddLocalStorage();
               }}
             >
               임시저장
@@ -151,13 +165,13 @@ const WritePage = ({ history }) => {
             >
               출간하기
             </Button>
-          </div>
-        </WriteFooter>
-      </WriteContainer>
+          </Grid>
+        </Grid>
+      </Grid>
 
       <PreviewContainer>
         <div>
-          <h2>{title}</h2>
+          <H1>{title}</H1>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
         </div>
       </PreviewContainer>
@@ -180,20 +194,69 @@ const WritePage = ({ history }) => {
           onToggleModal={onToggleModal}
         />
       )}
-    </Container>
+    </Grid>
   );
 };
-export default WritePage;
-const {
-  Container,
-  WriteContainer,
-  WriteHeader,
-  WriteTitle,
-  WriteLine,
-  WriteTagContainer,
-  WriteTagContent,
-  WriteTag,
-  EditorContainer,
-  WriteFooter,
-  PreviewContainer,
-} = style;
+
+const H1 = styled.h1`
+  font-size: 3rem;
+  line-height: 1.5;
+  letter-spacing: -0.004em;
+  margin: 0 0 2rem;
+  font-weight: 800;
+  color: rgb(52, 58, 64);
+  word-break: keep-all;
+
+  @media (max-width: 1024px) {
+    font-size: 2.25rem;
+  }
+`;
+
+const TitleInput = styled.input`
+  width: 100%;
+  height: 66px;
+  font-size: 30px;
+  font-weight: 700;
+  color: rgb(133, 133, 133);
+  border: none;
+  padding-left: 0;
+`;
+
+const TagInput = styled.input`
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+  border: none;
+  padding-left: 0;
+  margin-bottom: 12px;
+`;
+
+const EditorContainer = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 0 50px 14px;
+
+  .ck.ck-editor {
+    max-width: 700px;
+  }
+  .ck-editor__editable {
+    min-height: 400px;
+  }
+`;
+const PreviewContainer = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 100px 50px;
+  background: #fafafa;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+`;

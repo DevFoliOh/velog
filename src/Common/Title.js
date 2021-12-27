@@ -1,11 +1,16 @@
 import styled from 'styled-components';
-import { palette } from 'Styles/palette';
 
 export const Title = (props) => {
   const { h1, h3, h4, children } = props;
 
+  const styles = {
+    h1,
+    h3,
+    h4,
+  };
+
   return (
-    <>
+    <Title {...styles}>
       {h1 ? (
         <H1>{children}</H1>
       ) : h3 ? (
@@ -15,20 +20,14 @@ export const Title = (props) => {
       ) : (
         ''
       )}
-    </>
+    </Title>
   );
 };
 
-Text.defaultProps = {
-  size: '1.125rem',
-  line: '1.7',
-  letter: '-0.004em',
-  margin: '18px 0 18px',
-  bold: '400',
-  color: palette.gray[10],
-  wordBr: 'keep-all',
-  wrap: 'break-word',
-  children: null,
+Title.defaultProps = {
+  h1: false,
+  h3: false,
+  h4: false,
 };
 
 const H1 = styled.h1`

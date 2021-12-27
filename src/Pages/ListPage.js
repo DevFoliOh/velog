@@ -4,8 +4,9 @@ import { useInView } from 'react-intersection-observer';
 import MenuApi from 'lib/api';
 import useGetListData from 'Hooks/useGetAllPosts';
 import { Header, Card, Navbar, ScrollToTop, ListSkeleton } from 'Components';
+import { Grid } from 'Common';
 
-const ListPage = ({ history }) => {
+export const ListPage = ({ history }) => {
   const [postData, setPostData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
   const [location, setLocation] = useState('');
@@ -44,18 +45,17 @@ const ListPage = ({ history }) => {
   }, [sort]);
 
   return (
-    <Wrapper>
+    <Grid bg="#f8f9fa">
       <Header location={location} />
 
       <Container>
         <Navbar sort={sort} setSort={setSort} setPostData={setPostData} />
-
         {loading ? (
           <ListSkeleton />
         ) : sort ? (
-          <CardList>
-            <Main>
-              <CardWrap>
+          <Grid width="100%" margin="2rem auto" bg="#f8f9fa">
+            <Grid flex="1 1 0%">
+              <Grid is_flex flexWrap="wrap">
                 {sortedData &&
                   sortedData.map((post) => {
                     return (
@@ -64,13 +64,13 @@ const ListPage = ({ history }) => {
                       </div>
                     );
                   })}
-              </CardWrap>
-            </Main>
-          </CardList>
+              </Grid>
+            </Grid>
+          </Grid>
         ) : (
-          <CardList>
-            <Main>
-              <CardWrap>
+          <Grid width="100%" margin="2rem auto" bg="#f8f9fa">
+            <Grid flex="1 1 0%">
+              <Grid is_flex flexWrap="wrap">
                 {postData &&
                   postData.map((post) => {
                     return (
@@ -79,21 +79,15 @@ const ListPage = ({ history }) => {
                       </div>
                     );
                   })}
-              </CardWrap>
-            </Main>
-          </CardList>
+              </Grid>
+            </Grid>
+          </Grid>
         )}
       </Container>
       <ScrollToTop />
-    </Wrapper>
+    </Grid>
   );
 };
-
-const Wrapper = styled.div`
-  box-sizing: inherit;
-  display: block;
-  background: #f8f9fa;
-`;
 
 const Container = styled.div`
   width: 100%;
@@ -114,21 +108,3 @@ const Container = styled.div`
     width: calc(100% - 2rem);
   }
 `;
-
-const CardList = styled.div`
-  width: 100%;
-  margin: 2rem auto;
-  background: #f8f9fa;
-`;
-
-const Main = styled.div`
-  flex: 1 1 0%;
-`;
-
-const CardWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  /* justify-content: center; */
-`;
-
-export default ListPage;

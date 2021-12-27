@@ -2,23 +2,12 @@ import styled from 'styled-components';
 import { palette } from 'Styles/palette';
 
 export const Text = (props) => {
-  const {
-    size,
-    line,
-    letter,
-    margin,
-    bold,
-    color,
-    clamp,
-    wordBr,
-    wrap,
-    children,
-  } = props;
+  const { size, line, margin, bold, color, clamp, wordBr, wrap, children } =
+    props;
 
   const styles = {
     size,
     line,
-    letter,
     margin,
     bold,
     color,
@@ -33,7 +22,6 @@ export const Text = (props) => {
 Text.defaultProps = {
   size: '1.125rem',
   line: '1.7',
-  letter: '-0.004em',
   margin: '0',
   bold: '400',
   color: palette.gray[12],
@@ -44,12 +32,12 @@ Text.defaultProps = {
 };
 
 const ElText = styled.p`
+  letter-spacing: -0.0004em;
   font-size: ${(props) => props.size};
   line-height: ${(props) => props.line};
-  letter-spacing: -0.0004em;
   margin: ${(props) => props.margin};
   font-weight: ${(props) => props.bold};
-  color: ${(props) => (props.color ? 'rgb(53, 77, 102)' : props.color)};
+  color: ${(props) => props.color};
 
   ${(props) =>
     props.clamp
