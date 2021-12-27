@@ -28,7 +28,7 @@
 ### 🔮 역할 배분
 ❄ 김은태: WritePage 담당, CKEditor 도입<br/>
 ❄ 송창엽: DetailPage 담당, 공통 컴포넌트 제작<br/>
-❄ 윤예나: ListPage 및 EditPage 담당, 코드 개선<br/>
+❄ 윤예나: ListPage 및 EditPage 담당, 코드 개선(21.12.24 ~ 진행중)<br/>
 
 
 ### ✨ 구현 목록
