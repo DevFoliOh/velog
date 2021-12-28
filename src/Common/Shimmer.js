@@ -1,20 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Grid } from 'Common';
 
 export const Shimmer = (props) => {
   const { width, height, margin, bg } = props;
 
-  const styles = {
-    width,
-    height,
-    margin,
-    bg,
-  };
-
   return (
-    <Wrapper {...styles}>
+    <Grid width={width} height={height} margin={margin} bg={bg} overflow>
       <Effect />
-    </Wrapper>
+    </Grid>
   );
 };
 
@@ -24,14 +18,6 @@ Shimmer.defaultProps = {
   margin: '1rem 1rem 0',
   bg: '#eeeeee',
 };
-
-const Wrapper = styled.div`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  margin: ${(props) => props.margin};
-  background-color: ${(props) => props.bg};
-  overflow: hidden;
-`;
 
 const Effect = styled.div`
   width: 40%;

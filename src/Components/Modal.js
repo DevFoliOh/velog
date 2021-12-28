@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { MenuApi } from 'lib';
-import styled from 'styled-components';
 import { Grid, Text, Button } from 'Common';
 
 export const Modal = (props) => {
@@ -50,17 +49,31 @@ export const Modal = (props) => {
   };
 
   return (
-    <ModalContainer onClick={(e) => closeModal(e)}>
-      <ModalContent>
-        <ModalHeader>
+    <Grid
+      position="fixed"
+      height="100vh"
+      is_flex
+      bg="rgba(0, 0, 0, 0.4)"
+      zIndex
+      _onClick={(e) => closeModal(e)}
+    >
+      <Grid
+        width="400px"
+        height="220px"
+        is_flex
+        column
+        padding="40px 30px 30px"
+        shadow="rgb(0 0 0 / 9%) 0px 2px 12px 0px"
+      >
+        <Grid flex="1">
           <Text size="26px" bold="700" margin="0 0 16px">
             {title}
           </Text>
           <Text size="16px" color="rgb(73, 80, 87)">
             {content}
           </Text>
-        </ModalHeader>
-        <ModalFooter>
+        </Grid>
+        <Grid is_flex justify="space-around" align="center">
           <Button
             bg="rgb(233, 236, 239)"
             color="rgb(73, 80, 87)"
@@ -69,41 +82,8 @@ export const Modal = (props) => {
             취소
           </Button>
           <Button _onClick={(e) => closeModal(e)}>확인</Button>
-        </ModalFooter>
-      </ModalContent>
-    </ModalContainer>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
-
-const ModalContainer = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
-`;
-
-const ModalContent = styled.div`
-  width: 400px;
-  height: 220px;
-  display: flex;
-  flex-direction: column;
-  padding: 40px 30px 30px;
-  box-shadow: rgb(0 0 0 / 9%) 0px 2px 12px 0px;
-  background-color: #fff;
-`;
-
-const ModalHeader = styled.div`
-  flex: 1;
-`;
-
-const ModalFooter = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-export default Modal;

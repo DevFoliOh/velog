@@ -12,13 +12,11 @@ export const EditorFooter = ({
 
   return (
     <Grid
-      width="100%"
-      height="4rem"
       is_flex
-      align="center"
+      height="4rem"
       justify="space-between"
       padding="0 50px"
-      bg="gba(255, 255, 255, 0.85)"
+      bg="rgba(255, 255, 255, 0.85)"
       shadow="rgb(0 0 0 / 10%) 0px 0px 8px"
     >
       <div>

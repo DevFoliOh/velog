@@ -75,8 +75,8 @@ export const EditPage = ({ history }) => {
   );
 
   return (
-    <Grid is_flex width="100%" height="100%">
-      <Grid is_flex column bg="#fff">
+    <Grid is_flex>
+      <Grid is_flex column>
         <Grid is_flex justify="space-between" padding="30px 50px 0">
           <div>
             <TitleInput
@@ -91,7 +91,7 @@ export const EditPage = ({ history }) => {
               bg="rgb(133, 133, 133)"
               margin="1.5rem 0 1rem"
             />
-            <Grid is_flex flexWrap="wrap">
+            <Grid is_flex flexWrap>
               <Grid is_flex margin="0 0 10px">
                 {hashTagArr.map((hashtag, idx) => {
                   return (

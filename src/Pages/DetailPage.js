@@ -121,7 +121,7 @@ export const DetailPage = ({ history }) => {
         <Body>
           <Title>{detailData.title}</Title>
 
-          <Grid is_flex align="center" justify="space-between">
+          <Grid is_flex justify="space-between" align="center">
             <Text size="1rem" color="rgb(73, 80, 87)">
               {formatDate(detailData.createdAt)}
             </Text>
@@ -144,7 +144,7 @@ export const DetailPage = ({ history }) => {
               <PostShare isFixedShare={isFixedShare} detailData={detailData} />
             )}
           </TagList>
-          <Grid is_flex justify="center" width="100%" margin="5rem 0">
+          <Grid is_flex justify="center" margin="5rem 0">
             {detailData.thumbnail && (
               <Thumbnail src={detailData.thumbnail} alt="thumbnail"></Thumbnail>
             )}
@@ -153,13 +153,7 @@ export const DetailPage = ({ history }) => {
             dangerouslySetInnerHTML={{ __html: parse(detailData.body) }}
           ></Content>
 
-          <Grid
-            is_flex
-            align="center"
-            margin="10rem 0 6rem"
-            padding="0 0 2rem 0"
-            borderBottom="1px solid rgb(233, 236, 239)"
-          >
+          <Grid is_flex margin="10rem 0 6rem" padding="0 0 2rem 0" borderBottom>
             <UserImg src={avatar} alt="user" />
             <Grid is_flex column justify="center" margin="0 0 0 1rem">
               <Text size="1.5rem" line="1.5" bold="700" color="rgb(33, 37, 41)">
@@ -176,7 +170,7 @@ export const DetailPage = ({ history }) => {
             </Grid>
           </Grid>
 
-          <Grid margin="3rem auto auto" width="768px">
+          <Grid width="768px" margin="3rem auto auto">
             <Text
               bold="600"
               color="rgb(52, 58, 64)"

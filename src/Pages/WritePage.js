@@ -83,7 +83,7 @@ export const WritePage = ({ history }) => {
               bg="rgb(133, 133, 133)"
               margin="1.5rem 0 1rem"
             />
-            <Grid is_flex flexWrap="wrap">
+            <Grid is_flex flexWrap>
               <Grid is_flex margin="0 0 10px">
                 {hashTagArr.map((hashtag, idx) => {
                   return (

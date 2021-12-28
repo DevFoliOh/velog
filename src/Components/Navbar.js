@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from 'Common';
 
-export const Navbar = ({ sort, setSort, setPostData }) => {
+export const Navbar = () => {
   return (
-    <Wrapper>
-      <LeftDiv>
-        {/* <Box onClick={() => setSort(false)}> */}
+    <Grid
+      is_flex
+      justify="space-between"
+      position="relative"
+      margin="2rem 0 0 "
+    >
+      <Grid is_flex>
         <Box>
           <Icon>
             <svg
@@ -24,7 +28,6 @@ export const Navbar = ({ sort, setSort, setPostData }) => {
           <Text>트렌딩</Text>
         </Box>
 
-        {/* <Box onClick={() => setSort(true)}> */}
         <Box>
           <Icon>
             <svg
@@ -41,7 +44,7 @@ export const Navbar = ({ sort, setSort, setPostData }) => {
           </Icon>
           <Text>최근</Text>
         </Box>
-      </LeftDiv>
+      </Grid>
 
       <Icon>
         <svg
@@ -57,24 +60,9 @@ export const Navbar = ({ sort, setSort, setPostData }) => {
           <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
         </svg>
       </Icon>
-    </Wrapper>
+    </Grid>
   );
 };
-
-const Wrapper = styled.div`
-  margin-top: 1.5rem;
-  display: flex;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  align-items: center;
-  position: relative;
-  margin-top: 2rem;
-`;
-
-const LeftDiv = styled.div`
-  display: flex;
-`;
 
 const Box = styled.div`
   width: 7rem;
@@ -116,5 +104,3 @@ const Icon = styled.div`
   color: rgb(134, 142, 150);
   cursor: pointer;
 `;
-
-export default Navbar;
