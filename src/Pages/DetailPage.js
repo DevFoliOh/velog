@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Header, Tag, PostShare, Modal, DetailSkeleton } from 'Components';
 import { Grid, Text, Image } from 'Common';
-import { formatDate } from 'lib/formatDate';
+import { MenuApi, formatDate } from 'lib';
 import CommentView from 'Components/Comment/CommentView';
 import parse from 'html-react-parser';
-import MenuApi from 'lib/api';
 import { useSelector } from 'react-redux';
-import useGetData from 'Hooks/useGetPost';
+import { useGetPost } from 'Hooks';
 import { debounce } from 'lodash';
 import CommentWrite from 'Components/Comment/CommentWrite';
 import avatar from 'Assets/avatar.png';
@@ -33,7 +32,6 @@ export const DetailPage = ({ history }) => {
 
   const onToggleModal = useCallback((text) => {
     setShowModal(false);
-
     if (text) {
       setCommand(text);
       setShowModal(true);
@@ -56,7 +54,7 @@ export const DetailPage = ({ history }) => {
     [commentData],
   );
 
-  const loading = useGetData(setPostData, setComment, card.id);
+  const loading = useGetPost(setPostData, setComment, card.id);
 
   const onTextSubmit = useCallback(async (text) => {
     const response = await MenuApi.createComment(card.id, text);

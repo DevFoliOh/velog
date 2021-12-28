@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import MenuApi from 'lib/api';
+import { MenuApi } from 'lib';
 import styled from 'styled-components';
 import { Grid, Text, Button } from 'Common';
 

@@ -6,7 +6,8 @@ export const Navbar = ({ sort, setSort, setPostData }) => {
   return (
     <Wrapper>
       <LeftDiv>
-        <Box onClick={() => setSort(false)}>
+        {/* <Box onClick={() => setSort(false)}> */}
+        <Box>
           <Icon>
             <svg
               stroke="currentColor"
@@ -23,7 +24,8 @@ export const Navbar = ({ sort, setSort, setPostData }) => {
           <Text>트렌딩</Text>
         </Box>
 
-        <Box onClick={() => setSort(true)}>
+        {/* <Box onClick={() => setSort(true)}> */}
+        <Box>
           <Icon>
             <svg
               stroke="currentColor"

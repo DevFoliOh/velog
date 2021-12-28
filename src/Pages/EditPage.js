@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { Grid, Button, Icon, Text, Input } from 'Common';
-import { Editor, ImgUpload, Modal, Tag } from 'Components';
-import MenuApi from 'lib/api';
+import { MenuApi } from 'lib';
+import { Editor, ImgUpload, Modal, Tag, EditorFooter } from 'Components';
 import { useSelector } from 'react-redux';
-import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
 export const EditPage = ({ history }) => {
   const [loading, setLoading] = useState(false);
@@ -59,17 +58,6 @@ export const EditPage = ({ history }) => {
     } catch (error) {
       throw new Error('게시글 수정 실패');
     }
-  };
-
-  const addLocalStorage = () => {
-    const post = {
-      title,
-      body: content,
-      tags: hashTagArr,
-      thumbnail: url,
-    };
-
-    localStorage.setItem('posts', JSON.stringify(post));
   };
 
   const handleKeyEnter = (e) => {
@@ -137,52 +125,11 @@ export const EditPage = ({ history }) => {
           <Editor content={content} setContent={setContent} />
         </EditorContainer>
 
-        <Grid
-          width="100%"
-          height="4rem"
-          is_flex
-          align="center"
-          justify="space-between"
-          padding="0 50px"
-          bg="gba(255, 255, 255, 0.85)"
-          shadow="rgb(0 0 0 / 10%) 0px 0px 8px"
-        >
-          <div>
-            <Button
-              bg="#fff"
-              color="rgb(73, 80, 87)"
-              padding="8px 4px"
-              _onClick={() => onToggleModal('goToBack')}
-            >
-              <Icon icon="exitArrow" width={20} height={20} />
-              &nbsp; 나가기
-            </Button>
-          </div>
-
-          <Grid is_flex>
-            <Button
-              width="112px"
-              bold
-              bg="rgb(233, 236, 239)"
-              color="rgb(73, 80, 87)"
-              _onClick={() => {
-                addLocalStorage();
-                onToggleModal('saveLocalStorage');
-              }}
-            >
-              임시저장
-            </Button>
-            <Button
-              width="112px"
-              bold
-              bg="rgb(18, 184, 134)"
-              margin="0 0 0 12px"
-              _onClick={patchPost}
-            >
-              수정하기
-            </Button>
-          </Grid>
-        </Grid>
+        <EditorFooter
+          patchPost={patchPost}
+          onToggleModal={onToggleModal}
+          post={(title, content, hashTagArr, url)}
+        />
       </Grid>
 
       <PreviewContainer>
@@ -197,7 +144,7 @@ export const EditPage = ({ history }) => {
       {showModal && command === 'goToBack' && (
         <Modal
           title="포스트 작성 취소"
-          content="페이지를 벗어나시겠습니까? 수정중인 내용은 저장됩니다."
+          content="수정중인 내용이 저장됩니다."
           history={history}
           command={command}
           onToggleModal={onToggleModal}
