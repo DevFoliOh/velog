@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Header from 'Components/Header/Header';
 import { style } from './DetailPageStyle';
-import Tag from 'Components/Tag/Tag';
-import CommentView from 'Components/Comment/CommentView/CommentView';
 import parse from 'html-react-parser';
 import MenuApi from 'Common/api';
 import { useSelector } from 'react-redux';
 import useGetData from 'Hooks/useGetData';
+import Tag from 'Components/Tag/Tag';
+import Header from 'Components/Header/Header';
+import CommentView from 'Components/Comment/CommentView/CommentView';
 import DetailSkeleton from 'Components/DetailSkeleton/DetailSkeleton';
 import DetailAction from 'Components/DetailAction/DetailAction';
 import PostShare from 'Components/PostShare/PostShare';
-import { throttle } from 'lodash';
 import CommentWrite from 'Components/Comment/CommentWrite/CommentWrite';
 import Modal from 'Components/Modal/Modal';
+import { throttle } from 'lodash';
 import avatar from 'Assets/avatar.png';
 
 const DetailPage = ({ history }) => {
