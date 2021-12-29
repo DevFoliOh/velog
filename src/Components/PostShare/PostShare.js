@@ -3,6 +3,8 @@ import parse from 'html-react-parser';
 import { style } from './PostShareStyle';
 import { removeHTMLTagFromString } from 'Common/removeHTMLTag';
 
+const DEFAULT_URL = 'https://determined-volhard-ea03ee.netlify.app/detail';
+
 const PostShare = ({ isFixedShare, detailData }) => {
   const [shareContainerStyle, setShareContainerStyle] = useState({
     position: 'relative',
@@ -46,15 +48,15 @@ const PostShare = ({ isFixedShare, detailData }) => {
           description: description,
           imageUrl: `${img}`,
           link: {
-            mobileWebUrl: `http://localhost:3000/detail/${detailData.id}`,
-            webUrl: `http://localhost:3000/detail/${detailData.id}`,
+            mobileWebUrl: `${DEFAULT_URL}/${detailData.id}`,
+            webUrl: `${DEFAULT_URL}/${detailData.id}`,
           },
         },
         buttons: [
           {
             title: '웹으로 보기',
             link: {
-              webUrl: `http://localhost:3000/detail/${detailData.id}`,
+              webUrl: `${DEFAULT_URL}/${detailData.id}`,
             },
           },
         ],
