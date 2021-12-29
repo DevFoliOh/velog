@@ -110,7 +110,7 @@ const request = async (option) => {
   return response;
 };
 
-const MenuApi = {
+export const MenuApi = {
   getAllPosts(page) {
     return request(HTTP_METHOD.GETAll(page));
   },
@@ -147,5 +147,3 @@ const MenuApi = {
     return request(HTTP_METHOD.PATCHCOMMENT(id, data));
   },
 };
-
-export default MenuApi;

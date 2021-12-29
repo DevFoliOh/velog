@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import MenuApi from 'lib/api';
+import { MenuApi } from 'lib';
 
-const useGetData = (setPostData, setComment, id) => {
+export const useGetPost = (setPostData, setComment, id) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -25,5 +25,3 @@ const useGetData = (setPostData, setComment, id) => {
 
   return isLoading;
 };
-
-export default useGetData;

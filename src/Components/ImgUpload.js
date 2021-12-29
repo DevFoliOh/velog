@@ -43,7 +43,7 @@ export const ImgUpload = ({ url, setUrl, loading, setLoading }) => {
         />
       )}
       <UploadButton onClick={() => imgInputRef.current.click()}>
-        썸네일 이미지 등록
+        썸네일 업로드
       </UploadButton>
       <div>
         <UploadInput
@@ -79,5 +79,3 @@ const UploadButton = styled.button`
 const UploadInput = styled.input`
   display: none;
 `;
-
-export default ImgUpload;

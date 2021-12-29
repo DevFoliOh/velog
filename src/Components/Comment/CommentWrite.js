@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import MenuApi from 'lib/api';
+import { MenuApi } from 'lib';
 import { Grid, Button } from 'Common';
 
 export default function CommentWrite({

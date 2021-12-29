@@ -21,22 +21,29 @@ const Card = ({ post }) => {
       to={`/detail/${post.id}`}
     >
       {thumbnail ? (
-        <ImageContainer>
+        <Grid position="relative" padding="0 0 55%" maxHeight="177px">
           <Image src={thumbnail} alt="thumbnail" />
-        </ImageContainer>
+        </Grid>
       ) : (
-        <ImageContainer>
+        <Grid>
           <Image src={defaultImg} alt="default" />
-        </ImageContainer>
+        </Grid>
       )}
-      <PostInfoContainer>
+      <Grid
+        is_flex
+        column
+        justify="space-between"
+        padding="1rem"
+        minHeight="165px"
+        flex="1 1 0"
+      >
         <div>
           <Title>{post.title}</Title>
           <Content
             dangerouslySetInnerHTML={{ __html: parse(post.body) }}
           ></Content>
         </div>
-        <SubInfo>
+        <div>
           <Text size="13px" color="rgb(134, 142, 150)">
             {formatDate(post.createdAt)}
           </Text>
@@ -44,8 +51,8 @@ const Card = ({ post }) => {
           <Text size="13px" color="rgb(134, 142, 150)">
             8개의 댓글
           </Text>
-        </SubInfo>
-      </PostInfoContainer>
+        </div>
+      </Grid>
     </Wrapper>
   );
 };
@@ -67,6 +74,7 @@ const Wrapper = styled(Link)`
   -webkit-transition: box-shadow 0.25s ease-in 0s,
     -webkit-transform 0.25s ease-in 0s;
   transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
+
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;
   }
@@ -98,13 +106,6 @@ const Wrapper = styled(Link)`
   }
 `;
 
-const ImageContainer = styled.div`
-  position: relative;
-  padding-bottom: 55%;
-  width: 100%;
-  max-height: 177px;
-`;
-
 const Image = styled.img`
   position: absolute;
   top: 0;
@@ -113,22 +114,6 @@ const Image = styled.img`
   height: 100%;
   display: block;
   object-fit: cover;
-`;
-
-const PostInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  min-height: 165px;
-  flex: 1 1 0;
-`;
-
-const SubInfo = styled.div`
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: rgb(134, 142, 150);
-  /* height: 18px; */
 `;
 
 const Title = styled.b`

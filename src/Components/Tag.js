@@ -17,5 +17,3 @@ const Tagitem = styled.div`
   color: rgb(12, 166, 120);
   cursor: pointer;
 `;
-
-export default Tag;

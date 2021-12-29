@@ -9,6 +9,7 @@ import { Tag } from './Tag';
 import { DetailSkeleton } from './Skeleton/DetailSkeleton';
 import { ListSkeleton } from './Skeleton/ListSkeleton';
 import { Header } from './Header/Header';
+import { EditorFooter } from './EditorFooter';
 
 export {
   Card,
@@ -22,4 +23,5 @@ export {
   DetailSkeleton,
   ListSkeleton,
   Header,
+  EditorFooter,
 };

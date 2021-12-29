@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
+import { Grid } from 'Common';
 import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
 export const PostShare = ({ isFixedShare, detailData }) => {
@@ -66,7 +67,7 @@ export const PostShare = ({ isFixedShare, detailData }) => {
   }
 
   return (
-    <ShareContainer onClick={sendLinkCustom}>
+    <Grid position="absolute" left="-7rem" _onClick={sendLinkCustom}>
       <ShareWrap
         position={shareContainerStyle.position}
         left={shareContainerStyle.left}
@@ -81,14 +82,9 @@ export const PostShare = ({ isFixedShare, detailData }) => {
           </ShareImg>
         </ShareBtn>
       </ShareWrap>
-    </ShareContainer>
+    </Grid>
   );
 };
-
-const ShareContainer = styled.div`
-  position: absolute;
-  left: -7rem;
-`;
 
 const ShareWrap = styled.div`
   position: ${(props) => props.position};
@@ -127,5 +123,3 @@ const ShareImg = styled.svg`
   width: 25px;
   height: 25px;
 `;
-
-export default PostShare;

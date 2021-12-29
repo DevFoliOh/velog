@@ -1,76 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
-import MenuApi from 'lib/api';
-import useGetListData from 'Hooks/useGetAllPosts';
-import { Header, Card, Navbar, ScrollToTop, ListSkeleton } from 'Components';
+import { useGetAllPosts, useInfinityScroll } from 'Hooks';
 import { Grid } from 'Common';
+import { Header, Card, Navbar, ScrollToTop, ListSkeleton } from 'Components';
 
 export const ListPage = ({ history }) => {
+  const [loading, setLoading] = useState(false);
   const [postData, setPostData] = useState([]);
-  const [sortedData, setSortedData] = useState([]);
+  const [page, setPage] = useState(2);
   const [location, setLocation] = useState('');
   const [ref, inView] = useInView();
-  const [page, setPage] = useState(2);
-  const [loading, setLoading] = useState(false);
-  const [sort, setSort] = useState(false);
 
-  useGetListData(1, setPostData, setLoading);
-
-  useEffect(() => {
-    if (inView) {
-      MenuApi.getAllPosts(page).then((res) => {
-        if (!res.data) {
-          return;
-        } else {
-          setPostData(() => postData.concat(res.data.results));
-          setPage((prevState) => prevState + 1);
-        }
-      });
-    }
-  }, [inView]);
+  useGetAllPosts(1, setPostData, setLoading);
+  useInfinityScroll(postData, setPostData, page, setPage, inView);
 
   useEffect(() => {
     setLocation(history.location.pathname);
   }, []);
 
-  useEffect(() => {
-    setSortedData(
-      postData.sort((a, b) => {
-        const prevDate = a.createdAt;
-        const nextDate = b.createdAt;
-        return prevDate > nextDate ? -1 : prevDate < nextDate ? 1 : 0;
-      }),
-    );
-  }, [sort]);
-
   return (
     <Grid bg="#f8f9fa">
       <Header location={location} />
-
       <Container>
-        <Navbar sort={sort} setSort={setSort} setPostData={setPostData} />
+        <Navbar />
         {loading ? (
           <ListSkeleton />
-        ) : sort ? (
-          <Grid width="100%" margin="2rem auto" bg="#f8f9fa">
-            <Grid flex="1 1 0%">
-              <Grid is_flex flexWrap="wrap">
-                {sortedData &&
-                  sortedData.map((post) => {
-                    return (
-                      <div ref={ref} key={post.id}>
-                        <Card post={post} />
-                      </div>
-                    );
-                  })}
-              </Grid>
-            </Grid>
-          </Grid>
         ) : (
           <Grid width="100%" margin="2rem auto" bg="#f8f9fa">
-            <Grid flex="1 1 0%">
-              <Grid is_flex flexWrap="wrap">
+            <Grid flex="1 1 0%" bg="#f8f9fa">
+              <Grid is_flex flexWrap="wrap" bg="#f8f9fa">
                 {postData &&
                   postData.map((post) => {
                     return (

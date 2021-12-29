@@ -16,12 +16,17 @@ export const Grid = (props) => {
     top,
     left,
     flexWrap,
+    border,
+    radius,
     borderBottom,
     shadow,
     maxHeight,
     minHeight,
+    overflow,
+    zIndex,
     _ref,
     children,
+    _onClick,
   } = props;
 
   const styles = {
@@ -38,16 +43,20 @@ export const Grid = (props) => {
     position,
     top,
     left,
+    flexWrap,
+    border,
+    radius,
     borderBottom,
     shadow,
+    overflow,
     maxHeight,
     minHeight,
+    zIndex,
     _ref,
-    flexWrap,
   };
 
   return (
-    <GridBox {...styles} ref={_ref}>
+    <GridBox {...styles} ref={_ref} onClick={_onClick}>
       {children}
     </GridBox>
   );
@@ -59,42 +68,51 @@ Grid.defaultProps = {
   flex: '',
   align: '',
   justify: '',
-  padding: '',
   width: '',
   height: '',
-  margin: '',
-  bg: '',
+  padding: '0',
+  margin: '0',
+  bg: 'transparent',
   position: '',
-  top: '',
-  left: '',
-  flexWrap: '',
-  borderBottom: '',
+  top: '0',
+  left: '0',
+  flexWrap: false,
+  border: '',
+  radius: '',
+  borderBottom: false,
   shadow: '',
-  maxHeight: '',
-  minHeight: '',
+  overflow: false,
+  maxHeight: '0',
+  minHeight: '0',
+  zIndex: false,
   _ref: null,
   children: null,
+  _onClick: () => {},
 };
 
 const GridBox = styled.div`
   box-sizing: border-box;
   ${(props) => (props.is_flex ? 'display: flex' : '')};
   ${(props) => (props.column ? 'flex-direction: column' : '')};
-  ${(props) => (props.flex ? `flex: ${props.flex};` : '')}
-  ${(props) => (props.align ? `align-items: ${props.align};` : '')}
-  ${(props) => (props.justify ? `justify-content: ${props.justify};` : '')}
-    ${(props) => (props.width ? `width: ${props.width};` : '')}
-    ${(props) => (props.height ? `height: ${props.height};` : '')}
-    ${(props) => (props.padding ? `padding: ${props.padding};` : '')}
-  ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
-  ${(props) => (props.position ? `position: ${props.position};` : '')}
-  ${(props) => (props.top ? `top: ${props.top};` : '')}
-  ${(props) => (props.left ? `left: ${props.left};` : '')}
-  ${(props) => (props.bg ? `background: ${props.bg};` : '')}
-  ${(props) => (props.flexWrap ? `flex-wrap: ${props.flexWrap};` : '')}
+  flex: ${(props) => props.flex};
+  align-items: ${(props) => props.align};
+  justify-content: ${(props) => props.justify};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  padding: ${(props) => props.padding};
+  margin: ${(props) => props.margin};
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
+  left: ${(props) => props.left};
+  background: ${(props) => props.bg};
+  min-height: ${(props) => props.minHeight};
+  max-height: ${(props) => props.maxHeight};
+  box-shadow: ${(props) => props.shadow};
+  border: ${(props) => props.border};
+  ${(props) => (props.radius ? `border-radius: ${props.radius}` : '')};
+  ${(props) => (props.flexWrap ? 'flex-wrap: wrap' : '')};
+  ${(props) => (props.zIndex ? 'z-index: 999' : '')};
   ${(props) =>
-    props.borderBottom ? `border-bottom: ${props.borderBottom};` : ''}
-  ${(props) => (props.maxHeight ? `max-height: ${props.maxHeight};` : '')}
-  ${(props) => (props.shadow ? `box-shadow: ${props.shadow};` : '')}
-  ${(props) => (props.minHeight ? `min-height: ${props.minHeight};` : '')}
+    props.borderBottom ? 'border-bottom: 1px solid rgb(233, 236, 239)' : ''};
+  ${(props) => (props.overflow ? 'overflow: hidden' : '')};
 `;

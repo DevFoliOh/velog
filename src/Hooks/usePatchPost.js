@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
-import MenuApi from 'lib/api';
+import { MenuApi } from 'lib';
 import { useSelector } from 'react-redux';
 
-const usePatchEditData = (post, setPosts) => {
+export const usePatchPost = (post, setPosts) => {
   const [isLoading, setIsLoading] = useState(false);
   const Id = useSelector((state) => state.getCardIdReducer.card.id);
 
@@ -34,5 +34,3 @@ const usePatchEditData = (post, setPosts) => {
 
   return isLoading;
 };
-
-export default usePatchEditData;

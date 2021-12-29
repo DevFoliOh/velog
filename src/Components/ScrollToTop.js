@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import { throttle } from 'lodash';
 import { FaArrowUp } from 'react-icons/fa';
 
 export const ScrollToTop = () => {
@@ -70,5 +69,3 @@ const TopButton = styled.button`
     display: none;
   }
 `;
-
-export default ScrollToTop;
