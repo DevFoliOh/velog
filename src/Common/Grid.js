@@ -104,12 +104,20 @@ const GridBox = styled.div`
   position: ${(props) => props.position};
   top: ${(props) => props.top};
   left: ${(props) => props.left};
+<<<<<<< HEAD
   background: ${(props) => props.bg};
+=======
+  background: ${(props) => props.background};
+>>>>>>> 135ba82a9f93441598156f78e14a1c136dd63e1a
   min-height: ${(props) => props.minHeight};
   max-height: ${(props) => props.maxHeight};
   box-shadow: ${(props) => props.shadow};
   border: ${(props) => props.border};
+<<<<<<< HEAD
   ${(props) => (props.radius ? `border-radius: ${props.radius}` : '')};
+=======
+  border-radius: ${(props) => props.radius};
+>>>>>>> 135ba82a9f93441598156f78e14a1c136dd63e1a
   ${(props) => (props.flexWrap ? 'flex-wrap: wrap' : '')};
   ${(props) => (props.zIndex ? 'z-index: 999' : '')};
   ${(props) =>
