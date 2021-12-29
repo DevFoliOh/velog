@@ -56,6 +56,7 @@ const PostShare = ({ isFixedShare, detailData }) => {
           {
             title: '웹으로 보기',
             link: {
+              mobileWebUrl: `${DEFAULT_URL}/${detailData.id}`,
               webUrl: `${DEFAULT_URL}/${detailData.id}`,
             },
           },
