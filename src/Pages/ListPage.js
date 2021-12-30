@@ -20,13 +20,20 @@ export const ListPage = ({ history }) => {
   }, []);
 
   return (
-    <Wrapper>
+    <Grid width="100%" is_flex column bg="#f8f9fa">
       <Header location={location} />
       <Container>
         {loading ? (
           <ListSkeleton />
         ) : (
-          <CardList>
+          <Grid
+            width="100%"
+            is_flex
+            flexWrap
+            align="stretch"
+            justify="left"
+            bg="#f8f9fa"
+          >
             {postData &&
               postData.map((post) => {
                 return (
@@ -35,20 +42,13 @@ export const ListPage = ({ history }) => {
                   </div>
                 );
               })}
-          </CardList>
+          </Grid>
         )}
       </Container>
       <ScrollToTop />
-    </Wrapper>
+    </Grid>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background: #f8f9fa;
-`;
 
 const Container = styled.div`
   display: flex;
@@ -73,13 +73,4 @@ const Container = styled.div`
   @media (max-width: 767px) {
     width: calc(100% - 2rem);
   }
-`;
-
-const CardList = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: left;
-  background: #f8f9fa;
 `;
