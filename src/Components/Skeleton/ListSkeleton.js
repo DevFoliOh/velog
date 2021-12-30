@@ -66,40 +66,39 @@ const CardList = styled.div`
 `;
 
 const CardBox = styled.div`
-  width: 19rem;
-  height: 333px;
+  width: 18rem;
+  margin-top: -1rem;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   border-radius: 6px;
-  background-color: #eeeeee;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 16px 0px;
+  -webkit-transition: box-shadow 0.25s ease-in 0s,
+    -webkit-transform 0.25s ease-in 0s;
   transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
+
+  @media (max-width: 1440px) {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 1056px) {
+    width: 42vw;
+  }
+
+  @media (max-width: 944px) {
+    width: calc(50% - 2rem);
+    height: 464px;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
     margin: 0px 0px 1rem 0px;
   }
-  @media (max-width: 944px) {
-    width: calc(50% - 2rem);
-  }
-  @media (min-width: 944px) {
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;
-    }
-  }
-  @media (max-width: 944px) {
-    width: 487px;
-    height: 464px;
-  }
-  @media (max-width: 1056px) {
-    width: 42vw;
-  }
-  @media (max-width: 767px) {
-    width: 92vw;
-  }
+
   @media (max-width: 500px) {
     width: 451px;
   }
@@ -107,13 +106,16 @@ const CardBox = styled.div`
 
 const ImageWrap = styled.div`
   position: relative;
+  padding-bottom: 55%;
   width: 100%;
-  height: 150px;
-  overflow: hidden;
+  max-height: 177px;
 `;
 
 const ContentWrap = styled.div`
-  flex-wrap: wrap;
-  background-color: white;
-  height: 165px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  min-height: 165px;
+  flex: 1 1 0;
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import { useGetAllPosts, useInfinityScroll } from 'Hooks';
 import { Grid } from 'Common';
-import { Header, Card, Navbar, ScrollToTop, ListSkeleton } from 'Components';
+import { Header, Card, ScrollToTop, ListSkeleton } from 'Components';
 
 export const ListPage = ({ history }) => {
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ export const ListPage = ({ history }) => {
 
   useEffect(() => {
     setLocation(history.location.pathname);
-  }, []);
+  }, [history.location.pathname]);
 
   return (
     <Grid width="100%" is_flex column bg="#f8f9fa">

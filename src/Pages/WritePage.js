@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { Grid, Button, Icon, Text, Input } from 'Common';
 import { MenuApi } from 'lib';
 import { Editor, ImgUpload, Modal, Tag, EditorFooter } from 'Components';
 
@@ -167,25 +166,6 @@ const H1 = styled.h1`
   @media (max-width: 1024px) {
     font-size: 2.25rem;
   }
-`;
-
-const TitleInput = styled.input`
-  width: 100%;
-  height: 66px;
-  font-size: 30px;
-  font-weight: 700;
-  color: rgb(133, 133, 133);
-  border: none;
-  padding-left: 0;
-`;
-
-const TagInput = styled.input`
-  width: 100%;
-  height: 30px;
-  font-size: 20px;
-  border: none;
-  padding-left: 0;
-  margin-bottom: 12px;
 `;
 
 const Container = styled.div`

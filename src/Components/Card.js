@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { getCardAction } from 'Modules/getCard/getCard';
 import { useDispatch } from 'react-redux';
 import { formatDate } from 'lib/formatDate';
-import { Grid, Text, Icon, Anchor } from 'Common';
 import parse from 'html-react-parser';
 import defaultImg from 'Assets/default.png';
 

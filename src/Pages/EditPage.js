@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { Grid, Button, Icon, Text, Input } from 'Common';
+import { Grid } from 'Common';
 import { MenuApi } from 'lib';
 import { Editor, ImgUpload, Modal, Tag, EditorFooter } from 'Components';
 import { useSelector } from 'react-redux';
@@ -48,7 +48,7 @@ export const EditPage = ({ history }) => {
       setHashTagArr(post.tags);
       setUrl(post.thumbnail);
     }
-  }, []);
+  }, [id]);
 
   const patchPost = async () => {
     try {

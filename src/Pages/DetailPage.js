@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Header, Tag, PostShare, Modal, DetailSkeleton } from 'Components';
-import { Grid, Text, Image } from 'Common';
 import { MenuApi, formatDate } from 'lib';
 import CommentView from 'Components/Comment/CommentView';
 import parse from 'html-react-parser';
@@ -56,20 +55,23 @@ export const DetailPage = ({ history }) => {
 
   const loading = useGetPost(setPostData, setComment, card.id);
 
-  const onTextSubmit = useCallback(async (text) => {
-    const response = await MenuApi.createComment(card.id, text);
+  const onTextSubmit = useCallback(
+    async (text) => {
+      const response = await MenuApi.createComment(card.id, text);
 
-    if (response) {
-      const commentResponse = await MenuApi.getCommentData(card.id);
-      setCommentData(commentResponse.data.results);
+      if (response) {
+        const commentResponse = await MenuApi.getCommentData(card.id);
+        setCommentData(commentResponse.data.results);
 
-      mainRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-        inline: 'nearest',
-      });
-    }
-  }, []);
+        mainRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+          inline: 'nearest',
+        });
+      }
+    },
+    [card.id],
+  );
 
   const onFixedShareComponent = () => {
     if (window.pageYOffset > 220) {
