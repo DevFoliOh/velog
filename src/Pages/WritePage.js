@@ -64,65 +64,67 @@ export const WritePage = ({ history }) => {
   );
 
   return (
-    <Grid is_flex height="100vh">
-      <Grid is_flex column>
-        <Grid is_flex justify="space-between" padding="30px 50px 0">
-          <div>
-            <TitleInput
-              type="text"
-              name="title"
-              placeholder="제목을 입력하세요"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-            <Grid
-              width="64px"
-              height="6px"
-              bg="rgb(133, 133, 133)"
-              margin="1.5rem 0 1rem"
-            />
-            <Grid is_flex flexWrap>
-              <Grid is_flex margin="0 0 10px">
-                {hashTagArr.map((hashtag, idx) => {
-                  return (
-                    <Tag
-                      key={idx}
-                      tagContent={hashtag}
-                      _onClick={() => removeHashTag(hashtag)}
-                    >
-                      {hashtag}
-                    </Tag>
-                  );
-                })}
-              </Grid>
-              <TagInput
+    <Container>
+      <div>
+        <WriteContainer>
+          <WriteHeader>
+            <div>
+              <WriteTitle
                 type="text"
-                name="tag"
-                placeholder="태그를 입력하세요"
-                onKeyPress={handleKeyEnter}
+                name="title"
+                placeholder="제목을 입력하세요"
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
               />
-            </Grid>
-          </div>
-          <ImgUpload
-            url={url}
-            setUrl={setUrl}
-            loading={loading}
-            setLoading={setLoading}
-          />
-        </Grid>
+              <WriteLine
+                width="64px"
+                height="6px"
+                bg="rgb(133, 133, 133)"
+                margin="1.5rem 0 1rem"
+              />
+              <WriteTagContainer>
+                <WriteTagContent>
+                  {hashTagArr.map((hashtag, idx) => {
+                    return (
+                      <Tag
+                        key={idx}
+                        tagContent={hashtag}
+                        _onClick={() => removeHashTag(hashtag)}
+                      >
+                        {hashtag}
+                      </Tag>
+                    );
+                  })}
+                </WriteTagContent>
+                <WriteTag
+                  type="text"
+                  name="tag"
+                  placeholder="태그를 입력하세요"
+                  onKeyPress={handleKeyEnter}
+                />
+              </WriteTagContainer>
+            </div>
+            <ImgUpload
+              url={url}
+              setUrl={setUrl}
+              loading={loading}
+              setLoading={setLoading}
+            />
+          </WriteHeader>
 
-        <EditorContainer>
-          <Editor content={content} setContent={setContent} />
-        </EditorContainer>
+          <EditorContainer>
+            <Editor content={content} setContent={setContent} />
+          </EditorContainer>
+        </WriteContainer>
 
         <EditorFooter
           registerPost={registerPost}
           onToggleModal={onToggleModal}
           post={(title, content, hashTagArr, url)}
         />
-      </Grid>
+      </div>
 
       <PreviewContainer>
         <div>
@@ -149,7 +151,7 @@ export const WritePage = ({ history }) => {
           onToggleModal={onToggleModal}
         />
       )}
-    </Grid>
+    </Container>
   );
 };
 
@@ -186,10 +188,81 @@ const TagInput = styled.input`
   margin-bottom: 12px;
 `;
 
+const Container = styled.div`
+  display: flex;
+  height: 100vh;
+`;
+
+const WriteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 732px;
+  padding: 20px 50px 0;
+  box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
+`;
+
+const WriteHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const WriteTitle = styled.input.attrs({
+  placeholder: '제목을 입력하세요',
+  type: 'text',
+  name: 'title',
+})`
+  width: 100%;
+  height: 66px;
+  font-size: 30px;
+  font-weight: 700;
+  color: rgb(33, 37, 41);
+  border: none;
+  padding-left: 0;
+`;
+
+const WriteLine = styled.div`
+  width: 64px;
+  height: 6px;
+  background: rgb(33, 37, 41);
+  margin: 24px 0 16px;
+`;
+
+const WriteTagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const WriteTagContent = styled.div`
+  display: flex;
+  margin-bottom: 4px;
+
+  div {
+    height: 30px;
+    border-radius: 16px;
+    background: rgb(241, 243, 245);
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+`;
+
+const WriteTag = styled.input.attrs({
+  placeholder: '태그를 입력하세요',
+  type: 'text',
+  name: 'tag',
+})`
+  width: 100%;
+  height: 28px;
+  font-size: 18px;
+  border: none;
+  padding-left: 0;
+  margin-bottom: 12px;
+`;
+
 const EditorContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 0 50px 14px;
+  padding: 10px 0 14px;
 
   .ck.ck-editor {
     max-width: 700px;
@@ -198,6 +271,7 @@ const EditorContainer = styled.div`
     min-height: 400px;
   }
 `;
+
 const PreviewContainer = styled.div`
   width: 100%;
   display: flex;

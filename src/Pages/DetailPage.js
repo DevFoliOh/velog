@@ -89,7 +89,7 @@ export const DetailPage = ({ history }) => {
   }, [detailData]);
 
   return (
-    <Grid width="100%" _ref={mainRef}>
+    <Main ref={mainRef}>
       {showModal && command === 'postDelete' && (
         <Modal
           title="포스트 삭제"
@@ -120,11 +120,8 @@ export const DetailPage = ({ history }) => {
       ) : (
         <Body>
           <Title>{detailData.title}</Title>
-
-          <Grid is_flex justify="space-between" align="center">
-            <Text size="1rem" color="rgb(73, 80, 87)">
-              {formatDate(detailData.createdAt)}
-            </Text>
+          <ActionContainer>
+            <div>{formatDate(detailData.createdAt)}</div>
             <ActionWrap>
               <EditLink to={`/edit/${detailData.id}`}>
                 <ActionChange>수정</ActionChange>
@@ -133,8 +130,7 @@ export const DetailPage = ({ history }) => {
                 삭제
               </ActionDelete>
             </ActionWrap>
-          </Grid>
-
+          </ActionContainer>
           <TagList>
             {tagArr &&
               tagArr.map((tagContent, index) => (
@@ -144,37 +140,23 @@ export const DetailPage = ({ history }) => {
               <PostShare isFixedShare={isFixedShare} detailData={detailData} />
             )}
           </TagList>
-          <Grid is_flex justify="center" margin="5rem 0">
+          <ThumbnailWrap>
             {detailData.thumbnail && (
               <Thumbnail src={detailData.thumbnail} alt="thumbnail"></Thumbnail>
             )}
-          </Grid>
+          </ThumbnailWrap>
           <Content
             dangerouslySetInnerHTML={{ __html: parse(detailData.body) }}
           ></Content>
-
-          <Grid is_flex margin="10rem 0 6rem" padding="0 0 2rem 0" borderBottom>
+          <UserContainer>
             <UserImg src={avatar} alt="user" />
-            <Grid is_flex column justify="center" margin="0 0 0 1rem">
-              <Text size="1.5rem" line="1.5" bold="700" color="rgb(33, 37, 41)">
-                User
-              </Text>
-              <Text
-                size="1.125rem"
-                line="1.5"
-                margin="0.25rem 0 0 0"
-                color="rgb(73, 80, 87)"
-              >
-                Front-end
-              </Text>
-            </Grid>
-          </Grid>
-
-          <Grid width="768px" margin="3rem auto auto">
-            <Text
-              bold="600"
-              color="rgb(52, 58, 64)"
-            >{`${commentData.length}개의 댓글`}</Text>
+            <UserDescriptionWrap>
+              <UserDescriptionTitle>User</UserDescriptionTitle>
+              <UserDescriptionSubTitle>Front-end</UserDescriptionSubTitle>
+            </UserDescriptionWrap>
+          </UserContainer>
+          <CommentContainer>
+            <CommentCount>{`${commentData.length}개의 댓글`}</CommentCount>
             <CommentWrite onTextSubmit={onTextSubmit} />
             <CommentList>
               {commentData.map((comment) => (
@@ -185,12 +167,20 @@ export const DetailPage = ({ history }) => {
                 />
               ))}
             </CommentList>
-          </Grid>
+          </CommentContainer>
         </Body>
       )}
-    </Grid>
+    </Main>
   );
 };
+
+const ActionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: rgb(73, 80, 87);
+  justify-content: space-between;
+`;
 
 const ActionWrap = styled.ul`
   display: flex;
@@ -222,17 +212,19 @@ const EditLink = styled(Link)`
   color: rgb(134, 142, 150);
 `;
 
+const Main = styled.main`
+  width: 100%;
+`;
+
 const Body = styled.div`
   margin-top: 5.5rem;
   width: 768px;
   height: auto;
   margin-left: auto;
   margin-right: auto;
-
   @media (max-width: 1024px) {
     margin-top: 2rem;
   }
-
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -256,6 +248,13 @@ const TagList = styled.ul`
   min-height: 0.875rem;
 `;
 
+const ThumbnailWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 5rem 0 5rem 0;
+`;
+
 const Thumbnail = styled.img`
   width: 50%;
   height: auto;
@@ -266,6 +265,14 @@ const Content = styled.section`
   line-height: 2;
 `;
 
+const CommentContainer = styled.div`
+  margin-top: 3rem;
+  width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgb(52, 58, 64);
+`;
+
 const CommentCount = styled.h4`
   font-size: 1.125rem;
   line-height: 1.5;
@@ -274,10 +281,42 @@ const CommentCount = styled.h4`
   margin-bottom: 1.33rem;
 `;
 
+const UserContainer = styled.footer`
+  display: flex;
+  align-items: center;
+  margin-top: 10rem;
+  margin-bottom: 6rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgb(233, 236, 239); ;
+`;
+
 const UserImg = styled.img`
   width: 8rem;
   height: 8rem;
   cursor: pointer;
+`;
+
+const UserDescriptionWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+`;
+
+const UserDescriptionTitle = styled.div`
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: bold;
+  color: rgb(33, 37, 41);
+`;
+
+const UserDescriptionSubTitle = styled.div`
+  white-space: pre-wrap;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  color: rgb(73, 80, 87);
+  letter-spacing: -0.004em;
 `;
 
 const CommentList = styled.ul`

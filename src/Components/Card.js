@@ -21,38 +21,23 @@ const Card = ({ post }) => {
       to={`/detail/${post.id}`}
     >
       {thumbnail ? (
-        <Grid position="relative" padding="0 0 55%" maxHeight="177px">
+        <ImageContainer>
           <Image src={thumbnail} alt="thumbnail" />
-        </Grid>
+        </ImageContainer>
       ) : (
-        <Grid>
+        <ImageContainer>
           <Image src={defaultImg} alt="default" />
-        </Grid>
+        </ImageContainer>
       )}
-      <Grid
-        is_flex
-        column
-        justify="space-between"
-        padding="1rem"
-        minHeight="165px"
-        flex="1 1 0"
-      >
-        <div>
+      <PostInfoContainer>
+        <PostInfo>
           <Title>{post.title}</Title>
           <Content
             dangerouslySetInnerHTML={{ __html: parse(post.body) }}
           ></Content>
-        </div>
-        <div>
-          <Text size="13px" color="rgb(134, 142, 150)">
-            {formatDate(post.createdAt)}
-          </Text>
-          <span>·</span>
-          <Text size="13px" color="rgb(134, 142, 150)">
-            8개의 댓글
-          </Text>
-        </div>
-      </Grid>
+        </PostInfo>
+        <DateBox>{formatDate(post.createdAt)}</DateBox>
+      </PostInfoContainer>
     </Wrapper>
   );
 };
@@ -106,14 +91,40 @@ const Wrapper = styled(Link)`
   }
 `;
 
+const ImageContainer = styled.div`
+  position: relative;
+  padding-bottom: 55%;
+  width: 100%;
+  max-height: 177px;
+`;
+
 const Image = styled.img`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   display: block;
   object-fit: cover;
+`;
+
+const PostInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  min-height: 165px;
+  flex: 1 1 0;
+`;
+
+const PostInfo = styled.div`
+  color: black;
+  text-decoration: none;
+  &:focus {
+    color: black;
+  }
 `;
 
 const Title = styled.b`
@@ -135,4 +146,9 @@ const Content = styled.p`
   font-size: 0.875rem;
   color: rgb(73, 80, 87);
   margin-bottom: 2rem;
+`;
+
+const DateBox = styled.div`
+  font-size: 13px;
+  color: rgb(134, 142, 150);
 `;

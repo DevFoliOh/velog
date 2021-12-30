@@ -20,37 +20,44 @@ export const ListPage = ({ history }) => {
   }, []);
 
   return (
-    <Grid bg="#f8f9fa">
+    <Wrapper>
       <Header location={location} />
       <Container>
-        <Navbar />
         {loading ? (
           <ListSkeleton />
         ) : (
-          <Grid width="100%" margin="2rem auto" bg="#f8f9fa">
-            <Grid flex="1 1 0%" bg="#f8f9fa">
-              <Grid is_flex flexWrap="wrap" bg="#f8f9fa">
-                {postData &&
-                  postData.map((post) => {
-                    return (
-                      <div ref={ref} key={post.id}>
-                        <Card post={post} />
-                      </div>
-                    );
-                  })}
-              </Grid>
-            </Grid>
-          </Grid>
+          <CardList>
+            {postData &&
+              postData.map((post) => {
+                return (
+                  <div ref={ref} key={post.id}>
+                    <Card post={post} />
+                  </div>
+                );
+              })}
+          </CardList>
         )}
       </Container>
       <ScrollToTop />
-    </Grid>
+    </Wrapper>
   );
 };
 
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 100%;
-  margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 1728px;
+  margin-left: auto;
+  margin-right: auto;
   background: #f8f9fa;
 
   @media (max-width: 1919px) {
@@ -66,4 +73,13 @@ const Container = styled.div`
   @media (max-width: 767px) {
     width: calc(100% - 2rem);
   }
+`;
+
+const CardList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: left;
+  background: #f8f9fa;
 `;

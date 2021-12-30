@@ -51,8 +51,11 @@ export const Modal = (props) => {
   return (
     <Grid
       position="fixed"
+      width="100%"
       height="100vh"
       is_flex
+      justify="center"
+      align="center"
       bg="rgba(0, 0, 0, 0.4)"
       zIndex
       _onClick={(e) => closeModal(e)}
@@ -62,6 +65,7 @@ export const Modal = (props) => {
         height="220px"
         is_flex
         column
+        bg="#fff"
         padding="40px 30px 30px"
         shadow="rgb(0 0 0 / 9%) 0px 2px 12px 0px"
       >

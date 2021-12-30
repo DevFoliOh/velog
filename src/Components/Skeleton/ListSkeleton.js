@@ -36,6 +36,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-top: 2rem;
+  width: 1728px;
   margin-left: auto;
   margin-right: auto;
   background: #f8f9fa;
@@ -44,12 +45,11 @@ const Container = styled.div`
     width: 1376px;
   }
   @media (max-width: 1440px) {
-    width: 1124px;
+    width: 1024px;
+    margin: 0 auto;
   }
   @media (max-width: 1056px) {
-    width: calc(80% - 2rem);
-    margin-left: 1rem;
-    margin-right: 1rem;
+    width: calc(100% - 2rem);
   }
   @media (max-width: 767px) {
     width: calc(100% - 2rem);
@@ -68,7 +68,6 @@ const CardList = styled.div`
 const CardBox = styled.div`
   width: 19rem;
   height: 333px;
-  margin: -1rem 1rem;
   position: relative;
   display: flex;
   flex-wrap: wrap;

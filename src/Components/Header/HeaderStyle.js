@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const HeaderWrap = styled.header`
   width: 100%;
   height: 4rem;
-  background: #f8f9fa;
+  background: transparent;
 `;
 
 const HeaderContent = styled.div`

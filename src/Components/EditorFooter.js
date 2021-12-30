@@ -13,23 +13,20 @@ export const EditorFooter = ({
   return (
     <Grid
       is_flex
-      height="4rem"
       justify="space-between"
-      padding="0 50px"
+      padding=" 12px 50px 12px 20px"
       bg="rgba(255, 255, 255, 0.85)"
       shadow="rgb(0 0 0 / 10%) 0px 0px 8px"
     >
-      <div>
-        <Button
-          bg="#fff"
-          color="rgb(73, 80, 87)"
-          padding="8px 4px"
-          _onClick={() => onToggleModal('goToBack')}
-        >
-          <Icon icon="exitArrow" width={20} height={20} />
-          &nbsp; 나가기
-        </Button>
-      </div>
+      <Button
+        bg="#fff"
+        color="rgb(73, 80, 87)"
+        padding="8px 4px"
+        _onClick={() => onToggleModal('goToBack')}
+      >
+        <Icon icon="exitArrow" width={20} height={20} />
+        &nbsp; 나가기
+      </Button>
 
       <Grid is_flex>
         <Button
