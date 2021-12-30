@@ -1,17 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Header, Tag, PostShare, Modal, DetailSkeleton } from 'Components';
 import { MenuApi, formatDate } from 'lib';
 import CommentView from 'Components/Comment/CommentView';
+import CommentWrite from 'Components/Comment/CommentWrite';
 import parse from 'html-react-parser';
-import { useSelector } from 'react-redux';
 import { useGetPost } from 'Hooks';
 import { debounce } from 'lodash';
-import CommentWrite from 'Components/Comment/CommentWrite';
 import avatar from 'Assets/avatar.png';
 
 export const DetailPage = ({ history }) => {
+  const [loading, setLoading] = useState(false);
   const [detailData, setDetailData] = useState({
     tags: [],
     title: '',
@@ -53,7 +54,7 @@ export const DetailPage = ({ history }) => {
     [commentData],
   );
 
-  const loading = useGetPost(setPostData, setComment, card.id);
+  useGetPost(setPostData, setComment, setLoading, card.id);
 
   const onTextSubmit = useCallback(
     async (text) => {

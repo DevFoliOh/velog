@@ -26,7 +26,7 @@ export const usePatchPost = (post, setPosts) => {
       console.log(error);
       throw new Error('data load 실패');
     }
-  }, []);
+  }, [Id, post, setPosts]);
 
   useEffect(() => {
     getData();

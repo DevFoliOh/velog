@@ -1,27 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { MenuApi } from 'lib';
 
-export const useGetPost = (setPostData, setComment, id) => {
-  const [isLoading, setIsLoading] = useState(false);
-
+export const useGetPost = (setPostData, setComment, setLoading, id) => {
   useEffect(() => {
-    if (id) {
-      getData(id);
+    async function getData() {
+      try {
+        setLoading(true);
+        const postResponse = await MenuApi.getPostDetail(id);
+        const commentResponse = await MenuApi.getCommentData(id);
+        setPostData(postResponse.data);
+        setComment(commentResponse.data.results);
+        setLoading(false);
+      } catch (error) {
+        throw new Error('data load 실패');
+      }
     }
-  }, []);
-
-  const getData = async (id) => {
-    try {
-      setIsLoading(true);
-      const postResponse = await MenuApi.getPostDetail(id);
-      const commentResponse = await MenuApi.getCommentData(id);
-      setPostData(postResponse.data);
-      setComment(commentResponse.data.results);
-      setIsLoading(false);
-    } catch (error) {
-      throw new Error('data load 실패');
-    }
-  };
-
-  return isLoading;
+    getData();
+  }, [setPostData, setComment, setLoading, id]);
 };

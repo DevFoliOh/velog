@@ -22,7 +22,7 @@ export const Grid = (props) => {
     shadow,
     maxHeight,
     minHeight,
-    overflow,
+    overFlow,
     zIndex,
     _ref,
     children,
@@ -48,7 +48,7 @@ export const Grid = (props) => {
     radius,
     borderBottom,
     shadow,
-    overflow,
+    overFlow,
     maxHeight,
     minHeight,
     zIndex,
@@ -81,7 +81,7 @@ Grid.defaultProps = {
   radius: '',
   borderBottom: false,
   shadow: '',
-  overflow: false,
+  overFlow: false,
   maxHeight: '',
   minHeight: '',
   zIndex: false,
@@ -114,5 +114,5 @@ const GridBox = styled.div`
   ${(props) => (props.zIndex ? 'z-index: 999' : '')};
   ${(props) =>
     props.borderBottom ? 'border-bottom: 1px solid rgb(233, 236, 239)' : ''};
-  ${(props) => (props.overflow ? 'overflow: hidden' : '')};
+  ${(props) => (props.overFlow ? 'overflow: hidden' : '')};
 `;
