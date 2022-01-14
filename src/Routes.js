@@ -1,9 +1,6 @@
-import WritePage from 'Pages/WritePage/WritePage';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ListPage from 'Pages/ListPage/ListPage';
-import DetailPage from 'Pages/DetailPage/DetailPage';
-import EditPage from 'Pages/EditPage/EditPage';
+import { ListPage, WritePage, DetailPage, EditPage } from 'Pages';
 
 const Routes = () => {
   return (

@@ -1,8 +1,9 @@
 import React from 'react';
 import { style } from './HeaderStyle';
+import { Image } from 'Common';
 import avatar from 'Assets/avatar.png';
 
-const Header = ({ location }) => {
+export const Header = ({ location }) => {
   return (
     <HeaderWrap>
       <HeaderContent>
@@ -24,8 +25,8 @@ const Header = ({ location }) => {
               </svg>
             ) : (
               <LogoImg
-                width="192"
-                height="192"
+                width="1.75rem"
+                height="1.75rem"
                 viewBox="0 0 192 192"
                 fill="none"
               >
@@ -43,9 +44,10 @@ const Header = ({ location }) => {
             )}
           </LogoLink>
         </Logo>
-        <RightContent>
+
+        <RightNav>
           <Search>
-            <svg width="18" height="18" viewBox="0 0 17 17">
+            <svg width="17" height="17" viewBox="0 0 17 17">
               <path
                 fill-rule="evenodd"
                 d="M13.66 7.36a6.3 6.3 0 1 1-12.598 0 6.3 6.3 0 0 1 12.598 0zm-1.73 5.772a7.36 7.36 0 1 1 1.201-1.201l3.636 3.635c.31.31.31.815 0 1.126l-.075.075a.796.796 0 0 1-1.126 0l-3.636-3.635z"
@@ -55,7 +57,13 @@ const Header = ({ location }) => {
           </Search>
           <WriteBtn to="/write">새 글 작성</WriteBtn>
           <Profile>
-            <ProfileImg src={avatar} alt="profile" />
+            <Image
+              src={avatar}
+              alt="profile"
+              width="2.5rem"
+              height="2.5rem"
+              radius="50%"
+            />
             <Dropdown
               stroke="currentColor"
               fill="currentColor"
@@ -68,24 +76,21 @@ const Header = ({ location }) => {
               <path d="M7 10l5 5 5-5z"></path>
             </Dropdown>
           </Profile>
-        </RightContent>
+        </RightNav>
       </HeaderContent>
     </HeaderWrap>
   );
 };
-
-export default Header;
 
 const {
   HeaderWrap,
   HeaderContent,
   Logo,
   LogoImg,
-  RightContent,
+  RightNav,
   Search,
   WriteBtn,
   Profile,
-  ProfileImg,
   Dropdown,
   LogoLink,
 } = style;
