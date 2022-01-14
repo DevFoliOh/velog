@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Grid } from 'Common';
 import { removeHTMLTagFromString } from 'lib/removeHTMLTag';
 
+const DEFAULT_URL = 'https://determined-volhard-ea03ee.netlify.app/detail';
+
 export const PostShare = ({ isFixedShare, detailData }) => {
   const [shareContainerStyle, setShareContainerStyle] = useState({
     position: 'relative',
@@ -47,15 +49,16 @@ export const PostShare = ({ isFixedShare, detailData }) => {
           description: description,
           imageUrl: `${img}`,
           link: {
-            mobileWebUrl: `http://localhost:3000/detail/${detailData.id}`,
-            webUrl: `http://localhost:3000/detail/${detailData.id}`,
+            mobileWebUrl: `${DEFAULT_URL}/${detailData.id}`,
+            webUrl: `${DEFAULT_URL}/${detailData.id}`,
           },
         },
         buttons: [
           {
             title: '웹으로 보기',
             link: {
-              webUrl: `http://localhost:3000/detail/${detailData.id}`,
+              mobileWebUrl: `${DEFAULT_URL}/${detailData.id}`,
+              webUrl: `${DEFAULT_URL}/${detailData.id}`,
             },
           },
         ],
