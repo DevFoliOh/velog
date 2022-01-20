@@ -1,6 +1,6 @@
-## 📌 velog 클론코딩
+# velog 클론
 
-<h1 align='middle'><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h1>
+<h1><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h1>
 
 ### :timer_clock: 개발기간
 + 2021년 11월 16일 ~ 2021년 11월 23일 <br/><br/>
