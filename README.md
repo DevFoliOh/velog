@@ -3,7 +3,7 @@
 <h1><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h1>
 
 ### :timer_clock: 개발기간
-+ 2021년 11월 16일 ~ 2021년 11월 23일 <br/><br/>
++ 2021년 11월 16일 ~ 2021년 11월 23일 (7일)<br/><br/>
 
 <img src="https://user-images.githubusercontent.com/66353903/142976104-d163bec4-f0a3-468b-adfa-0f21572a8d1f.png" width="600" />
 
