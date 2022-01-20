@@ -1,11 +1,6 @@
-<p align='middle'>
-<a href='https://github.com/DevFoliOh/velog'><img src='https://user-images.githubusercontent.com/66353903/142974589-1a9d29a4-3c67-4208-b861-00491a02f810.png' width="200px;" alt="Velog" /></a></p>
-
+## 📌 velog 클론코딩
 
 <h1 align='middle'><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h1>
-
-
-## 📌 velog 클론코딩
 
 ### :timer_clock: 개발기간
 + 2021년 11월 16일 ~ 2021년 11월 23일 <br/><br/>
