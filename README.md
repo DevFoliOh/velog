@@ -1,11 +1,12 @@
-# velog 클론
+# 커뮤니티 사이트의 CRUD 기능 구현
 
-<h1><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h1>
+### 🛶 배포 링크
+<h2><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h2>
 
-### :timer_clock: 개발기간
+<img src="https://user-images.githubusercontent.com/68722179/157565352-12ecc2a9-27a3-44f6-9852-928f74d6e3ed.png" width="700" />
+
+### :timer_clock: 개발 기간
 + 2021년 11월 16일 ~ 2021년 11월 23일 (7일)<br/><br/>
-
-<img src="https://user-images.githubusercontent.com/66353903/142976104-d163bec4-f0a3-468b-adfa-0f21572a8d1f.png" width="600" />
 
 ### 🛠 기술 스택
 
@@ -17,24 +18,16 @@
  </p>
 
 ### 🔮 역할 배분
-⚜ 김은태: WritePage 담당, CKEditor 도입<br/>
-⚜ 송창엽: DetailPage 담당, 공통 컴포넌트 제작<br/>
-⚜ 윤예나: ListPage 및 EditPage 담당, 프로젝트 이후 코드 개선<br/>
+⚜ 김은태: 새글 작성 구현(WritePage), 마크다운 에디터(CKEditor) 도입<br/>
+⚜ 송창엽: 게시글 상세 조회 구현(DetailPage), 공통 컴포넌트(스켈레톤 UI, 모달창) 제작<br/>
+⚜ 윤예나: 전체 게시글 조회 및 개별 게시글 수정(ListPage와 EditPage), 코드 개선<br/>
 
-### 👨‍👧‍👧 깃허브로 협업
-
+### 👨‍👧‍👧 깃허브 flow로 협업
+[ 작업순서 ]
 1. 기능별 브랜치 생성 (예: feat/writepage)
 2. 깃허브 issue에 구현할 기능 리스트 작성
 3. 커밋 메시지 컨벤션을 지켜서 커밋 메시지 작성
 4. pull request 생성 후 코드 리뷰가 끝나면 merge
-
-### 🧶 구현 중 어려웠던 점
-
-문제: CKEditor의 내장 props인 data에 에디터 규칙상 단일변수가 들어가지 않음을 발견 <br/>
-해결: 삼항연산자를 활용하여 undefined인지 여부에 따라 다른 값을 넣는 식으로 해결<br/>
-
-문제: 작성 페이지와 수정 페이지에서 공통 컴포넌트인 Editor에 각각 props를 어떻게 넘길 것인지에 대한 고민<br/>
-해결: 작성 중인 내용은 content로 통일하고 수정할 내용은 loadedContent 변수로 따로 선언한 뒤 이중 삼항연산자를 사용하여 Editor 컴포넌트에 전달하는 방법으로 해결<br/>
 
 ### ✨ 구현 목록
 
@@ -66,18 +59,26 @@
 
 #### EditPage: `게시글 수정`
 
-✔ 서버에 저장된 게시글을 작성 중이던 상태처럼 불러옴 (WritePage와 동일한 뷰)<br/>
+✔ 서버에 저장된 게시글을 작성 중이던 상태처럼 불러옴<br/>
 ✔ 미리보기, 임시저장, 불러오기: WritePage와 동일<br/>
 ✔ 수정하기: 수정한 내용을 서버에 업로드<br/>
 
 
 ### ✨ 공통 컴포넌트
 
-#### 로딩 중 Skeleton UI 적용
+1. 로딩 중 Skeleton UI 적용
 
-#### 특정 action의 시행 여부를 확인하기 위한 Modal창 적용
+2. 특정 action의 시행 여부를 확인하기 위한 Modal창 적용
 + 나가기 버튼 클릭 시 페이지 이탈 여부 재확인 (WritePage, EditPage) <br/>
 + 게시글 삭제 및 댓글 삭제 버튼 클릭 시 삭제 여부 재확인 (DetailPage)
+
+### 🧶 구현 중 어려웠던 점
+
+문제 1: CKEditor의 내장 props인 data에 에디터 규칙상 단일변수가 들어가지 않음을 발견 <br/>
+해결 : 삼항연산자를 활용하여 undefined인지 여부에 따라 다른 값을 넣는 식으로 해결<br/>
+
+문제 2: 작성 페이지와 수정 페이지에서 공통 컴포넌트인 Editor에 각각 props를 어떻게 넘길 것인지에 대한 고민<br/>
+해결 : 작성 중인 내용은 content로 통일하고 수정할 내용은 loadedContent 변수로 따로 선언한 뒤 이중 삼항연산자를 사용하여 Editor 컴포넌트에 전달하는 방법으로 해결<br/>
 
 
 ### 🚀 코드 개선사항 (21.12.24 ~ 진행중)
